@@ -25,7 +25,7 @@ class DB
     }
 
     public function query($sql, $params = [],$class = false)
-    //fonction pour accérir des donnéescddepuis la bdd
+    //fonction pour accérir des données cd depuis la bdd
     {
         $this->_error = false;
         if ($this->_query = $this->_pdo->prepare($sql)) {//optimisation des requêtes (preparer) //$sql existe et prerare reussite

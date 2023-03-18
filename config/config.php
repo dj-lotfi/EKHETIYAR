@@ -1,7 +1,7 @@
 <?php
 define('DEBUG', true);
 
-define('DB_NAME','bdd_projet'); // nom de la bdd
+define('DB_NAME',/*'bdd_projet'*/ 'ikhtiyar'); // nom de la bdd
 define('DB_USER','root'); //nom d'utilisateur
 define('DB_PASSWORD',''); //mot de passe de la bdd 
 define('DB_HOST','127.0.0.1'); //host de la bdd (IP pour éviter DNS lookup)
