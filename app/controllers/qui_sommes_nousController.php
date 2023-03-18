@@ -1,6 +1,6 @@
 <?php
 
-class Comparatif extends Controller 
+class Qui_sommes_nousController extends Controller 
 {
     public function __construct($controller, $action)
     {
@@ -10,6 +10,6 @@ class Comparatif extends Controller
 
     public function indexAction() //nom_de_la_method+Action
     {
-        $this->view->render('comparatif/index');
+        $this->view->render('qui_sommes_nous/index');
     }
 }

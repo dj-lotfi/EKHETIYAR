@@ -24,7 +24,7 @@ class DB
         
     }
 
-    public function query($sql, $params = [])
+    public function query($sql, $params = [],$class = false)
     //fonction pour accérir des donnéescddepuis la bdd
     {
         $this->_error = false;
@@ -38,7 +38,12 @@ class DB
             }
 
             if(($this->_query)->execute()) {
-                $this->_result = ($this->_query)->fetchAll(PDO::FETCH_OBJ);
+                if ($class) {
+                    $this->_result = $this->_query->fetchAll(PDO::FETCH_CLASS,$class);
+                } else {
+                    $this->_result = ($this->_query)->fetchAll(PDO::FETCH_OBJ);
+                }
+                
                 $this->_count =  $this->_query->rowCount();
                 $this->_lastInsertID = $this->_pdo->lastInsertId();
             }else {
@@ -52,6 +57,83 @@ class DB
     public function error(){
         return $this->_error;
     }
+
+    protected function _read($table, $params=[],$class)
+    //fonction qui créer une instruction "SELECT * FROM {$table}{$conditionString}{$order}{$limit}"
+    //renvoie tous les éléments du tableau $table qui vérifie les conditions {$conditionString} dans l'ordre {$order} et pas plus de {$limit} éléments
+    /* $table
+        [
+            'conditions' => "condition, condition, ...",// colomn_name = ? ,colomn_name2 > ?
+            'bind' => ['value, ...'],//la valeur qui va remplacer le ?
+            'order' => "colomn_name, colomn_name, ...",
+            'limit' => integer
+        ]
+        //si on ne veut pas utiliser une option ,on ne met pas le '=>' correspendant
+    */
+    {
+        $conditionString = '';
+        $bind = [];
+        $order = '';//la colonne d'aprés laquel les resultats sont ordonnés
+        $limit = '';//nombre max d'element a renvoier
+
+        //conditions
+        if (isset($params['conditions'])) {
+            if (is_array($params['conditions'])) {
+                foreach ($params['conditions'] as $condition ) {
+                    $conditionString .= ' ' . $condition . ' AND';
+                }
+                $conditionString = trim($conditionString);
+                $conditionString = rtrim($conditionString, ' AND');
+            } else {
+                $conditionString = $params['conditions'];
+            }
+            if($conditionString != '') {
+                $conditionString = ' WHERE ' . $conditionString;
+            }
+        }
+
+        //bind
+        if (array_key_exists('bind', $params)) {
+            $bind = $params['bind'];
+        }
+        
+        //order
+        if (array_key_exists('order', $params)) {
+            $order = ' ORDER BY ' . $params['order'];
+        }
+
+        //limit
+        if (array_key_exists('limit', $params)) {
+            $limit = ' LIMIT ' . $params['limit'];
+        }
+
+
+        $sql = "SELECT * FROM {$table}{$conditionString}{$order}{$limit}";
+        if($this->query($sql, $bind,$class)) {
+            if (!count($this->_result)) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function find($table, $params=[],$class=false)
+    {
+        if ($this->_read($table, $params,$class)) {
+            return $this->getResult();
+        }
+        return false;
+    }
+
+    public function findFirst($table, $params=[],$class=false)
+    {
+        if ($this->_read($table, $params,$class)) {
+            return $this->getFirstResult();
+        }
+        return false;
+    }
+
 
     public function insert($table, $fields = [])
     //fonction pour inserer les champs $feilds dans la table $table
@@ -106,5 +188,23 @@ class DB
         return false;
     }
 
+    public function getResult()
+    {
+        return $this->_result;
+    }
 
+    public function getCount()
+    {
+        return $this->_count;
+    }
+
+    public function getColumns($table)
+    {
+        return $this->query("SHOW COLUMNS FROM {$table}")->getResult();
+    }
+
+    public function getFirstResult()
+    {
+        return (!empty($this->_result))? $this->_result[0] : [];
+    }
 }

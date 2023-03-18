@@ -1,6 +1,6 @@
 <?php
 
-class Accueil extends Controller 
+class AccueilController extends Controller 
 {
     public function __construct($controller, $action)
     {
@@ -12,10 +12,11 @@ class Accueil extends Controller
     {
         $db = DB::getInstance();
         $fields = [
-            'n' => '46',
-            'last' => '2'
+            'conditions' => "n > ?",
+            'bind' => ['50'],
+            'order' => "last",
         ];
-        $te = $db->delete('test4',1);
+        dnd($db->findFirst('test4',$fields));
         $this->view->render('accueil/index');
     }
 }
