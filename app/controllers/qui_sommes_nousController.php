@@ -13,7 +13,9 @@ class Qui_sommes_nousController extends Controller
         $db = DB::getInstance();
         $contact = $db->query("select * from a_propos;");
         $res = $contact->getFirstResult();
-        dnd($res);
-        $this->view->render('C:\xampp\htdocs\ProjectFileV5\index.php');
+        require_once("app\Views\qui_sommes_nous\index.php");
+        //$this->view->render('qui_sommes_nous');
+        //dnd($res);
+        
     }
 }

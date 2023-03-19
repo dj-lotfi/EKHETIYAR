@@ -58,7 +58,7 @@ class DB
         return $this->_error;
     }
 
-    protected function _read($table, $params=[],$class)
+    protected function _read($table , $class , $params=[])
     //fonction qui créer une instruction "SELECT * FROM {$table}{$conditionString}{$order}{$limit}"
     //renvoie tous les éléments du tableau $table qui vérifie les conditions {$conditionString} dans l'ordre {$order} et pas plus de {$limit} éléments
     /* $table
@@ -120,7 +120,7 @@ class DB
 
     public function find($table, $params=[],$class=false)
     {
-        if ($this->_read($table, $params,$class)) {
+        if ($this->_read($table ,$class, $params)) {
             return $this->getResult();
         }
         return false;
@@ -128,7 +128,7 @@ class DB
 
     public function findFirst($table, $params=[],$class=false)
     {
-        if ($this->_read($table, $params,$class)) {
+        if ($this->_read($table ,$class, $params)) {
             return $this->getFirstResult();
         }
         return false;

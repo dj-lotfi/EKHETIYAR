@@ -11,9 +11,9 @@ class view {
     {
         $viewArray = explode('/',$viewName);
         $viewString = implode(DS, $viewArray);
-        if(file_exists(ROOT . DS . 'app'. DS . 'views' . DS . $viewString . '.php')){
-            include(ROOT . DS . 'app'. DS . 'views' . DS . $viewString . '.php');//execute la page $viewString/index.php
-            include(ROOT . DS .'app'. DS . 'views' . DS . 'layouts' . DS . $this->_layout .'.php');//affiche la page layouts/default.php
+        if(file_exists(ROOT . DS . 'app'. DS . 'Views' . DS . $viewString . '.php')){
+            include(ROOT . DS . 'app'. DS . 'Views' . DS . $viewString . '.php');//execute la page $viewString/index.php
+            include(ROOT . DS .'app'. DS . 'Views' . DS . 'layouts' . DS . $this->_layout .'.php');//affiche la page layouts/default.php
         }else{
             die('The view "' . $viewName . '" does not exist.');
         }
