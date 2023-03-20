@@ -1,10 +1,23 @@
-<?php $this->setSiteTitle('Accueil'); ?>
-<?php $this->start('head'); ?>
-<!-- write html here -->
-    
-<?php $this->end(); ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Accueil</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <h3>Nom </h3>
+    <p> <?php echo $res->nom ?></p>
+    <h3>Adresse Siege Sociale</h3>
+    <p> <?php echo $res->adresse_siege_social ?>    </p>
+    <h3>Telephone</h3>
+    <p> <?php echo $res->telephone ?></p>
+    <h3>Fax </h3>
+    <p><?php echo $res->fax ?></p>
 
-<?php $this->start('body'); ?>
-<!-- write html here -->
-    <h1 ><center>welcome traveler</center></h1>
-<?php $this->end(); ?>
+    
+</body>
+</html>
