@@ -11,9 +11,15 @@ class view {
     {
         $viewArray = explode('/',$viewName);
         $viewString = implode(DS, $viewArray);
+<<<<<<< Updated upstream
         if(file_exists(ROOT . DS . 'app'. DS . 'Views' . DS . $viewString . '.php')){
             include(ROOT . DS . 'app'. DS . 'Views' . DS . $viewString . '.php');//execute la page $viewString/index.php
             include(ROOT . DS .'app'. DS . 'Views' . DS . 'layouts' . DS . $this->_layout .'.php');//affiche la page layouts/default.php
+=======
+        if(file_exists(ROOT . DS . 'app'. DS . 'Views' . DS . $viewString . DS . 'index.php')){
+            require(ROOT . DS . 'app'. DS . 'Views' . DS . $viewString . DS .  'index.php');//execute la page $viewString/index.php
+            require(ROOT . DS .'app'. DS . 'Views' . DS . 'layouts' . DS . $this->_layout .'.php');//affiche la page layouts/default.php
+>>>>>>> Stashed changes
         }else{
             die('The view "' . $viewName . '" does not exist.');
         }

@@ -8,15 +8,27 @@ class AccueilController extends Controller
         $this->view->setLayout('default');
     }
 
+    public function getBanque($db ,$bank){
+        $contact = $db->query("select * from banques where id_banque=" . $bank);
+        $res = $contact->getFirstResult();
+        return $res;
+    }
+
     public function indexAction() //nom_de_la_method+Action
     {
         $db = DB::getInstance();
-        $fields = [
+        /*$fields = [
             'conditions' => "n > ?",
             'bind' => ['50'],
             'order' => "last",
         ];
-        dnd($db->findFirst('test4',$fields));
-        $this->view->render('accueil/index');
+        dnd($db->findFirst('test4',$fields));*/
+        $res=$this->getBanque($db,1);
+        require_once("app\Views\accueil\index.php");
+
+
+
+        //$this->view->render('accueil/index');
     }
+
 }
