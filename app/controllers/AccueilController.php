@@ -14,7 +14,7 @@ class AccueilController extends Controller
         $fields = [
             'conditions' => "n > ?",
             'bind' => ['50'],
-            'order' => "last",
+            'order' => "last"
         ];
         dnd($db->findFirst('test4',$fields));
         $this->view->render('accueil/index');
