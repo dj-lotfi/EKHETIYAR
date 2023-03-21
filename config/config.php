@@ -1,10 +1,16 @@
 <?php
 define('DEBUG', true);
 
-define('DB_NAME','bdd_projet'); // nom de la bdd
+define('DB_NAME',/*'bdd_projet'*/ 'bank_db'); // nom de la bdd
+<<<<<<< Updated upstream
 define('DB_USER','root'); //nom d'utilisateur
 define('DB_PASSWORD',''); //mot de passe de la bdd 
-define('DB_HOST','127.0.0.1'); //host de la bdd (IP pour éviter DNS lookup)
+define('DB_HOST','127.0.0.1:3307'); //host de la bdd (IP pour éviter DNS lookup)
+=======
+define('DB_USER','proot'); //nom d'utilisateur
+define('DB_PASSWORD','TvFrp@Q6sY6aAQ3'); //mot de passe de la bdd 
+define('DB_HOST','tcp:ikhtiyar.database.windows.net,1433'); //host de la bdd (IP pour éviter DNS lookup)
+>>>>>>> Stashed changes
 
 
 

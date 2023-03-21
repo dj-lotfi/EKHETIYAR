@@ -9,7 +9,8 @@ class DB
     public function __construct()
     {
         try {
-            $this->_pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+            //$this->_pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+            $this->_pdo = new PDO("sqlsrv:server = " . DB_HOST . "; Database = "  . DB_NAME , DB_USER, DB_PASSWORD);
         } catch (PDOException $e) {
             die($e->getMessage());
         }
@@ -25,7 +26,7 @@ class DB
     }
 
     public function query($sql, $params = [],$class = false)
-    //fonction pour accérir des donnéescddepuis la bdd
+    //fonction pour accérir des données cd depuis la bdd
     {
         $this->_error = false;
         if ($this->_query = $this->_pdo->prepare($sql)) {//optimisation des requêtes (preparer) //$sql existe et prerare reussite
@@ -58,7 +59,7 @@ class DB
         return $this->_error;
     }
 
-    protected function _read($table, $params=[],$class)
+    protected function _read($table , $class , $params=[])
     //fonction qui créer une instruction "SELECT * FROM {$table}{$conditionString}{$order}{$limit}"
     //renvoie tous les éléments du tableau $table qui vérifie les conditions {$conditionString} dans l'ordre {$order} et pas plus de {$limit} éléments
     /* $table
@@ -120,7 +121,7 @@ class DB
 
     public function find($table, $params=[],$class=false)
     {
-        if ($this->_read($table, $params,$class)) {
+        if ($this->_read($table ,$class, $params)) {
             return $this->getResult();
         }
         return false;
@@ -128,7 +129,7 @@ class DB
 
     public function findFirst($table, $params=[],$class=false)
     {
-        if ($this->_read($table, $params,$class)) {
+        if ($this->_read($table ,$class, $params)) {
             return $this->getFirstResult();
         }
         return false;
