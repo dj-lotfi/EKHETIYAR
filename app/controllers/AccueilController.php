@@ -23,12 +23,11 @@ class AccueilController extends Controller
             'order' => "last"
         ];
         dnd($db->findFirst('test4',$fields));*/
-        $res=$this->getBanque($db,1);
-        require_once("app\Views\accueil\index.php");
+        $_SESSION['res']=$this->getBanque($db,1);
+        //require_once("app\Views\accueil\index.php");
 
 
-
-        //$this->view->render('accueil/index');
+        $this->view->render('accueil');
     }
 
 }

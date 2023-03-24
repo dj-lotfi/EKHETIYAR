@@ -10,13 +10,13 @@
 </head>
 <body>
     <h3>Nom </h3>
-    <p> <?php echo $res->nom ?></p>
+    <p> <?php echo $_SESSION['res']->nom ?></p>
     <h3>Adresse Siege Sociale</h3>
-    <p> <?php echo $res->adresse_siege_social ?>    </p>
+    <p> <?php echo $_SESSION['res']->adresse_siege_social ?>    </p>
     <h3>Telephone</h3>
-    <p> <?php echo $res->telephone ?></p>
+    <p> <?php echo $_SESSION['res']->telephone ?></p>
     <h3>Fax </h3>
-    <p><?php echo $res->fax ?></p>
+    <p><?php echo $_SESSION['res']->fax ?></p>
 
     
 </body>
