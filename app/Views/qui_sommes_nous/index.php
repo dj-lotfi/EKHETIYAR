@@ -10,15 +10,15 @@
 
         <h1> Description </h1>
         <p> 
-        <?php echo $res->description ?> 
+        <?php echo $_SESSION['result']->description ?> 
         </p>
         <h1> Telephone </h1>
         <p>
-        <?php echo $res->telephone ; ?>
+        <?php echo $_SESSION['result']->telephone ; ?>
         </p>
         <h1>Email</h1>
         <p>
-        <?php echo $res->email?>
+        <?php echo $_SESSION['result']->email?>
         </p>
            
     </body>

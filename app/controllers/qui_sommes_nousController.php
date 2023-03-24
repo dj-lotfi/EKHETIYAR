@@ -12,8 +12,8 @@ class Qui_sommes_nousController extends Controller
     {
         $db = DB::getInstance();
         $contact = $db->query("select * from a_propos;");
-        $res = $contact->getFirstResult();
-        require_once("app\Views\qui_sommes_nous\index.php");
+        $_SESSION['result'] = $contact->getFirstResult();
+        //require_once("app\Views\qui_sommes_nous\index.php");
         $this->view->render('qui_sommes_nous');
         //dnd($res);
         
