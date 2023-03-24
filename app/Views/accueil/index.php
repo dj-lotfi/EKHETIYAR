@@ -1,23 +1,76 @@
+<?php $this->setSiteTitle('Accueil'); ?>
+
+<?php $this->start('head'); ?>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+</html>
+<?php $this->end(); ?>
+
+<?php $this->start('body'); ?>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Accueil</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
-</head>
-<body>
-    <h3>Nom </h3>
-    <p> <?php echo $_SESSION['res']->nom ?></p>
-    <h3>Adresse Siege Sociale</h3>
-    <p> <?php echo $_SESSION['res']->adresse_siege_social ?>    </p>
-    <h3>Telephone</h3>
-    <p> <?php echo $_SESSION['res']->telephone ?></p>
-    <h3>Fax </h3>
-    <p><?php echo $_SESSION['res']->fax ?></p>
-
+    <body class="main-layout">
+        <header>
+            <h3 class="logo">Logo</h3>
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <nav class="navbar">
+                <ul>
+                <li><a href="<?=PROOT?>/accueil">Accueil</a></li>
+                <li><a href="<?=PROOT?>/comparatif">Comparatif</a></li>
+                <li><a href="<?=PROOT?>/qui_sommes_nous">Qui Sommes-Nous</a></li>
+                </ul>
+            </nav>
+            <label for="nav-toggle" class="nav-toggle-label">
+                <span></span>
+            </label>
+        </header>
+        <section>
+            <div class="carousel">
     
-</body>
+                <button class="carousel__button carousel__button--left">
+                    <img src="<?=PROOT?>/img/left.svg" alt="">
+                </button>
+    
+                <div class="coursel__track-container">
+                    <ul class="carousel__track">
+                        <li class="carousel__slide current-slide">
+                            <img class="carousel__image" src="<?=PROOT?>/img/img.jpg" alt="">
+                        </li>
+                        <li class="carousel__slide">
+                            <img class="carousel__image" src="<?=PROOT?>/img/img1.webp" alt="">
+                        </li>
+                        <li class="carousel__slide">
+                            <img class="carousel__image" src="<?=PROOT?>/img/img2.jpg" alt="">
+                        </li>
+                    </ul>
+                </div>
+    
+                <button class="carousel__button carousel__button--right">
+                    <img src="<?=PROOT?>/img/right.svg" alt="">
+                </button>
+    
+                <div class="carousel__nav">
+                    <button class="carousel__indicator current-slide"></button>
+                    <button class="carousel__indicator"></button>
+                    <button class="carousel__indicator"></button>
+                </div>
+    
+            </div>
+        </section>
+        <main class="content-layout">
+        </main>
+        <footer>
+            <ul>
+            <li><a href="<?=PROOT?>/accueil">Accueil</a></li>
+                <li><a href="<?=PROOT?>/comparatif">Comparatif</a></li>
+                <li><a href="<?=PROOT?>/qui_sommes_nous">Qui Sommes-Nous</a></li>
+            </ul>
+            <div class="copyright">Copyright © 2023. All Rights Reserved.</div>
+        </footer>
+    </body>
 </html>
+<?php $this->end(); ?>

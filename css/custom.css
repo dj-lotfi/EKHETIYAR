@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap');
+
+:root {
+    --dark-color-1: #222823ff;
+    --dark-color-2: #343a40ff;
+    --dark-color-3: #575a5eff;
+    --dark-color-4: #a7a2a9ff;
+    --dark-color-5: #f4f7f5ff;
+
+    --light-color-1: #3D5A80ff;
+    --light-color-2: #c6d8ffff;
+    --light-color-3: #f4f7f5ff;
+    --light-color-4: #388697ff;
+    --light-color-5: #f77f00ff;
+
+    --main1: var(--light-color-1);
+    --main2: var(--light-color-2);
+    --support: var(--light-color-3);
+    --accent1: var(--light-color-4);
+    --accent2: var(--light-color-5);
+
+    --main-50: #EFF6FFff;
+    --main-100: #DBEAFEff;
+    --main-200: #BFDBFEff;
+    --main-300: #93C5FDff;
+    --main-400: #60A5FAff;
+    --main-500: #3B82F6ff;
+    --main-600: #2563EBff;
+    --main-700: #1D4ED8ff;
+    --main-800: #1E40AFff;
+    --main-900: #1E3A8Aff;
+
+    --space: 0.5rem;
+}
+
+body {
+    font-size: 100%;
+    font-family: 'Atkinson Hyperlegible', system-ui, 'Open Sans';
+    margin: 0;
+}
+
+a:hover, a:visited, a:link {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+header {
+    background: var(--main-500);
+    text-align: center;
+
+    position: sticky;
+    /*Maybe absolute is better, priviously : fixed*/
+    z-index: 999;
+
+    width: 100%;
+    left: 0;
+}
+
+.blue1 {
+    background-color: #98C1D9ff;
+}
+
+.blue2 {
+    background-color: #3D5A80ff;
+}
+
+.orange {
+    background-color: #EE6C4Dff;
+}
+
+.main-layout {
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+}
+
+.content-layout {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    margin: 1% 0 1% 0;
+}
+
+.filter-margin {
+    margin: 0 0 2.5% 0;
+}
+
+.rounded {
+    border-radius: 1rem;
+}
+
+.filter-margin>p {
+    margin: 5% 0 5% 0;
+}
+
+.navbar {
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    left: 0;
+    background: var(--main-500);
+    width: 100%;
+    transform: scale(1, 0);
+
+    transform-origin: top;
+    transition: transform 400ms ease-in-out;
+}
+
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navbar li {
+    margin: 0 0 1rem 1rem;
+}
+
+.navbar a {
+    color: var(--main-100);
+    text-decoration: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    opacity: 0;
+
+    transition: 150ms ease-in-out;
+}
+
+.navbar a:hover {
+    color: var(--main-800);
+}
+
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle:checked~nav {
+    transform: scale(1, 1);
+}
+
+.nav-toggle:checked~nav a {
+    opacity: 1;
+    transition: 250ms ease-in-out 250ms;
+}
+
+.nav-toggle-label {
+    position: absolute;
+
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    top: 0;
+    left: 0;
+    margin-left: 1rem;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    display: block;
+    background: var(--main-100);
+    height: 2px;
+    width: 2em;
+    border-radius: 2px;
+    position: relative;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+}
+
+.nav-toggle-label span::before {
+    bottom: 7px;
+}
+
+.nav-toggle-label span::after {
+    top: 7px;
+}
+
+@media screen and (orientation:landscape) {
+    .content-layout {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        margin: 1% 0 1% 0;
+    }
+
+    .filter-margin {
+        margin: 0 15% 0 0;
+    }
+
+    .rounded {
+        border-radius: 1rem;
+    }
+
+    .width {
+        max-width: 750px;
+    }
+
+    .content-layout {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        margin: 1% 0 1% 0;
+    }
+
+    .nav-toggle-label {
+        display: none;
+    }
+
+    header {
+        display: grid;
+        grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+    }
+
+    .logo {
+        grid-column: 2 / 3;
+    }
+
+    .navbar {
+        all: unset;
+        grid-column: 3 / 4;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .navbar ul {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .navbar li {
+        margin: 0 0 0 3em;
+    }
+
+    .navbar a {
+        opacity: 1;
+        position: relative;
+    }
+
+    .navbar a::before {
+        content: '';
+        display: block;
+        height: 5px;
+        border-radius: 5px;
+        position: absolute;
+        background: var(--main-800);
+        top: -.75em;
+        left: 0;
+        right: 0;
+
+        transition: transform ease-in-out 250ms;
+        transform: scale(0, 1);
+    }
+
+    .navbar a:hover::before {
+        transform: scale(1, 1);
+    }
+}
+
+footer {
+    background:var(--main-500);
+    width:100%;
+    font-size: 0.8rem;
+
+    border-top: 5px solid transparent;
+    border-color: var(--main-900);
+}
+
+footer > ul{
+    margin-top: 0.32rem;
+    margin-bottom: 0.64rem;
+}
+
+footer > ul > li > a {
+    margin-left: 5%;
+    color: var(--main-300);
+}
+
+footer > ul > li > a:hover{
+    color:var(--main-50);
+}
+
+.copyright {
+    width:100%;
+    float: left;
+    font-size: 1rem;
+    background-color: var(--main-900);
+    color:var(--main-100);
+}
+
+.carousel {
+    position: relative;
+    width: 80%;
+    aspect-ratio: 21/9;
+    margin: 0 auto;
+}
+
+.carousel__track_container {
+    position: relative;
+    height: 100%;
+}
+
+.carousel__track {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: 100%;
+    transition: transform 250ms ease-in;
+}
+
+.carousel__slide {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.carousel__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    z-index: 10;
+
+    filter: invert(42%) sepia(71%) saturate(2063%) hue-rotate(201deg) brightness(98%) contrast(97%);
+}
+
+.carousel__button--left {
+    left: 0;
+}
+
+.carousel__button--right {
+    right: 40px;
+}
+
+.carousel__button img {
+    width: 25px;
+}
+
+.carousel__nav {
+    margin: 0 auto;
+}
