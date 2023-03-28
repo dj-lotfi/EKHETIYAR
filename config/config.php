@@ -1,10 +1,10 @@
 <?php
 define('DEBUG', true);
 
-define('DB_NAME',/*'bdd_projet'*/ 'bank_db'); // nom de la bdd
-define('DB_USER','proot'); //nom d'utilisateur
-define('DB_PASSWORD','TvFrp@Q6sY6aAQ3'); //mot de passe de la bdd 
-define('DB_HOST','tcp:ikhtiyar.database.windows.net,1433'); //host de la bdd (IP pour éviter DNS lookup)
+define('DB_NAME',/*'bdd_projet'*/ 'sql7609233'); // nom de la bdd
+define('DB_USER','sql7609233'); //nom d'utilisateur
+define('DB_PASSWORD','M8j5TXwV8C'); //mot de passe de la bdd 
+define('DB_HOST','sql7.freemysqlhosting.net'); //host de la bdd (IP pour éviter DNS lookup)
 
 
 

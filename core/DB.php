@@ -9,8 +9,8 @@ class DB
     public function __construct()
     {
         try {
-            //$this->_pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
-            $this->_pdo = new PDO("sqlsrv:server = " . DB_HOST . "; Database = "  . DB_NAME , DB_USER, DB_PASSWORD);
+            $this->_pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+            //$this->_pdo = new PDO("sqlsrv:server = " . DB_HOST . "; Database = "  . DB_NAME , DB_USER, DB_PASSWORD);
         } catch (PDOException $e) {
             die($e->getMessage());
         }

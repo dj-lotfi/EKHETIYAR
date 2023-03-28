@@ -2,16 +2,12 @@
 
 class AccueilController extends Controller 
 {
+    private $model ;
     public function __construct($controller, $action)
     {
         parent::__construct($controller, $action);
+        //$this->load_model('AccueilModel');
         $this->view->setLayout('default');
-    }
-
-    public function getBanque($db ,$bank){
-        $contact = $db->query("select * from banques where id_banque=" . $bank);
-        $res = $contact->getFirstResult();
-        return $res;
     }
 
     public function indexAction() //nom_de_la_method+Action
@@ -23,7 +19,11 @@ class AccueilController extends Controller
             'order' => "last"
         ];
         dnd($db->findFirst('test4',$fields));*/
-        $_SESSION['res']=$this->getBanque($db,1);
+        $model = new AccueilModel();
+        $this->load_model('AccueilModel');
+        //require "app\models\AccueilModel.php";
+
+        $_SESSION['res']=$model->getBanque($db,1);
         //require_once("app\Views\accueil\index.php");
 
 
