@@ -1,0 +1,24 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 10px;
+  }
+  
+  .square {
+    background-image: url(background.jpg);
+    background-size: cover;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1.2em;
+    text-align: center;
+  }
+  
+  .square img {
+    max-width: 50%;
+    margin-bottom: 10px;
+  }
+  

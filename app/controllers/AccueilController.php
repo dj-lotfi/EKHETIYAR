@@ -12,19 +12,17 @@ class AccueilController extends Controller
 
     public function indexAction() //nom_de_la_method+Action
     {
-        $db = DB::getInstance();
+        //$db = DB::getInstance();
         /*$fields = [
             'conditions' => "n > ?",
             'bind' => ['50'],
             'order' => "last"
         ];
         dnd($db->findFirst('test4',$fields));*/
-        $model = new AccueilModel();
-        $this->load_model('AccueilModel');
-        //require "app\models\AccueilModel.php";
-
-        $_SESSION['res']=$model->getBanque($db,1);
-        //require_once("app\Views\accueil\index.php");
+        $model = new BanqueModel();
+        //$this->load_model('BanqueModel');
+        mb_internal_encoding("UTF-8");
+        $_SESSION['res']=$model->getBanque(1);
 
 
         $this->view->render('accueil');

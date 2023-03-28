@@ -19,7 +19,7 @@ spl_autoload_register(function($className){
     } elseif(file_exists(ROOT . DS . 'app' . DS . 'controllers' . DS . $className . '.php')){
         require_once(ROOT . DS . 'app' . DS . 'controllers' . DS . $className . '.php');
     } elseif(file_exists(ROOT . DS . 'app' . DS . 'models' . DS . $className . '.php')){
-        require_once(file_exists(ROOT . DS . 'app' . DS . 'models' . DS . $className . '.php'));
+        require_once(ROOT . DS . 'app' . DS . 'models' . DS . $className . '.php');
     }
 });
 
