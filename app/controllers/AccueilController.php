@@ -19,10 +19,8 @@ class AccueilController extends Controller
             'order' => "last"
         ];
         dnd($db->findFirst('test4',$fields));*/
-        $model = new BanqueModel();
-        //$this->load_model('BanqueModel');
-        mb_internal_encoding("UTF-8");
-        $_SESSION['res']=$model->getBanque(1);
+        //$model = new BanqueModel();
+        //$_SESSION['res']=$model->getBanque(1);
 
 
         $this->view->render('accueil');

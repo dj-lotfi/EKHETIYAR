@@ -1,18 +1,12 @@
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-gap: 10px;
-  }
-  
   .square {
-    background-image: url(background.jpg);
+    background-image: url(img\Blank-Map-of-World-Outline-02-EN_1.png);
     background-size: cover;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #fff;
+    color: #000000;
     font-size: 1.2em;
     text-align: center;
   }
@@ -20,5 +14,18 @@
   .square img {
     max-width: 50%;
     margin-bottom: 10px;
+  }
+
+  .rectangle {
+    text-align : center;
+    align-items: center;
+    justify-content: center;
+    width: 1000px;
+    height: 100px;
+    background-color: gray;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    color: white;
   }
   
