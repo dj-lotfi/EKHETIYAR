@@ -21,6 +21,12 @@ class AccueilController extends Controller
         dnd($db->findFirst('test4',$fields));*/
         //$model = new BanqueModel();
         //$_SESSION['res']=$model->getBanque(1);
+        $pres = new CommentaireModel();
+        $date_str = '2027-05-10';
+        $date = new DateTime($date_str);        
+        $formatted_date = $date->format('Y-m-d');
+        $pres->Rate(1,3,"chikor mamakom",$formatted_date);
+        $pres->delelteRatinb(1);
 
 
         $this->view->render('accueil');

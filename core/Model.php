@@ -3,7 +3,6 @@ class Model
 {
     protected $_db, $_table, $_modelNAme, $_softDelete = false;
     public $id;
-
     public function __construct($table)
     {
         $this->_db = DB::getInstance();
@@ -20,7 +19,7 @@ class Model
     public function find($params = [])
     //return les lignes qui correspond aux conditions $params dans un tableau de type nom_model[]
     {
-        $results = [];
+        $results = [] ;
         $resultsQuery = $this->_db->find($this->_table, $params,get_class($this));
         if (!$resultsQuery) {
             return [];
@@ -34,9 +33,9 @@ class Model
         return $resultsQuery;
     }
 
-    public function findById($id)
+    public function findById($id,$indexid)
     {
-        return $this->findFirst(['conditions'=>"id = ?", 'bind' =>[$id]]);
+        return $this->findFirst(['conditions'=>"$indexid = ?", 'bind' =>[$id]]);
     }
 
     protected function populateObjData($result)
@@ -46,12 +45,12 @@ class Model
         }
     }
 
-    public function save()
+    public function save($indexid)
     {
         $fields = getObjectProperties($this);
         if(property_exists($this, 'id') && $this->id != '')//tester si il faut inserer or modifier
         {
-            return $this->update($this->id, $fields);
+            return $this->update($this->id, $fields,$indexid);
         } else {
             return $this->insert($fields);
         }
@@ -88,19 +87,16 @@ class Model
         return $this->_db->insert($this->_table, $fields);
     }
 
-    public function update($id, $fields)
+    public function update($id, $fields,$indexid)
     {
         if(empty($fields) || $id == '')
         {
             return false;
         }
-        return $this->_db->update($this->_table, $id, $fields);
+        return $this->_db->update($this->_table, $id, $fields,$indexid);
     }
 
-
-
-
-    public function delete($id ='')
+    public function delete($indexid,$id ='')
     {
         if ($id == '' && $this->id == '') {
             return false;
@@ -108,8 +104,8 @@ class Model
         $id = ($id == '') ? $this->id : $id ;
         if($this->_softDelete)
         {
-            return $this->update($id, ['deleted' => 1]);
+            return $this->update($id, ['deleted' => 1],$indexid);
         }
-        return $this->_db->delete($this->_table, $id);
+        return $this->_db->delete($this->_table, $id,$indexid);
     }
-}
+} ?>

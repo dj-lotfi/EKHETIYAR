@@ -159,7 +159,7 @@ class DB
         return false;
     }
 
-    public function update($table, $id, $fields =[])
+    public function update($table, $id,$indexid , $fields =[])
     //modifier certains données $fields une ligne avec l'identifiant $id
     //fields tableau associative des noms des colonnes et les valeurs
     //resiste les attaques injections
@@ -172,17 +172,17 @@ class DB
         }
         $fieldString = trim($fieldString);
         $fieldString = rtrim($fieldString,',');
-        $sql = "UPDATE {$table} SET {$fieldString} WHERE id = {$id}";
+        $sql = "UPDATE {$table} SET {$fieldString} WHERE {$indexid} = {$id}";
         if (!$this->query($sql, $values)->error()) {//modification réussite
             return true;
         }
         return false;
     }
 
-    public function delete($table, $id)
+    public function delete($table, $id ,$indexid)
     //fonction pour supprimer la ligne avec l'identifiant $id 
     {
-        $sql = "DELETE FROM {$table} WHERE id = {$id}";
+        $sql = "DELETE FROM {$table} WHERE {$indexid} = {$id}";
         if (!$this->query($sql)->error()) {//suppression réussite
             return true;
         }

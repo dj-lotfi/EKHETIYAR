@@ -21,8 +21,8 @@
     align-items: center;
     justify-content: center;
     width: 1000px;
-    height: 100px;
-    background-color: gray;
+    height: 200px;
+    background-color: rgb(40, 54, 255);
     border-radius: 10px;
     margin-bottom: 20px;
     padding: 10px;
