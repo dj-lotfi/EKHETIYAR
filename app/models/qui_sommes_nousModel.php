@@ -7,7 +7,7 @@ class qui_sommes_nousModel extends Model {
 
     public function getQSN(){
         $contact = $this->_db->query("select * from A_propos;");
-        $_SESSION['result'] = $contact->getFirstResult();
+        return $contact->getFirstResult();
 
     }
 }

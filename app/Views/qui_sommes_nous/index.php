@@ -62,6 +62,15 @@
             </div>
         </section>
         <main class="content-layout">
+            <?php $dump = new qui_sommes_nousModel();
+            $res = $dump->getQSN(); ?>
+            <h4> Description </h4>
+            <p> <?php echo $res->description;    ?>
+            </p>
+            <h4>Telephone </h4>
+            <p><?php echo $res->telephone ?></p>
+            <h4>Email </h4>
+            <p><?php echo $res->email ?></p>
         </main>
         <footer>
             <ul>
