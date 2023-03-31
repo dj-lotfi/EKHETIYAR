@@ -66,277 +66,282 @@
         </div>
     </section>
     <main class="content-layout">
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(1)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(1)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(1)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(1)->fax) ?>
-                    <br> Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(1)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(2)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(2)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(2)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(2)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(2)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(4)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(4)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(4)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(4)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(4)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(5)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(5)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(5)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(5)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(5)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(6)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(6)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(6)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(6)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(6)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(7)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(7)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(7)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(7)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(7)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(8)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(8)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(8)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(8)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(8)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(9)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(9)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(9)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(9)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(9)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(10)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(10)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(10)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(10)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(10)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(11)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(11)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(11)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(11)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(11)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(12)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(12)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(12)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(12)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(12)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(13)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(13)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(13)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(13)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(13)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(14)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(14)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(14)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(14)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(14)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(15)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(15)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(15)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(15)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(15)->site_banque);?>
-            </p>
-        </div>
-        <br>
-        <div class="rectangle" >
-            <p>
-                <?php $model = new BanqueModel();?>
-                    Nom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(16)->nom) ?>
-                    <br> Prenom :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(16)->adresse_siege_social) ?>
-                    <br> Telephone :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(16)->telephone) ?>
-                    <br> Fax :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(16)->fax) ?>
-                    <br>Site :
-                    <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(16)->site_banque);?>
-            </p>
-        </div>
+        <section>
+            
+        </section>
+        <section>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(1)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(1)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(1)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(1)->fax) ?>
+                        <br> Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(1)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(2)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(2)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(2)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(2)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(2)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(3)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(4)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(4)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(4)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(4)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(4)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(5)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(5)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(5)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(5)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(5)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(6)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(6)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(6)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(6)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(6)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(7)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(7)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(7)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(7)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(7)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(8)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(8)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(8)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(8)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(8)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(9)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(9)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(9)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(9)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(9)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(10)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(10)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(10)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(10)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(10)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(11)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(11)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(11)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(11)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(11)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(12)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(12)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(12)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(12)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(12)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(13)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(13)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(13)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(13)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(13)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(14)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(14)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(14)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(14)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(14)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(15)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(15)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(15)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(15)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(15)->site_banque);?>
+                </p>
+            </div>
+            <br>
+            <div class="rectangle" >
+                <p>
+                    <?php $model = new BanqueModel();?>
+                        Nom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(16)->nom) ?>
+                        <br> Prenom :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(16)->adresse_siege_social) ?>
+                        <br> Telephone :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(16)->telephone) ?>
+                        <br> Fax :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(16)->fax) ?>
+                        <br>Site :
+                        <?php echo iconv('ISO-8859-1', 'UTF-8',$model->getBanque(16)->site_banque);?>
+                </p>
+            </div>
+        </section>
     </main>
     <footer>
         <ul>

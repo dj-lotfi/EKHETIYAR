@@ -1,31 +1,39 @@
-  .square {
-    background-image: url(img\Blank-Map-of-World-Outline-02-EN_1.png);
-    background-size: cover;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #000000;
-    font-size: 1.2em;
-    text-align: center;
-  }
-  
-  .square img {
-    max-width: 50%;
-    margin-bottom: 10px;
-  }
+.square {
+  background-image: url(img\Blank-Map-of-World-Outline-02-EN_1.png);
+  background-size: cover;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+  font-size: 1.2em;
+  text-align: center;
+}
 
-  .rectangle {
-    text-align : center;
-    align-items: center;
-    justify-content: center;
-    width: 1000px;
-    height: 200px;
-    background-color: rgb(40, 54, 255);
-    border-radius: 10px;
-    margin-bottom: 20px;
-    padding: 10px;
-    color: white;
-  }
-  
+.rectangle {
+  position: relative;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  max-width: 1000px;
+  background-color: rgb(40, 54, 255);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  color: white;
+}
+
+.rectangle::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
+  background-image: url('../img/Blank-Map-of-World-Outline-02-EN_1.png');
+  background-size: cover;
+
+  opacity: 0.75;
+}
