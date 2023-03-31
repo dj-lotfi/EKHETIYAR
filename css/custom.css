@@ -74,15 +74,20 @@ header {
 .main-layout {
     min-height: 100vh;
     min-height: 100dvh;
+    width: 100vw;
 
     display: grid;
     grid-template-rows: auto auto 1fr auto;
 }
 
 .content-layout {
-    display: grid;
+    /*display: grid;
     grid-template-rows: auto 1fr;
-    margin: 1% 0 1% 0;
+    margin: 1% 0 1% 0;*/
+    text-align: center;
+    display: flex; /* add display:flex to center child element horizontally */
+    justify-content: center;
+    width: 100%; /* set a width for the parent element */
 }
 
 .filter-margin {

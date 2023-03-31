@@ -9,6 +9,8 @@ class AccueilController extends Controller
         //$this->load_model('AccueilModel');
         $this->view->setLayout('default');
     }
+    
+    
 
     public function indexAction() //nom_de_la_method+Action
     {
@@ -34,5 +36,7 @@ class AccueilController extends Controller
 
         $this->view->render('accueil');
     }
+
+    
 
 }

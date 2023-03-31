@@ -10,22 +10,101 @@
     font-size: 1.2em;
     text-align: center;
   }
-  
+
   .square img {
     max-width: 50%;
     margin-bottom: 10px;
   }
 
+  .grid {
+    text-align: center;
+    display: flex;
+    /* add display:flex to center child element horizontally */
+    justify-content: center;
+    width: 100vw;
+    /* set a width for the parent element */
+  }
+
   .rectangle {
-    text-align : center;
+    text-align: center;
     align-items: center;
     justify-content: center;
-    width: 1000px;
+    width: 95%;
+    /* adjust width as needed */
     height: 200px;
     background-color: rgb(40, 54, 255);
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin: 50px auto;
+    /* use margin:auto to center horizontally and adjust top margin as needed */
     padding: 10px;
     color: white;
   }
-  
+
+
+  /* Styles for the button */
+  .prestations-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 20px;
+  }
+
+  /* Styles for the pop-up window */
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black background with opacity */
+    border-radius: 20px;
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    color: #000000;
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    box-shadow: 0px 0px 20px #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+    text-align: center;
+    border-radius: 20px;
+  }
+
+  /* Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: #ffffff;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #ff0000;
+    text-decoration: none;
+    cursor: pointer;
+  }
