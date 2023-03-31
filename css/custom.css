@@ -303,7 +303,7 @@ footer > ul > li > a:hover{
 .carousel {
     position: relative;
     width: 80%;
-    aspect-ratio: 21/9;
+    aspect-ratio: 7/2;
     margin: 0 auto;
 }
 
