@@ -67,15 +67,43 @@
     </section>
     <main class="content-layout">
         <div class="grid">
+            <?php 
+            function displayPrestations($id){
+                $pres = new PrestationModel();
+                $table = 'table' . $id;
+                 ?>
+                <table id="<?php echo $table; ?>" >
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Categorie</th>
+                                        <th>Prix</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $prpr = $pres->getPrestations($id);
+                                    for ($i=0 ; $i<sizeof($prpr);$i++) {
+                                        echo '<tr>';
+                                        echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->nom) . '</td>';
+                                        echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->categorie) . '</td>';
+                                        echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->prix) . '</td>';
+                                        echo '</tr>';
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+            <?php }?>
+            
         <?php
             function displayBank($bankId)
             {
                 $model = new BanqueModel();
                 $bank = $model->getBanque($bankId);
-                $pres = new PrestationModel();
+                
                 $buttonId = 'prestations-button-' . $bankId;
                 $modalId = 'prestations-modal-' . $bankId;
-                $table = 'table' . $bankId;
+                
                 ?>
                 <div class="rectangle">
                     <p>
@@ -97,27 +125,8 @@
                         <div class="modal-content">
                             <span class="close">&times;</span>
                             <h2>Prestations</h2>
-                            <table id="<?php echo $table; ?>" >
-                                <thead>
-                                    <tr>
-                                        <th>Nom</th>
-                                        <th>Categorie</th>
-                                        <th>Prix</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $prpr = $pres->getPrestations($bankId);
-                                    for ($i=0 ; $i<sizeof($prpr);$i++) {
-                                        echo '<tr>';
-                                        echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->nom) . '</td>';
-                                        echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->categorie) . '</td>';
-                                        echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->prix) . '</td>';
-                                        echo '</tr>';
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                            <?php displayPrestations($bankId); ?>
+                            
                         </div>
                     </div>
                     <script>
