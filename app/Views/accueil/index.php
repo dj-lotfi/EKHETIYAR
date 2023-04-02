@@ -7,7 +7,8 @@
     <meta charset="utf8mb4">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css\banks_squares.css">
+    <link rel="stylesheet" href="css/banks_squares.css">
+    <script defer src="js/prestation.js"></script>
 </head>
 
 </html>
@@ -66,7 +67,19 @@
         </div>
     </section>
     <main class="content-layout">
-        <div class="grid">
+        <section></section>
+        <div> <!--<div class="grid">-->
+            <div class="sort-section">
+                <span>Trier Par:</span>
+                <div class="custom-select">
+                    <select autocomplete="off">
+                        <option selected value="0">Defaut</option>
+                        <option value="1">Tarifs Croissantes</option>
+                        <option value="2">Tarifs Décroissantes</option>
+                    </select>
+                    <span class="custom-arrow"></span>
+                </div>
+            </div>
             <?php
             function displayPrestations($id)
             {
@@ -139,7 +152,7 @@
                         </div>
                     </div>
 
-                    <script>
+                    <!--<script>
                         document.getElementById("<?php echo $modalId; ?>").getElementsByClassName("close")[0].onclick = function () {
 
                             document.getElementById("<?php echo $modalId; ?>").style.display = "none";
@@ -147,8 +160,9 @@
                         document.getElementById("<?php echo $buttonId; ?>").onclick = function () {
 
                             document.getElementById("<?php echo $modalId; ?>").style.display = "block";
+
                         };
-                    </script>
+                    </script>-->
                 </div>
 
             <?php } ?>

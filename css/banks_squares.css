@@ -21,7 +21,7 @@
     display: flex;
     /* add display:flex to center child element horizontally */
     justify-content: center;
-    width: 100vw;
+    /*width: 100vw;*/
     /* set a width for the parent element */
   }
 
@@ -31,7 +31,6 @@
     justify-content: center;
     width: 95%;
     /* adjust width as needed */
-    height: 200px;
     background-color: rgb(40, 54, 255);
     border-radius: 10px;
     margin: 50px auto;
@@ -62,7 +61,7 @@
     /* Hidden by default */
     position: fixed;
     /* Stay in place */
-    z-index: 1;
+    z-index: 1000;
     /* Sit on top */
     left: 0;
     top: 0;
@@ -74,21 +73,31 @@
     /* Enable scroll if needed */
     background-color: rgba(0, 0, 0, 0.4);
     /* Black background with opacity */
-    border-radius: 20px;
+  }
+
+  /* Hide the vertical scrollbar of the pop-up window depending on browser */
+  .modal::-webkit-scrollbar {
+    display: none;
+  }
+
+  .modal {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   /* Modal Content/Box */
   .modal-content {
     color: #000000;
     background-color: #fefefe;
-    margin: 15% auto;
-    /* 15% from the top and centered */
+    margin: 2.5% auto;
+    /* 2.5% from the top and centered */
     padding: 20px;
     box-shadow: 0px 0px 20px #888;
     width: 80%;
     /* Could be more or less, depending on screen size */
     text-align: center;
     border-radius: 20px;
+    z-index: 1001;
   }
 
   /* Close Button */
