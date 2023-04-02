@@ -67,49 +67,50 @@
     </section>
     <main class="content-layout">
         <div class="grid">
-            <?php 
-            function displayPrestations($id){
+            <?php
+            function displayPrestations($id)
+            {
                 $pres = new PrestationModel();
                 $table = 'table' . $id;
-                 ?>
-                <table id="<?php echo $table; ?>" >
-                                <thead>
-                                    <tr>
-                                        <th>Nom</th>
-                                        <th>Categorie</th>
-                                        <th>Prix</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $prpr = $pres->getPrestations($id);
-                                    for ($i=0 ; $i<sizeof($prpr);$i++) {
-                                        echo '<tr>';
-                                        echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->nom) . '</td>';
-                                        echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->categorie) . '</td>';
-                                        if ($prpr[$i]->prix==null) {
-                                            echo '<td>' .'?'. '</td>';
-                                        } else {
-                                            echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->prix) . '</td>';
-                                        }
-                                        
-                                        
-                                        echo '</tr>';
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-            <?php }?>
-            
-        <?php
+                ?>
+                <table id="<?php echo $table; ?>">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Categorie</th>
+                            <th>Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $prpr = $pres->getPrestations($id);
+                        for ($i = 0; $i < sizeof($prpr); $i++) {
+                            echo '<tr>';
+                            echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->nom) . '</td>';
+                            echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->categorie) . '</td>';
+                            if ($prpr[$i]->prix == null) {
+                                echo '<td>' . '?' . '</td>';
+                            } else {
+                                echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->prix) . '</td>';
+                            }
+
+
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            <?php } ?>
+
+            <?php
             function displayBank($bankId)
             {
                 $model = new BanqueModel();
                 $bank = $model->getBanque($bankId);
-                
+
                 $buttonId = 'prestations-button-' . $bankId;
                 $modalId = 'prestations-modal-' . $bankId;
-                
+
                 ?>
                 <div class="rectangle">
                     <p>
@@ -125,34 +126,28 @@
                         <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->site_banque) ?>
                     </p>
                     <div>
-                        <button id="<?php echo $buttonId; ?>" class="prestations-button" >Prestations</button>
+                        <button id="<?php echo $buttonId; ?>" class="prestations-button">Prestations</button>
                         <!-- The Modal -->
                         <div id="<?php echo $modalId; ?>" class="modal">
                             <!-- Modal content -->
                             <div class="modal-content">
-                                <span class="close" >&times;</span>
+                                <span class="close">&times;</span>
                                 <h2>Prestations</h2>
                                 <?php displayPrestations($bankId); ?>
-                                
+
                             </div>
                         </div>
                     </div>
-                    
-                    <script>
 
-                        document.getElementById("<?php echo $buttonId; ?>").onclick = function() {myFunction<?php echo $bankId; ?>()};
-                        document.getElementById("<?php echo $modalId; ?>").getElementsByClassName("close")[0].onclick = function() {
+                    <script>
+                        document.getElementById("<?php echo $modalId; ?>").getElementsByClassName("close")[0].onclick = function () {
 
                             document.getElementById("<?php echo $modalId; ?>").style.display = "none";
                         };
-                        document.getElementById("<?php echo $buttonId; ?>").onclick = function() {
-                            
+                        document.getElementById("<?php echo $buttonId; ?>").onclick = function () {
+
                             document.getElementById("<?php echo $modalId; ?>").style.display = "block";
                         };
-
-                        
-
-
                     </script>
                 </div>
 
