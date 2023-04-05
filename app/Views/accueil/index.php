@@ -121,11 +121,11 @@
                 $model = new BanqueModel();
                 $bank = $model->getBanque($bankId);
 
-                /*$buttonId = 'prestations-button-' . $bankId;
-                $modalId = 'prestations-modal-' . $bankId;*/
+                $buttonId = 'prestations-button-' . $bankId;
+                $modalId = 'prestations-modal-' . $bankId;
                 ?>
 
-                <div class="bank-card">
+                <!-- #region --><div class="bank-card">
                     <p class="title">
                         <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->nom) ?>
                     </p>
@@ -145,9 +145,10 @@
                     <div><a href="<?php echo iconv('ISO-8859-1', 'UTF-8', $bank->site_banque) ?>" class="site-link"><?php echo iconv('ISO-8859-1', 'UTF-8', $bank->site_banque) ?></a></div>
                     <div class="prestations-button">Prestations<div class="prestations-button__handler">?</div>
                     </div>
+                    
                     <div class="map__container"><iframe
                             src="https://www.google.com/maps/d/embed?mid=1n3rOTqTkG_JeSe_0sCcn4lGBXiv4DrU&ehbc=2E312F&z=12"
-                            frameborder="0" class="hide-map-bar"></iframe></div>
+                            frameborder="0" class="hide-map-bar"></iframe></div> 
                     <button class="view-button">Voir Plus</button>
                     <div>
                         <!-- The Modal -->
@@ -163,45 +164,45 @@
                     </div>
                 </div>
 
-                <!--<div class="rectangle">
+                <div class="rectangle">
                     <p>
                         Nom:
-                        <?php //echo iconv('ISO-8859-1', 'UTF-8', $bank->nom) ?><br>
+                        <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->nom) ?><br>
                         Adresse:
-                        <?php //echo iconv('ISO-8859-1', 'UTF-8', $bank->adresse_siege_social) ?><br>
+                        <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->adresse_siege_social) ?><br>
                         Telephone:
-                        <?php //echo iconv('ISO-8859-1', 'UTF-8', $bank->telephone) ?><br>
+                        <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->telephone) ?><br>
                         Fax:
-                        <?php //echo iconv('ISO-8859-1', 'UTF-8', $bank->fax) ?><br>
+                        <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->fax) ?><br>
                         Site:
-                        <?php //echo iconv('ISO-8859-1', 'UTF-8', $bank->site_banque) ?>
+                        <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->site_banque) ?>
                     </p>
                     <div>
-                        <button id="<?php //echo $buttonId; ?>" class="prestations-button">Prestations</button>
+                        <button id="<?php echo $buttonId; ?>" class="prestations-button">Prestations</button>
                         /* The Modal */
-                        <div id="<?php //echo $modalId; ?>" class="modal">
+                        <div id="<?php echo $modalId; ?>" class="modal">
                             /* Modal content */
                             <div class="modal-content">
                                 <span class="close">&times;</span>
                                 <h2>Prestations</h2>
-                                <?php //displayPrestations($bankId); ?>
+                                <?php displayPrestations($bankId); ?>
 
                             </div>
                         </div>
                     </div>
 
-                    /*<script>
-                        document.getElementById("<?php //echo $modalId; ?>").getElementsByClassName("close")[0].onclick = function () {
+                    <script>
+                        document.getElementById("<?php echo $modalId; ?>").getElementsByClassName("close")[0].onclick = function () {
 
-                            document.getElementById("<?php //echo $modalId; ?>").style.display = "none";
+                            document.getElementById("<?php echo $modalId; ?>").style.display = "none";
                         };
-                        document.getElementById("<?php //echo $buttonId; ?>").onclick = function () {
+                        document.getElementById("<?php echo $buttonId; ?>").onclick = function () {
 
-                            document.getElementById("<?php //echo $modalId; ?>").style.display = "block";
+                            document.getElementById("<?php echo $modalId; ?>").style.display = "block";
 
                         };
-                    </script>*/
-                </div>-->
+                    </script>
+                </div>
 
             <?php } ?>
             <div>

@@ -1,13 +1,13 @@
 <?php 
 class BanqueModel extends Model {
-    private $table = 'Banques';
+    private $table = 'banques';
     public function __construct(){
         //$table = 'Banques';
         parent::__construct($this->table);
     }
 
 public function getBanque($bank){
-    $contact = $this->_db->query("select * from Banques where id_banque=" . $bank);
+    $contact = $this->_db->query("select * from banques where id_banque=" . $bank);
     $res = $contact->getFirstResult();
     return $res;
 }
