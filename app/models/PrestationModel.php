@@ -3,7 +3,7 @@ class PrestationModel extends Model
 {
     public function __construct()
     {
-        $table = "Prestations";
+        $table = "prestations";
         parent::__construct($table);
     }
     /*
@@ -11,7 +11,7 @@ class PrestationModel extends Model
     */
     public function getPrestation($IdPrestation)
     {
-        $contact = $this->_db->query("SELECT * FROM Prestation WHERE id_prestation=" . $IdPrestation);
+        $contact = $this->_db->query("SELECT * FROM prestations WHERE id_prestation=" . $IdPrestation);
         $res = $contact->getFirstResult();
         return $res;
     }

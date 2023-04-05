@@ -99,12 +99,12 @@
                         $prpr = $pres->getPrestations($id);
                         for ($i = 0; $i < sizeof($prpr); $i++) {
                             echo '<tr>';
-                            echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->nom) . '</td>';
-                            echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->categorie) . '</td>';
+                            echo '<td>' . $prpr[$i]->nom . '</td>';
+                            echo '<td>' . $prpr[$i]->categorie . '</td>';
                             if ($prpr[$i]->prix == null) {
                                 echo '<td>' . '?' . '</td>';
                             } else {
-                                echo '<td>' . iconv('ISO-8859-1', 'UTF-8', $prpr[$i]->prix) . '</td>';
+                                echo '<td>' . $prpr[$i]->prix . '</td>';
                             }
 
 
@@ -127,22 +127,22 @@
 
                 <!-- #region --><div class="bank-card">
                     <p class="title">
-                        <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->nom) ?>
+                        <?php echo $bank->nom ?>
                     </p>
                     <div class="bank-logo"><img src="img/right.svg"></div>
                     <div class="general-info">
                         <div class="seige-social">
-                            <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->adresse_siege_social) ?>
+                            <?php echo $bank->adresse_siege_social ?>
                         </div>
                         <div class="tel">
-                            <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->telephone) ?>
+                            <?php echo $bank->telephone ?>
                         </div>
                         <div class="fax">
-                            <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->fax) ?>
+                            <?php echo $bank->fax ?>
                         </div>
                     </div>
                     <div class="more-info"></div>
-                    <div><a href="<?php echo iconv('ISO-8859-1', 'UTF-8', $bank->site_banque) ?>" class="site-link"><?php echo iconv('ISO-8859-1', 'UTF-8', $bank->site_banque) ?></a></div>
+                    <div><a href="<?php echo $bank->site_banque ?>" class="site-link"><?php echo $bank->site_banque ?></a></div>
                     <div class="prestations-button">Prestations<div class="prestations-button__handler">?</div>
                     </div>
                     
