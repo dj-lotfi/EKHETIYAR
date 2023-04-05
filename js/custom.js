@@ -1,12 +1,9 @@
 var body = document.body;
 var bankCards = document.querySelectorAll('.bank-card');
 
-bankCards.forEach(function (bankCard) {
+bankCards.forEach(bankCard => {
 
   var viewButton = bankCard.querySelector('.view-button');
-  var prestationsButton = bankCard.querySelector('.prestations-button__handler');
-  var modal = bankCard.querySelector('.modal');
-  var closeButton = bankCard.querySelector('.close');
 
   viewButton.onclick = function () {
 
@@ -23,28 +20,38 @@ bankCards.forEach(function (bankCard) {
 
   };
 
-  prestationsButton.onclick = function () {
+});
+
+var banksPrestations = document.querySelectorAll('.bank-card__container');
+
+banksPrestations.forEach(bankPrestations => {
+
+  var prestationsButton = bankPrestations.querySelector('.prestations-button__handler');
+  var modal = bankPrestations.querySelector('.modal');
+  var closeButton = bankPrestations.querySelector('.close');
+
+  prestationsButton.addEventListener('click', () => {
 
     modal.style.display = "block";
-    body.style.overflowY = 'hidden'; /* Hide scrollbar and remove scrolling functionality */
-    
-  };
+    body.style.overflowY = 'hidden'; /* Hide scrollbar and remove scrolling functionality*/
 
-  closeButton.onclick = function () {
+  });
+
+  closeButton.addEventListener('click', () => {
 
     modal.style.display = "none";
-    body.style.overflowY = 'overlay'; /* Show scrollbar */
+    body.style.overflowY = 'overlay'; /* Show scrollbar*/
 
-  };
+  });
 
-  modal.onclick = function () {
+  modal.addEventListener('click', (click) => {
 
     if (click.target == modal) {
       modal.style.display = "none";
-      body.style.overflowY = 'overlay'; /* Show scrollbar */
+      body.style.overflowY = 'overlay'; /* Show scrollbar*/
     }
 
-  };
+  })
 
 });
 
