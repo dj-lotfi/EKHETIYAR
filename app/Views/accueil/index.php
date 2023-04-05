@@ -163,11 +163,11 @@
                         </div>
                     </div>
                 </div>
-
+                <!--
                 <div class="rectangle">
                     <p>
                         Nom:
-                        <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->nom) ?><br>
+                        <?php /*echo iconv('ISO-8859-1', 'UTF-8', $bank->nom) ?><br>
                         Adresse:
                         <?php echo iconv('ISO-8859-1', 'UTF-8', $bank->adresse_siege_social) ?><br>
                         Telephone:
@@ -179,9 +179,9 @@
                     </p>
                     <div>
                         <button id="<?php echo $buttonId; ?>" class="prestations-button">Prestations</button>
-                        /* The Modal */
+                        /* The Modal 
                         <div id="<?php echo $modalId; ?>" class="modal">
-                            /* Modal content */
+                            /* Modal content 
                             <div class="modal-content">
                                 <span class="close">&times;</span>
                                 <h2>Prestations</h2>
@@ -198,11 +198,11 @@
                         };
                         document.getElementById("<?php echo $buttonId; ?>").onclick = function () {
 
-                            document.getElementById("<?php echo $modalId; ?>").style.display = "block";
+                            document.getElementById("<?php echo $modalId; */?>").style.display = "block";
 
                         };
                     </script>
-                </div>
+                </div>-->
 
             <?php } ?>
             <div>
