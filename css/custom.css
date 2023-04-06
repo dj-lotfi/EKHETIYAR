@@ -479,6 +479,10 @@ select option {
     transition: all 150ms ease-in-out;
 }
 
+.bank-card>* {
+    z-index: 1;
+}
+
 .bank-card:hover {
     background-image: linear-gradient(30deg, var(--main-500), var(--main-500), var(--main-300), var(--main-500), var(--main-500));
     background-size: 500%;
