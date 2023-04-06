@@ -120,6 +120,8 @@
             {
                 $model = new BanqueModel();
                 $bank = $model->getBanque($bankId);
+                $logo = $model->getLogo($bankId);
+                $map = $model->getMap($bankId);
 
                 $buttonId = 'prestations-button-' . $bankId;
                 $modalId = 'prestations-modal-' . $bankId;
@@ -131,7 +133,7 @@
                         <p class="title">
                             <?php echo $bank->nom ?>
                         </p>
-                        <div class="bank-logo"><img src="img/right.svg"></div>
+                        <div class="bank-logo"><img src="<?= PROOT?>/app/logos/<?= $logo->logo?>"/></div>
                         <div class="general-info">
                             <div class="seige-social">
                                 <?php echo $bank->adresse_siege_social ?>
@@ -151,7 +153,7 @@
 
                             <div class="map__container">
                                 <iframe
-                                    src="https://www.google.com/maps/d/embed?mid=1n3rOTqTkG_JeSe_0sCcn4lGBXiv4DrU&ehbc=2E312F&z=12"
+                                    src="<?=$map->lienmap?>"
                                     frameborder="0" class="hide-map-bar"></iframe>
                             </div>
                         </div>

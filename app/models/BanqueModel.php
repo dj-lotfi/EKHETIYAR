@@ -52,7 +52,23 @@ public function addBanque($nom , $logo , $adr , $tel ,$fax ,$site ,$id=null){
     
 }
 
+public function getLogo($idBank){
+    $contact = $this->_db->query("select (`logo`) from banques where id_banque=" . $idBank);
+    $res = $contact->getFirstResult();
+    return $res;
+
 }
+public function getMap($idBank){
+    $contact = $this->_db->query("select (`lienmap`) from banques where id_banque=" . $idBank);
+    $res = $contact->getFirstResult();
+    return $res;
+
+}
+
+
+
+}
+
 
 
 
