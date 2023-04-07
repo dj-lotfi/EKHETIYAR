@@ -24,36 +24,55 @@ bankCards.forEach(bankCard => {
 
 var banksPrestations = document.querySelectorAll('.bank-card__container');
 
-banksPrestations.forEach(bankPrestations => {
 
+banksPrestations.forEach(bankPrestations => {
   var prestationsButton = bankPrestations.querySelector('.prestations-button__handler');
   var modal = bankPrestations.querySelector('.modal');
   var closeButton = bankPrestations.querySelector('.close');
+  var prestationsContent = bankPrestations.querySelector('.prestations-content');
+  var bankId = prestationsButton.getAttribute('data-id');
+  var loadingScreen = bankPrestations.querySelector('.loader');
+
+  var cached = 0;
 
   prestationsButton.addEventListener('click', () => {
-
     modal.style.display = "block";
-    body.style.overflowY = 'hidden'; /* Hide scrollbar and remove scrolling functionality*/
+    body.style.overflowY = 'hidden';
+    if (cached == 0) {
+      loadingScreen.style.display = "block"; // show the loading screen
+      cached = 1;
+
+      // Send AJAX request
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'Prestations?id=' + bankId, true);
+      xhr.onload = function () {
+        if (this.status == 200) {
+          loadingScreen.style.display = "none";
+          prestationsContent.innerHTML = this.responseText;
+          modal.style.display = "block";
+          body.style.overflowY = 'hidden'; /* Hide scrollbar and remove scrolling functionality*/
+        }
+      };
+      xhr.send();
+    }
+
 
   });
 
   closeButton.addEventListener('click', () => {
-
     modal.style.display = "none";
     body.style.overflowY = 'overlay'; /* Show scrollbar*/
-
   });
 
   modal.addEventListener('click', (click) => {
-
     if (click.target == modal) {
       modal.style.display = "none";
       body.style.overflowY = 'overlay'; /* Show scrollbar*/
     }
-
-  })
-
+  });
 });
+
+
 
 /*const carouselContainer = document.querySelector('.carousel-container');
 const prevButton = document.querySelector('.prev-button');
