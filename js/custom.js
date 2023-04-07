@@ -32,6 +32,7 @@ banksPrestations.forEach(bankPrestations => {
   var prestationsContent = bankPrestations.querySelector('.prestations-content');
   var bankId = prestationsButton.getAttribute('data-id');
   var loadingScreen = bankPrestations.querySelector('.loader');
+  var xhr;
 
   var cached = 0;
 
@@ -43,7 +44,7 @@ banksPrestations.forEach(bankPrestations => {
       cached = 1;
 
       // Send AJAX request
-      var xhr = new XMLHttpRequest();
+      xhr = new XMLHttpRequest();
       xhr.open('GET', 'Prestations?id=' + bankId, true);
       xhr.onload = function () {
         if (this.status == 200) {
@@ -60,6 +61,9 @@ banksPrestations.forEach(bankPrestations => {
   });
 
   closeButton.addEventListener('click', () => {
+    if (xhr) {
+      xhr.abort(); // abort the AJAX request
+    }
     modal.style.display = "none";
     body.style.overflowY = 'overlay'; /* Show scrollbar*/
   });
