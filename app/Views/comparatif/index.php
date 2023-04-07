@@ -32,7 +32,7 @@
             <span></span>
         </label>
     </header>
-    <section>
+    <!--<section>
         <div class="carousel">
 
             <button class="carousel__button carousel__button--left">
@@ -64,9 +64,8 @@
             </div>
 
         </div>
-    </section>
-    <main class="content-layout">
-        <section></section>
+    </section>-->
+    <main class="comparatif-layout">
         <?php
         $model = new BanqueModel();
 
@@ -75,6 +74,7 @@
             <h1>Select Banks</h1>
             <form method="post">
                 <div class="select-container">
+                    <div></div>
                     <div>
                         <label for="bank1">Select Bank 1:</label>
                         <select id="bank1" name="bank1">
@@ -97,6 +97,7 @@
         </div>
 
     </main>
+    <section></section>
     <footer>
         <ul>
             <li><a href="<?= PROOT ?>/accueil">Accueil</a></li>
