@@ -68,7 +68,7 @@
     </section>
     <main class="content-layout">
         <section></section>
-        <div> <!--<div class="grid">-->
+        <div>
             <div class="sort-section">
                 <span>Trier Par:</span>
                 <div class="custom-select">
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                         <div class="more-info">
-                            <div><a href="<?php echo $bank->site_banque ?>" class="site-link"><?php echo $bank->site_banque ?></a></div>
+                            <div><a href="<?php echo $bank->site_banque ?>" target="_blank" class="site-link"><?php echo $bank->site_banque ?></a></div>
                             <div class="prestations-button">Prestations
                                 <div class="prestations-button__handler" data-id="<?= $bankId ?>">?</div>
                             </div>
