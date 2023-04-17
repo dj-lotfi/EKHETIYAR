@@ -1,12 +1,12 @@
 <?php 
 class qui_sommes_nousModel extends Model {
+    private $table = 'a_propos';
     public function __construct(){
-        $table = 'A_propos';
-        parent::__construct($table);
+        parent::__construct($this->table);
     }
 
     public function getQSN(){
-        $contact = $this->_db->query("select * from A_propos;");
+        $contact = $this->_db->query("select * from {$this->table};");
         return $contact->getFirstResult();
 
     }
