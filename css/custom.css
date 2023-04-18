@@ -268,8 +268,8 @@ header {
 
     .content-layout {
         display: grid;
-        grid-template-columns: minmax(min-content, 1fr) 4fr;
-        margin: 1% 0 1% 0;
+        grid-template-columns: minmax(min-content, 3fr) 10fr;
+        margin: 1% 2.5% 1% 2.5%;
     }
 
     .nav-toggle-label {
@@ -677,7 +677,7 @@ select option {
     border-radius: 25px;
     padding: 25px;
     margin: 2vh auto 0 auto;
-    max-width: 1000px;
+    max-width: 55vw;
     overflow: hidden;
 
     transition: all 150ms ease-in-out;

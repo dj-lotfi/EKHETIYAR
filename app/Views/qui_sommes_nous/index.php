@@ -75,42 +75,9 @@
 </style>
 
 <body class="main-layout">
-<?php generateHeader(); ?>
-    <section>
-        <div class="carousel">
-
-            <button class="carousel__button carousel__button--left">
-                <img src="<?= PROOT ?>/img/left.svg" alt="">
-            </button>
-
-            <div class="coursel__track-container">
-                <ul class="carousel__track">
-                    <li class="carousel__slide current-slide">
-                        <img class="carousel__image" src="<?= PROOT ?>/img/img.jpg" alt="">
-                    </li>
-                    <li class="carousel__slide">
-                        <img class="carousel__image" src="<?= PROOT ?>/img/img1.webp" alt="">
-                    </li>
-                    <li class="carousel__slide">
-                        <img class="carousel__image" src="<?= PROOT ?>/img/img2.jpg" alt="">
-                    </li>
-                </ul>
-            </div>
-
-            <button class="carousel__button carousel__button--right">
-                <img src="<?= PROOT ?>/img/right.svg" alt="">
-            </button>
-
-            <div class="carousel__nav">
-                <button class="carousel__indicator current-slide"></button>
-                <button class="carousel__indicator"></button>
-                <button class="carousel__indicator"></button>
-            </div>
-
-        </div>
-    </section>
+    <?php generateHeader(); ?>
+    <section></section>
     <main>
-        <section></section>
         <div class="prop">
             <?php $dump = new qui_sommes_nousModel();
             $res = $dump->getQSN(); ?>
