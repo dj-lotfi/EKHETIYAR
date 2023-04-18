@@ -1,26 +1,4 @@
 <?php
-function generateHeader() {
-    
-    echo '
-    <header>
-        <img class="logo" src="<?= PROOT ?>/img/Site_Logo.svg" alt="Logo du site">
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <nav class="navbar">
-            <ul>
-                <li><a href="<?= PROOT ?>/accueil">Accueil</a></li>
-                <li><a href="<?= PROOT ?>/comparatif">Comparatif</a></li>
-                <li><a href="<?= PROOT ?>/qui_sommes_nous">Qui Sommes-Nous</a></li>
-            </ul>
-        </nav>
-        <label for="nav-toggle" class="nav-toggle-label">
-            <span></span>
-        </label>
-    </header>';
-}
-
-function generateCarousel() {
-
-}
 
 function generateFiltersSection() {
 
@@ -126,8 +104,8 @@ function generateSortSection() {
     <div class="custom-select">
       <select autocomplete="off">
         <option selected value="0">Defaut</option>
-        <option value="1">Tarifs Croissantes</option>
-        <option value="2">Tarifs Décroissantes</option>
+        <option value="1">Tarif 1</option>
+        <option value="2">Tarif 2</option>
       </select>
       <span class="custom-arrow"></span>
     </div>
@@ -141,5 +119,85 @@ function generateSortSection() {
     return $sort;
 
 }
+function imageFinder($dirPath = ROOT . '/' . 'img')// Directory path to search for files
+
+{
+    // Open the directory
+    $dirHandle = opendir($dirPath);
+
+    // Check if directory was opened successfully
+    if ($dirHandle) {
+        $imgArray= array();
+        // Loop through all files and directories in the directory
+        while (($file = readdir($dirHandle)) !== false) {
+            // Exclude special directories . and ..
+            if ($file != '.' && $file != '..') {
+                // Get the file's extension
+                $extension = pathinfo($file, PATHINFO_EXTENSION);
+
+                // Check if the entry is a file and has an extension
+                if (is_file($dirPath . '/' . $file) && !empty($extension)) {
+                    // Output the file name and extension
+                    if ($extension == 'jpg' || $extension == 'png' || $extension == 'webp' || $extension == 'jpeg' ) {
+                        array_push($imgArray,$dirPath . '/' . $file);
+                    }
+                }
+            }
+        }
+
+        $_SESSION['img']=$imgArray;
+
+        // Close the directory handle
+        closedir($dirHandle);
+    } else {
+        echo "Failed to open directory.";
+    }
+}
+
+function imageGenerator($array)
+{
+    if (sizeof($array)>0) {
+        for ($i=0; $i < sizeof($array) ; $i++) { 
+            echo '<img src="' . $array[$i] . '" alt="Image '. $i+1 .'">';
+        }
+        echo '<img src="' . $array[0] . '" alt="Image 1">';
+    } 
+}
+
+function generateCarousel() {
+  
+  echo '<div class="slider-container" style="max-width: 800px; height: 400px;">
+        <div class="slider" style="width: 100%;">';
+            imageFinder();
+            imageGenerator($_SESSION['img']);
+  echo '</div>
+        <div class="slider-control" id="prev">&#10094;</div>
+        <div class="slider-control" id="next">&#10095;</div>
+        <div class="slider-dots" id="dots"></div>
+    </div>
+    <script>
+      window.onload = function() {
+        // Create dots based on number of images
+        const images =', json_encode($_SESSION['img']),
+       'const maxIndex = images.length;
+        for (let i = 0; i < images.length; i++) {
+            const dot = document.createElement(\'div\');
+            dot.className = \'slider-dot\';
+
+            dot.addEventListener(\'click\', () => {
+                clearInterval(slideShow);
+                currentPosition = -i * sliderContainer.offsetWidth;
+                slider.style.transform = `translateX(${currentPosition}px)`;
+                activateDot(i);
+                slideShow = setInterval(goToNextSlide, 3000);
+            });
+            dotsContainer.appendChild(dot);
+        }
+        activateDot(0); // Set the first dot as active
+        
+      }
+    </script>';
+}
+
 
 ?>

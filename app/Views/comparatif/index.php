@@ -1,5 +1,5 @@
 <?php $this->setSiteTitle('Comparatif'); ?>
-
+<?php include __DIR__ . "../../CommenViewFunctions.php"; ?>
 <?php $this->start('head'); ?>
 <html>
 
@@ -18,20 +18,7 @@
 <html>
 
 <body class="main-layout">
-    <header>
-        <h3 class="logo">Logo</h3>
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <nav class="navbar">
-            <ul>
-                <li><a href="<?= PROOT ?>/accueil">Accueil</a></li>
-                <li><a href="<?= PROOT ?>/comparatif">Comparatif</a></li>
-                <li><a href="<?= PROOT ?>/qui_sommes_nous">Qui Sommes-Nous</a></li>
-            </ul>
-        </nav>
-        <label for="nav-toggle" class="nav-toggle-label">
-            <span></span>
-        </label>
-    </header>
+<?php generateHeader(); ?>
     <!--<section>
         <div class="carousel">
 

@@ -243,7 +243,7 @@ header {
 
     .content-layout {
         display: grid;
-        grid-template-columns: 1fr 4fr;
+        grid-template-columns: minmax(min-content, 1fr) 4fr;
         margin: 1% 0 1% 0;
     }
 
@@ -334,65 +334,68 @@ footer>ul>li>a:hover {
 }
 
 /* Carousel Section */
-.carousel {
+.slider-container {
+    max-width: 100%;
+    overflow: hidden;
     position: relative;
-    width: 80%;
-    aspect-ratio: 7/2;
     margin: 0 auto;
 }
 
-.carousel__track_container {
-    position: relative;
+.slider {
+    display: flex;
+    transition: transform ease-in-out;
     height: 100%;
+    transition-duration: 0.5s;
 }
 
-.carousel__track {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    height: 100%;
-    transition: transform 250ms ease-in;
-}
-
-.carousel__slide {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-}
-
-.carousel__image {
+.slider img {
+    flex-shrink: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
-.carousel__button {
+.slider-control {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: transparent;
-    border: 0;
+    display: flex;
     cursor: pointer;
-    z-index: 10;
-
-    filter: invert(42%) sepia(71%) saturate(2063%) hue-rotate(201deg) brightness(98%) contrast(97%);
 }
 
-.carousel__button--left {
-    left: 0;
+.slider-control:hover {
+    color: crimson;
 }
 
-.carousel__button--right {
+#next {
     right: 40px;
 }
 
-.carousel__button img {
-    width: 25px;
+#prev {
+    left: 0;
 }
 
-.carousel__nav {
-    margin: 0 auto;
+.slider-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.slider-dot.active {
+    background-color: crimson;
 }
 
 /* Filter Section */
@@ -416,7 +419,7 @@ footer>ul>li>a:hover {
 
 .filters-subcategory dt {
     color: var(--neutral-700);
-    font-weight: 400;
+    font-weight: 600;
     font-family: 'Rubik';
     text-transform: uppercase;
     padding: 0 0 5px 5%;
@@ -435,13 +438,13 @@ footer>ul>li>a:hover {
 
 .criteres>ul:not(:last-child) {
     margin: 0;
-    padding: 8px 0 8px 10%;
+    padding: 8px 0 8px 5%;
     border-bottom: 1px solid var(--neutral-800);
 }
 
 .criteres>ul>ul {
     margin: 0;
-    padding: 0 0 0 2.5%;
+    padding: 0 0 0 10%;
 }
 
 .tarifs-interval {
@@ -510,44 +513,45 @@ textarea {
     display: flex;
     align-items: center;
     padding: 10px;
-  }
-  
-  .custom-select {
+}
+
+.custom-select {
     position: relative;
     margin: 0 2.5%;
-  }
-  
-  select {
+}
+
+select {
     outline: 1px solid var(--neutral-400);
     font-size: 1rem;
     padding: 0.25em 1.5em;
-  
+
     background: var(--neutral-50);
     color: var(--neutral-800);
-  
+
     border: 0;
-  }
-  
-  select:hover {
+    max-width: 25vw;
+}
+
+select:hover {
     box-shadow: 0 2px 25px rgba(59, 130, 246, 1);
-  }
-  
-  select:focus {
+}
+
+select:focus {
     box-shadow: 0 2px 25px rgba(59, 130, 246, 1);
     outline: 1px solid var(--main-500);
-  }
-  
-  select optgroup{
+}
+
+select optgroup {
     background: var(--neutral-100);
     color: var(--neutral-700);
-  }
-  
-  select option {
+}
+
+select option {
     background: var(--neutral-50);
     color: var(--neutral-600);
-  }
-  
-  .custom-arrow {
+}
+
+.custom-arrow {
     position: absolute;
     top: 0;
     right: 0;
@@ -556,23 +560,23 @@ textarea {
     height: 100%;
     width: 1.5rem;
     pointer-events: none;
-  }
-  
-  .custom-arrow::after {
+}
+
+.custom-arrow::after {
     --size: 0.5em;
-  
+
     content: '';
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-  
+
     width: 0;
     height: 0;
     border-left: var(--size) solid transparent;
     border-right: var(--size) solid transparent;
     border-top: var(--size) solid var(--main-400);
-  }
+}
 
 .sort-order-toggle {
     display: none;
@@ -666,7 +670,7 @@ textarea {
     background: var(--main-500);
     border-radius: 25px;
     padding: 25px;
-    margin-top: 2vh;
+    margin: 2vh auto 0 auto;
     max-width: 1000px;
     overflow: hidden;
 

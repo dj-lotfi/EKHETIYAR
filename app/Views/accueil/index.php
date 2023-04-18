@@ -1,5 +1,6 @@
 <?php $this->setSiteTitle('Accueil'); ?>
-<?php include "accueilView.php"; ?>
+<?php include "accueilView.php";
+include __DIR__ . "../../CommenViewFunctions.php"; ?>
 <?php $this->start('head'); ?>
 <html>
 
@@ -8,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/banks_squares.css">
-    <script defer src="js/prestation.js"></script>
+    <script defer src="js/carousel.js"></script>
 </head>
 
 </html>
@@ -19,52 +20,9 @@
 <html>
 
 <body class="main-layout">
-    <header>
-        <img class="logo" src="<?= PROOT ?>/img/Site_Logo.svg" alt="Logo du site">
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <nav class="navbar">
-            <ul>
-                <li><a href="<?= PROOT ?>/accueil">Accueil</a></li>
-                <li><a href="<?= PROOT ?>/comparatif">Comparatif</a></li>
-                <li><a href="<?= PROOT ?>/qui_sommes_nous">Qui Sommes-Nous</a></li>
-            </ul>
-        </nav>
-        <label for="nav-toggle" class="nav-toggle-label">
-            <span></span>
-        </label>
-    </header>
+    <?php generateHeader(); ?>
     <section>
-        <div class="carousel">
-
-            <button class="carousel__button carousel__button--left">
-                <img src="<?= PROOT ?>/img/left.svg" alt="">
-            </button>
-
-            <div class="coursel__track-container">
-                <ul class="carousel__track">
-                    <li class="carousel__slide current-slide">
-                        <img class="carousel__image" src="<?= PROOT ?>/img/img.jpg" alt="">
-                    </li>
-                    <li class="carousel__slide">
-                        <img class="carousel__image" src="<?= PROOT ?>/img/img1.webp" alt="">
-                    </li>
-                    <li class="carousel__slide">
-                        <img class="carousel__image" src="<?= PROOT ?>/img/img2.jpg" alt="">
-                    </li>
-                </ul>
-            </div>
-
-            <button class="carousel__button carousel__button--right">
-                <img src="<?= PROOT ?>/img/right.svg" alt="">
-            </button>
-
-            <div class="carousel__nav">
-                <button class="carousel__indicator current-slide"></button>
-                <button class="carousel__indicator"></button>
-                <button class="carousel__indicator"></button>
-            </div>
-
-        </div>
+        <?php generateCarousel(); ?>
     </section>
     <main class="content-layout">
         <?php echo generateFiltersSection(); ?>
