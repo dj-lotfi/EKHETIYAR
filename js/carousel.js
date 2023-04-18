@@ -15,13 +15,6 @@ function goToNextSlide() {
     }
     slider.style.transform = `translateX(${currentPosition}px)`;
     updateActiveDot();
-    if (currentPosition - sliderContainer.offsetWidth < -sliderContainer.offsetWidth * (slider.children.length - 1)) {
-        currentPosition = 0;
-        slider.style.transition = "transition: transform 0s";
-        slider.style.transform = `translateX(${currentPosition}px)`;
-        updateActiveDot();
-
-    }
 }
 
 // Function to activate the dot for the currently displayed image

@@ -118,7 +118,7 @@ function generateSortSection() {
     return $sort;
 
 }
-function imageFinder($dirPath = 'M:/xampp/htdocs' . PROOT . '/'.'img')// Directory path to search for files
+function imageFinder($dirPath =  '.' . '/'.'img')// Directory path to search for files
 
 {
     // Open the directory
@@ -137,7 +137,7 @@ function imageFinder($dirPath = 'M:/xampp/htdocs' . PROOT . '/'.'img')// Directo
                 // Check if the entry is a file and has an extension
                 if (is_file($dirPath . '/' . $file) && !empty($extension)) {
                     // Output the file name and extension
-                    if ($extension == 'jpg' || $extension == 'png' || $extension == 'webp' || $extension == 'jpeg' ) {
+                    if ($extension == 'jpg' || $extension == 'webp' || $extension == 'jpeg' ) {
                         array_push($imgArray,$dirPath . '/' . $file);
                     }
                 }
@@ -175,8 +175,6 @@ function generateCarousel() {
         <div class="slider-dots" id="dots"></div>
     </div>
     <script>
-      window.onload = function() {
-        // Create dots based on number of images
         const images =', json_encode($_SESSION['img']),
        'const maxIndex = images.length;
         for (let i = 0; i < images.length; i++) {
@@ -192,9 +190,7 @@ function generateCarousel() {
             });
             dotsContainer.appendChild(dot);
         }
-        activateDot(0); // Set the first dot as active
-        
-      }
+        activateDot(0);
     </script>';
 }
 

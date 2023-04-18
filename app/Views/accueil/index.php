@@ -8,7 +8,6 @@ include __DIR__ . "../../CommenViewFunctions.php"; ?>
     <meta charset="utf8mb4">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/banks_squares.css">
     <script defer src="js/carousel.js"></script>
 </head>
 
