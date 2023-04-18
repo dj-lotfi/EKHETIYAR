@@ -92,58 +92,64 @@ banksPrestations.forEach(bankPrestations => {
   });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+  const filterSubcategories = document.querySelectorAll('.filters-subcategory');
 
+  const firstOccurence = filterSubcategories[0].querySelector('dd');
+  firstOccurence.style.display = 'block';
 
-/*const carouselContainer = document.querySelector('.carousel-container');
-const prevButton = document.querySelector('.prev-button');
-const nextButton = document.querySelector('.next-button');
-const carouselItems = document.querySelectorAll('.carousel-item');
-const dots = document.querySelectorAll('.dot');
-const itemWidth = carouselItems[0].offsetWidth;
-
-let currentIndex = 0;
-
-function moveCarousel() {
-  carouselContainer.style.transform = `translateX(-${itemWidth * currentIndex}px)`;
-  updateDots();
-}
-
-function handlePrevButtonClick() {
-  if (currentIndex === 0) {
-    currentIndex = carouselItems.length - 1;
-  } else {
-    currentIndex--;
-  }
-  moveCarousel();
-}
-
-function handleNextButtonClick() {
-  if (currentIndex === carouselItems.length - 1) {
-    currentIndex = 0;
-  } else {
-    currentIndex++;
-  }
-  moveCarousel();
-}
-
-function handleDotClick(event) {
-  const dotIndex = [...dots].indexOf(event.target);
-  if (dotIndex !== currentIndex) {
-    currentIndex = dotIndex;
-    moveCarousel();
-  }
-}
-
-function updateDots() {
-  dots.forEach((dot, index) => {
-    if (index === currentIndex) {
-      dot.classList.add('active');
-    } else {
-      dot.classList.remove('active');
-    }
+  filterSubcategories.forEach(function (filterSubcategory) {
+    const Subcategory = filterSubcategory.querySelector('dt');
+    Subcategory.addEventListener('click', function () {
+      const dd = filterSubcategory.querySelector('dd');
+      if (dd.style.display === 'block') {
+        dd.style.display = 'none';
+        dd.style.opacity = 0;
+      } else {
+        dd.style.display = 'block';
+        dd.style.opacity = 1;
+      }
+    });
   });
-}
+});
 
-prevButton.addEventListener('click', handlePrevButtonClick);
+// Get all the scrollable-checkboxes UL elements
+const scrollableCheckboxes = document.querySelectorAll('.scrollable-checkboxes');
 
-nextButton.addEventListener('click', handleNextButtonClick);*/
+// Loop through each UL element
+scrollableCheckboxes.forEach(function(checkboxList) {
+  // Get all the checkboxes in this UL element
+  const checkboxes = checkboxList.querySelectorAll('input[type="checkbox"]');
+
+  // Get the first checkbox in this UL element
+  const firstCheckbox = checkboxList.querySelector('input[type="checkbox"]:first-child');
+
+  // Add an event listener to each checkbox
+  checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+      if (this.checked) {
+        if (this === firstCheckbox) {
+          checkboxes.forEach(function(otherCheckbox) {
+            if (otherCheckbox !== checkbox) {
+              otherCheckbox.checked = false;
+            }
+          });
+        } else {
+          firstCheckbox.checked = false;
+        }
+      }
+    });
+  });
+});
+
+const minMaxContainers = document.querySelectorAll('.temp');
+
+minMaxContainers.forEach(function(minMaxContainer) {
+  const inputedText = minMaxContainer.querySelectorAll('input[type="text"]');
+  
+  inputedText.forEach(function(text) {
+    text.addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');
+    });
+  });
+});

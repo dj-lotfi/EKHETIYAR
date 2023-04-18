@@ -1,5 +1,5 @@
 <?php $this->setSiteTitle('Accueil'); ?>
-
+<?php include "accueilView.php"; ?>
 <?php $this->start('head'); ?>
 <html>
 
@@ -20,7 +20,7 @@
 
 <body class="main-layout">
     <header>
-        <h3 class="logo">Logo</h3>
+        <img class="logo" src="<?= PROOT ?>/img/Site_Logo.svg" alt="Logo du site">
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <nav class="navbar">
             <ul>
@@ -67,19 +67,9 @@
         </div>
     </section>
     <main class="content-layout">
-        <section></section>
+        <?php echo generateFiltersSection(); ?>
         <div>
-            <div class="sort-section">
-                <span>Trier Par:</span>
-                <div class="custom-select">
-                    <select autocomplete="off">
-                        <option selected value="0">Defaut</option>
-                        <option value="1">Tarifs Croissantes</option>
-                        <option value="2">Tarifs Décroissantes</option>
-                    </select>
-                    <span class="custom-arrow"></span>
-                </div>
-            </div>
+            <?php echo generateSortSection(); ?>
 
             <?php
             function displayBank($bankId)
@@ -98,7 +88,9 @@
                         <p class="title">
                             <?php echo $bank->nom ?>
                         </p>
-                        <a href="<?=$bank->site_banque?>" target="_blank"><div class="bank-logo"><img src="<?= PROOT ?>/app/logos/<?= $logo->logo ?>" /></div></a>
+                        <a href="<?= $bank->site_banque ?>" target="_blank">
+                            <div class="bank-logo"><img src="<?= PROOT ?>/app/logos/<?= $logo->logo ?>" /></div>
+                        </a>
                         <div class="general-info">
                             <div class="seige-social">
                                 <?php echo $bank->adresse_siege_social ?>
