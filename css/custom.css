@@ -57,6 +57,31 @@
     --orange-900: #7c2d12ff;
     --orange-950: #431407ff;
 
+
+    --green-50: #f0fdf4ff;
+    --green-100: #dcfce7ff;
+    --green-200: #bbf7d0ff;
+    --green-300: #86efacff;
+    --green-400: #4ade80ff;
+    --green-500: #22c55eff;
+    --green-600: #16a34aff;
+    --green-700: #15803dff;
+    --green-800: #166534ff;
+    --green-900: #14532dff;
+    --green-950: #052e16ff;
+
+    --red-50: #fef2f2ff;
+    --red-100: #fee2e2ff;
+    --red-200: #fecacaff;
+    --red-300: #fca5a5ff;
+    --red-400: #f87171ff;
+    --red-500: #ef4444ff;
+    --red-600: #dc2626ff;
+    --red-700: #b91c1cff;
+    --red-800: #991b1bff;
+    --red-900: #7f1d1dff;
+    --red-950: #450a0aff;
+
     --space: 0.5rem;
 }
 
@@ -588,71 +613,52 @@ select option {
     align-items: center;
 }
 
-.sort-order-toggle-label>span:last-child {
+.sort-order-toggle-label>span {
     margin-left: 5px;
 }
 
-.sort-arrow {
-    font-size: 2rem;
-    color: green;
-    transform: rotate(90deg) translateX(-3px);
-    transition: all 1s ease-in-out;
-}
-
-.sort-arrow::before {
-    content: '❮';
-}
-
-.sort-order-toggle:checked~.sort-order-toggle-label .sort-arrow {
-    font-size: 2rem;
-    color: red;
-    transform: rotate(90deg) translateX(3px);
-    transition: all 750ms ease-in-out;
-
-}
-
-.sort-order-toggle:checked~.sort-order-toggle-label .sort-arrow::before {
-    content: '❯';
-}
-
-.sort-order-toggle-label>span:last-child,
-.sort-order-toggle-label>span:last-child::before,
-.sort-order-toggle-label>span:last-child::after {
+.sort-order-toggle-label>span,
+.sort-order-toggle-label>span::before,
+.sort-order-toggle-label>span::after {
     display: block;
-    background: var(--neutral-600);
+    background: var(--green-500);
     height: 3px;
     width: 1.5em;
     border-radius: 3px;
     position: relative;
-    transition: all 250ms ease-in-out;
+    transition: all 500ms ease-in-out;
 }
 
-.sort-order-toggle-label>span:last-child::before,
-.sort-order-toggle-label>span:last-child::after {
+.sort-order-toggle-label>span::before,
+.sort-order-toggle-label>span::after {
     content: '';
     position: absolute;
 }
 
-.sort-order-toggle-label>span:last-child::before {
+.sort-order-toggle-label>span::before {
     bottom: 7px;
     width: 1em;
-    background: var(--neutral-500);
+    background: var(--green-400);
 }
 
-.sort-order-toggle-label>span:last-child::after {
+.sort-order-toggle-label>span::after {
     top: 7px;
     width: 2em;
-    background: var(--neutral-700);
+    background: var(--green-600);
 }
 
-.sort-order-toggle:checked~.sort-order-toggle-label>span:last-child::before {
+.sort-order-toggle:checked~.sort-order-toggle-label>span::before {
     width: 2em;
-    background: var(--neutral-700);
+    background: var(--red-600);
 }
 
-.sort-order-toggle:checked~.sort-order-toggle-label>span:last-child::after {
+.sort-order-toggle:checked~.sort-order-toggle-label>span {
+    background: var(--red-500);
+}
+
+.sort-order-toggle:checked~.sort-order-toggle-label>span::after {
     width: 1em;
-    background: var(--neutral-500);
+    background: var(--red-400);
 }
 
 

@@ -111,7 +111,6 @@ function generateSortSection() {
     </div>
     <input class="sort-order-toggle" type="checkbox" id="sortOrder">
     <label class="sort-order-toggle-label" for="sortOrder">
-      <span class="sort-arrow"></span>
       <span></span>
     </label>
   </div>';
@@ -119,7 +118,7 @@ function generateSortSection() {
     return $sort;
 
 }
-function imageFinder($dirPath = ROOT . '/' . 'img')// Directory path to search for files
+function imageFinder($dirPath = 'M:/xampp/htdocs' . PROOT . '/'.'img')// Directory path to search for files
 
 {
     // Open the directory

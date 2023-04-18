@@ -46,9 +46,7 @@ include __DIR__ . "../../CommenViewFunctions.php"; ?>
                         <p class="title">
                             <?php echo $bank->nom ?>
                         </p>
-                        <a href="<?= $bank->site_banque ?>" target="_blank">
-                            <div class="bank-logo"><img src="<?= PROOT ?>/app/logos/<?= $logo->logo ?>" /></div>
-                        </a>
+                            <div class="bank-logo"><a href="<?= $bank->site_banque ?>" target="_blank"><img src="<?= PROOT ?>/app/logos/<?= $logo->logo ?>" /></a></div>
                         <div class="general-info">
                             <div class="seige-social">
                                 <?php echo $bank->adresse_siege_social ?>
