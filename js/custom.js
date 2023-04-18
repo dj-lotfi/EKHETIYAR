@@ -4,11 +4,12 @@ var bankCards = document.querySelectorAll('.bank-card');
 bankCards.forEach(bankCard => {
 
   var viewButton = bankCard.querySelector('.view-button');
+  var moreInfo = bankCard.querySelector('.more-info');
+  var isPaused = false ;
 
-  viewButton.onclick = function () {
 
-    var moreInfo = bankCard.querySelector('.more-info');
-
+  bankCard.addEventListener('click', function () {
+    if (isPaused) return ;
     if (moreInfo.style.display === 'none' || moreInfo.style.display === "") {
       moreInfo.style.display = 'block';
       moreInfo.style.animation = 'fade-in 1s';
@@ -18,8 +19,23 @@ bankCards.forEach(bankCard => {
       setTimeout(function () { moreInfo.style.display = 'none'; viewButton.innerHTML = 'Voir Plus'; }, 800);
     }
 
-  };
+  });
+  viewButton.addEventListener('click', function () {
+    if (moreInfo.style.display === 'none' || moreInfo.style.display === "") {
+      moreInfo.style.display = 'block';
+      moreInfo.style.animation = 'fade-in 1s';
+      viewButton.innerHTML = 'Voir Moins';
+    } else {
+      moreInfo.style.animation = 'fade-out 1s';
+      setTimeout(function () { moreInfo.style.display = 'none'; viewButton.innerHTML = 'Voir Plus'; }, 800);
+    }
 
+  });
+
+  viewButton.addEventListener('mouseover', function () {
+    isPaused = true;
+    setTimeout(function () { isPaused = false; }, 1000);
+  });
 });
 
 var banksPrestations = document.querySelectorAll('.bank-card__container');

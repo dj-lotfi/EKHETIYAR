@@ -88,7 +88,6 @@
                 $bank = $model->getBanque($bankId);
                 $logo = $model->getLogo($bankId);
                 $map = $model->getMap($bankId);
-
                 $buttonId = 'prestations-button-' . $bankId;
                 $modalId = 'prestations-modal-' . $bankId;
                 ?>
@@ -99,7 +98,7 @@
                         <p class="title">
                             <?php echo $bank->nom ?>
                         </p>
-                        <div class="bank-logo"><img src="<?= PROOT ?>/app/logos/<?= $logo->logo ?>" /></div>
+                        <a href="<?=$bank->site_banque?>" target="_blank"><div class="bank-logo"><img src="<?= PROOT ?>/app/logos/<?= $logo->logo ?>" /></div></a>
                         <div class="general-info">
                             <div class="seige-social">
                                 <?php echo $bank->adresse_siege_social ?>
