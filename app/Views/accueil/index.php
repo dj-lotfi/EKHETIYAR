@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' type='text/css' href='css/accueil.css?v=<?php echo time(); ?>'>
-    <script defer src='js/custom.js?v=<?php echo time(); ?>'></script>
+    <script defer src='js/carousel.js?v=<?php echo time(); ?>'></script>
 </head>
 
 </html>

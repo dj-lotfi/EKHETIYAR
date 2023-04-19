@@ -61,18 +61,21 @@
     transition: all 250ms ease-in;
 }
 
-.slider-dot:hover,.slider-dot:focus {
+.slider-dot:hover,
+.slider-dot:focus {
     background-color: rgba(251, 191, 36, 0.65);
     border: 1px solid var(--accent-500);
 }
 
 .slider-dot.active {
     background-color: var(--main-500);
-    border: 1px solid var(--main-500);;
+    border: 1px solid var(--main-500);
+    ;
     transform: scale(1.25);
 }
 
-.slider-dot.active:hover,.slider-dot.active:focus {
+.slider-dot.active:hover,
+.slider-dot.active:focus {
     background-color: var(--accent-500);
     border: 1px solid var(--accent-500);
 }
@@ -371,13 +374,13 @@ select option {
     ;
 }
 
-.vertically-centered{
+.vertically-centered {
     display: flex;
     align-items: center;
 }
 
 
-.title{
+.title {
     font-family: 'Rubik';
     font-size: var(--fs-500);
     font-weight: 800;
@@ -452,7 +455,7 @@ select option {
 
 .bank-logo {
     /* set a default aspect ratio */
-    max-width: clamp(100px,32.2vw - 28.67px,293px);
+    max-width: clamp(100px, 32.2vw - 28.67px, 293px);
     height: min-content;
     /*background: rgba(255,255,255,0.5);*/
     margin-left: auto;
