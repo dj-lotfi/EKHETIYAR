@@ -7,6 +7,8 @@
     <meta charset="utf8mb4">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' href='css/accueil.css?v=<?php echo time(); ?>'>
+    <script defer src='js/custom.js?v=<?php echo time(); ?>'></script>
 </head>
 
 </html>
@@ -21,7 +23,7 @@
     <section>
         <?php
 
-        function imageFinder($dirPath = '.' . '/' . 'img' . '/' . 'carousel_images') // Directory path to search for files
+        function imageFinder($dirPath = '.' . DS . 'img' . DS . 'carousel_images') // Directory path to search for files
         {
             // Open the directory
             $dirHandle = opendir($dirPath);
@@ -37,10 +39,10 @@
                         $extension = pathinfo($file, PATHINFO_EXTENSION);
 
                         // Check if the entry is a file and has an extension
-                        if (is_file($dirPath . '/' . $file) && !empty($extension)) {
+                        if (is_file($dirPath . DS . $file) && !empty($extension)) {
                             // Output the file name and extension
                             if ($extension == 'jpg' || $extension == 'png' || $extension == 'webp' || $extension == 'jpeg') {
-                                array_push($imgArray, $dirPath . '/' . $file);
+                                array_push($imgArray, $dirPath . DS . $file);
                             }
                         }
                     }
@@ -61,7 +63,6 @@
                 for ($i = 0; $i < sizeof($array); $i++) {
                     echo '<img src="' . $array[$i] . '" alt="Image ' . $i + 1 . '">';
                 }
-                echo '<img src="' . $array[0] . '" alt="Image 1">';
             }
         }
         ?>
@@ -77,83 +78,6 @@
             <div class="slider-control" id="next">&#10095;</div>
             <div class="slider-dots" id="dots"></div>
         </div>
-        <script>
-            const prevBtn = document.getElementById('prev');
-            const nextBtn = document.getElementById('next');
-            const slider = document.querySelector('.slider');
-            const sliderContainer = document.querySelector('.slider-container');
-            const dotsContainer = document.getElementById('dots');
-            let currentPosition = 0;
-
-            let slideShow = setInterval(goToNextSlide, 3000); // Interval in milliseconds (3 seconds)
-
-            // Create dots based on number of images
-            const images = <?php echo json_encode($_SESSION['img']); ?>;
-            const maxIndex = images.length;
-            for (let i = 0; i < images.length; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'slider-dot';
-                dot.addEventListener('click', () => {
-                    clearInterval(slideShow);
-                    currentPosition = -i * sliderContainer.offsetWidth;
-                    slider.style.transform = `translateX(${currentPosition}px)`;
-                    activateDot(i);
-                    slideShow = setInterval(goToNextSlide, 3000);
-                });
-                dotsContainer.appendChild(dot);
-            }
-            activateDot(0); // Set the first dot as active
-
-            // Function to go to the next slide
-            function goToNextSlide() {
-                currentPosition -= sliderContainer.offsetWidth;
-                if (currentPosition < -sliderContainer.offsetWidth * (slider.children.length - 1)) {
-                    currentPosition = 0;
-                }
-                slider.style.transform = `translateX(${currentPosition}px)`;
-                updateActiveDot();
-                 
-            }
-
-            // Function to activate the dot for the currently displayed image
-            function activateDot(index) {
-                const dots = document.querySelectorAll('.slider-dot');
-                dots.forEach((dot, i) => {
-                    if (i === index) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
-            }
-
-            // Function to update the active dot based on the current position of the slider
-            function updateActiveDot() {
-                const dots = document.querySelectorAll('.slider-dot');
-                const index = Math.abs(currentPosition / sliderContainer.offsetWidth);
-                activateDot(index);
-            }
-
-            // Event listener for previous button
-            prevBtn.addEventListener('click', () => {
-                clearInterval(slideShow);
-                currentPosition += sliderContainer.offsetWidth;
-                if (currentPosition > 0) {
-                    currentPosition = -sliderContainer.offsetWidth * (slider.children.length - 1);
-                }
-                slider.style.transform = `translateX(${currentPosition}px)`;
-                updateActiveDot();
-                slideShow = setInterval(goToNextSlide, 3000);
-            });
-
-            // Event listener for next button
-            nextBtn.addEventListener('click', () => {
-                clearInterval(slideShow);
-                goToNextSlide();
-                slideShow = setInterval(goToNextSlide, 3000);
-            });
-
-        </script>
     </section>
     <main class="content-layout">
         <div class="filters">
@@ -277,11 +201,16 @@
                 <!-- #region -->
                 <div class="bank-card__container">
                     <div class="bank-card">
-                        <p class="title">
-                            <?php echo $bank->nom ?>
-                        </p>
-                        <div class="bank-logo"><a href="<?= $bank->site_banque ?>" target="_blank"><img
-                                    src="<?= PROOT ?>/app/logos/<?= $logo->logo ?>" /></a></div>
+                        <div class="vertically-centered">
+                            <p class="title">
+                                <?php echo $bank->nom ?>
+                            </p>
+                        </div>
+                        <div class="vertically-centered">
+                            <a class="bank-logo" href="<?= $bank->site_banque ?>" target="_blank"><img
+                                    src="<?= PROOT ?>/app/logos/<?= $logo->logo ?>" /></a>
+                        </div>
+
                         <div class="general-info">
                             <div class="seige-social">
                                 <?php echo $bank->adresse_siege_social ?>
@@ -298,9 +227,6 @@
                             <div class="prestations-button">Prestations
                                 <div class="prestations-button__handler" data-id="<?= $bankId ?>">?</div>
                             </div>
-
-
-
                             <div class="map__container">
                                 <iframe src="<?= $map->lienmap ?>" frameborder="0" class="hide-map-bar"></iframe>
                             </div>
