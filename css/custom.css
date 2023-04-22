@@ -155,7 +155,12 @@ body {
     margin: 0;
     overflow-y: overlay;
 
-    background: var(--neutral-700);
+
+    background-image: conic-gradient(from 0deg at 50% 50%,
+            var(--neutral-600),
+            var(--neutral-700),
+            var(--neutral-700),
+            var(--neutral-600));
 }
 
 a:hover,
@@ -574,6 +579,6 @@ footer a:active {
     cursor: default;
 }
 
-.footer--col .col-list> li+li {
+.footer--col .col-list>li+li {
     margin-top: calc(var(--fs-100)/2);
 }

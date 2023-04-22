@@ -52,14 +52,7 @@
 
     </main>
     <section></section>
-    <footer>
-        <ul>
-            <li><a href="<?= PROOT ?>/accueil">Accueil</a></li>
-            <li><a href="<?= PROOT ?>/comparatif">Comparatif</a></li>
-            <li><a href="<?= PROOT ?>/qui_sommes_nous">Qui Sommes-Nous</a></li>
-        </ul>
-        <div class="copyright">Copyright © 2023. All Rights Reserved.</div>
-    </footer>
+    <?php generateFooter(); ?>
 </body>
 
 </html>

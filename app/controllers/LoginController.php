@@ -25,8 +25,6 @@ class LoginController extends Controller
             //get the submitted username and password
             $username = $_POST["username"];
             $password = $_POST["password"];
-            
-            $trouv = 0;
 
              
             $logs = $this->model->getLogs();
@@ -36,15 +34,13 @@ class LoginController extends Controller
                 if($logs[$i]->username == $username && $logs[$i]->password == $password)     //hash
                 {
                     $_SESSION["loggedin"] = true;
-                    $trouv = 1;
                     Router::redirect(Admin);
                 }
 
             }
 
-            if ($trouv == 0) {
-                Router::redirect(Login);
-            }
+            Router::redirect(Login);
+            
         }
 
            
