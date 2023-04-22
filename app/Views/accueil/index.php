@@ -175,9 +175,21 @@
                 <span>Trier Par:</span>
                 <div class="custom-select">
                     <select autocomplete="off">
-                        <option selected value="0">Defaut</option>
-                        <option value="1">Tarif 1</option>
-                        <option value="2">Tarif 2</option>
+                    <?php
+                        function generateOrderChoices()
+                        {
+                            $model = new PrestationModel();
+
+                            $nom = array() ;
+                            $nom = $model->getPrestationsNom();
+
+                            echo '<option value="" selected>Defaut</option>';
+                            for ($i=0; $i < count($nom); $i++) { 
+                                echo '<option value="'.$nom[$i].'">'.$nom[$i].'</option>';
+                            }
+                        }
+                            generateOrderChoices();
+                        ?>
                     </select>
                     <span class="custom-arrow"></span>
                 </div>
@@ -187,81 +199,8 @@
                 </label>
             </div>
 
-            <?php
-            function displayBank($bankId)
-            {
-                $model = new BanqueModel();
-                $bank = $model->getBanque($bankId);
-                $logo = $model->getLogo($bankId);
-                $map = $model->getMap($bankId);
-                $buttonId = 'prestations-button-' . $bankId;
-                $modalId = 'prestations-modal-' . $bankId;
-                ?>
-
-                <!-- #region -->
-                <div class="bank-card__container">
-                    <div class="bank-card">
-                        <div class="vertically-centered">
-                            <p class="title">
-                                <?php echo $bank->nom ?>
-                            </p>
-                        </div>
-                        <div class="vertically-centered">
-                            <a class="bank-logo" href="<?= $bank->site_banque ?>" target="_blank"><img
-                                    src="<?= PROOT ?>/app/logos/<?= $logo->logo ?>" /></a>
-                        </div>
-
-                        <div class="general-info">
-                            <div class="seige-social">
-                                <?php echo $bank->adresse_siege_social ?>
-                            </div>
-                            <div class="tel">
-                                <?php echo $bank->telephone ?>
-                            </div>
-                            <div class="fax">
-                                <?php echo $bank->fax ?>
-                            </div>
-                        </div>
-                        <div class="more-info">
-                            <div><a href="<?php echo $bank->site_banque ?>" target="_blank" class="site-link"><?php echo $bank->site_banque ?></a></div>
-                            <div class="prestations-button">Prestations
-                                <div class="prestations-button__handler" data-id="<?= $bankId ?>">?</div>
-                            </div>
-                            <div class="map__container">
-                                <iframe src="<?= $map->lienmap ?>" frameborder="0" class="hide-map-bar"></iframe>
-                            </div>
-                        </div>
-                        <button class="view-button">Voir Plus</button>
-                    </div>
-
-
-                    <!-- The Modal -->
-                    <div class="modal">
-
-
-                        <!--Modal content-->
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <h2>Prestations</h2>
-                            <!-- Add a loading screen -->
-                            <div class="loader">
-                                <div class="justify-content-center jimu-primary-loading"></div>
-                            </div>
-
-                            <div class="prestations-content"></div>
-                        </div>
-                    </div>
-                </div>
-
-
-            <?php } ?>
-            <div>
-                <?php
-                for ($i = 1; $i <= 20; $i++) {
-                    displayBank($i);
-                }
-                ?>
-            </div>
+            
+            <!-- display banque-->
         </div>
 
 
@@ -277,5 +216,9 @@
     </footer>
 </body>
 
+
 </html>
+
+
+
 <?php $this->end(); ?>

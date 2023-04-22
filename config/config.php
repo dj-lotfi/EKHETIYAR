@@ -7,6 +7,13 @@ define('DB_PASSWORD','M8j5TXwV8C'); //mot de passe de la bdd
 define('DB_HOST','db4free.net'); //host de la bdd (IP pour éviter DNS lookup)
 
 
+define('Admin','j2sJDpUgQQmLF5EF');
+define('Login','MNnCXwmkGtcA6pQR');
+
+define('DB_NAME_ADMIN', 'adminbd'); // nom de la bdd admin
+define('DB_USER_ADMIN', 'rqct3i7rwh'); //nom d'utilisateur admin
+define('DB_PASSWORD_ADMIN', '28ed28e5'); //mot de passe de la bdd admin
+define('DB_HOST_ADMIN', 'db4free.net'); //host de la bdd admin(IP pour éviter DNS lookup)
 
 define('DEFAULT_CONTROLLER','Accueil'); 
 //controller par défaut s'il n'y a pas de controlleur

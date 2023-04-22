@@ -6,15 +6,11 @@ class PrestationsController extends Controller {
         parent::__construct($controller, $action);
         //$this->load_model('AccueilModel');
         $this->view->setLayout('default');
+        $this->model = new PrestationModel();
     }
 
     public function indexaction() {
         $this->view->render('prestations');
     }
+    
 }
-
-
-
-
-
-?>

@@ -1,15 +1,16 @@
 <?php
 
-class DB  
-{
+class DB_admin {
+    
     private static $_instance = null ;//la référance vers la bdd (static car instance de dbb unique pour chaque utilisateur)
     private $_pdo; //la connexion à la bdd
     private $_query, $_error = false, $_result, $_count = 0, $_lastInsertID = null;
 
+
     public function __construct()
     {
         try {
-            $this->_pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+            $this->_pdo = new PDO('mysql:host='.DB_HOST_ADMIN.';dbname='.DB_NAME_ADMIN, DB_USER_ADMIN, DB_PASSWORD_ADMIN);
             //$this->_pdo = new PDO("sqlsrv:server = " . DB_HOST . "; Database = "  . DB_NAME , DB_USER, DB_PASSWORD);
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -19,7 +20,7 @@ class DB
     public static function getInstance()
     {
         if (!isset(self::$_instance)) {//assurer l'unicité de la bdd
-            self::$_instance = new DB();
+            self::$_instance = new DB_admin();
         } 
         return self::$_instance;
         
@@ -156,4 +157,59 @@ class DB
     {
         return (!empty($this->_result))? $this->_result[0] : [];
     }
+
+
+    public function insert($table, $fields = [])
+    //fonction pour inserer les champs $feilds dans la table $table
+    //fields tableau associative des noms des colonnes et les valeurs
+    //resiste les attaques injections
+    {
+        $fieldString = '';
+        $valueString = '';
+        $values = [];
+
+        foreach ($fields as $field => $value) {
+            $fieldString .= '`' . $field . '`,';
+            $valueString .= '?,';
+            $values[] = $value;//inserer à la fin du tableau
+        }
+        $fieldString = rtrim($fieldString, ',');
+        $valueString = rtrim($valueString, ',');
+        $sql = "INSERT INTO {$table} ({$fieldString}) VALUES ({$valueString})";
+        if (!$this->query($sql, $values)->error()) {//insertion réussite
+            return true;
+        }
+        return false;
+    }
+
+    public function update($table, $id,$indexid , $fields =[])
+    //modifier certains données $fields une ligne avec l'identifiant $id
+    //fields tableau associative des noms des colonnes et les valeurs
+    //resiste les attaques injections
+    {
+        $fieldString = '';
+        $values = [];
+        foreach ($fields as $field => $value) {
+            $fieldString .= ' ' .$field . ' = ?,';
+            $values[] = $value;
+        }
+        $fieldString = trim($fieldString);
+        $fieldString = rtrim($fieldString,',');
+        $sql = "UPDATE {$table} SET {$fieldString} WHERE {$indexid} = {$id}";
+        if (!$this->query($sql, $values)->error()) {//modification réussite
+            return true;
+        }
+        return false;
+    }
+
+    public function delete($table, $id ,$indexid)
+    //fonction pour supprimer la ligne avec l'identifiant $id 
+    {
+        $sql = "DELETE FROM {$table} WHERE {$indexid} = {$id}";
+        if (!$this->query($sql)->error()) {//suppression réussite
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -9,6 +9,28 @@ class PrestationModel extends Model
     /*
     
     */
+
+
+    public function getPrestationsNom()
+    {
+        
+        $contact = $this->_db->query("SELECT DISTINCT nom FROM prestations");
+        $res = $contact->getResult();
+        $array =array();
+        for ($i=0; $i < sizeof($res); $i++) { 
+            array_push($array , $res[$i]->nom);
+        }
+        return $array;
+    }
+
+    /*
+    public function FunctionName(Type $var = null)
+    {
+        # code...
+    }
+*/
+    
+
     public function getPrestation($IdPrestation)
     {
         $contact = $this->_db->query("SELECT * FROM prestations WHERE id_prestation=" . $IdPrestation);

@@ -11,7 +11,7 @@ class AdminController extends Controller
 
     public function indexAction()
     {
-        $_SESSION['filedir'] = __FILE__;
+        /*$_SESSION['filedir'] = __FILE__;
         if (isset($_POST['submit'])) {
 
             $this->model = new BanqueModel();
@@ -25,8 +25,9 @@ class AdminController extends Controller
                 $_POST['fields']['id']
             );
         } else {
-            $this->view->render('admin');
-        }
+        }*/
+        $this->view->render('admin');
+
     }
 }
 

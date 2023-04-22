@@ -7,6 +7,12 @@ class view {
     protected $_outputBuffer;//pour indiquer si le output buffer contient le head ou le body 
     protected $_layout = DEFAULT_LAYOUT;
 
+    protected $controller;
+
+    public function __construct($controller) {
+
+        $this->controller = $controller;
+    }
     public function render($viewName)
     {
         $viewArray = explode('/',$viewName);

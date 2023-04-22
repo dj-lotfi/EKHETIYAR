@@ -9,7 +9,7 @@ class Controller extends Application {
         parent::__construct();
         $this->_controller = $controller;
         $this->_action = $action;
-        $this->view = new View();
+        $this->view = new View($this);
     }
 
     /*public function load_model($path){
@@ -28,7 +28,7 @@ class Controller extends Application {
             include_once $model_file_path;
     
             // Instantiate the model object and return it
-            $model_class_name = ucfirst($model_name) . "Model";
+            $model_class_name = ucfirst($model_name);
             return new $model_class_name();
         } else {
             // If the model file doesn't exist, throw an exception

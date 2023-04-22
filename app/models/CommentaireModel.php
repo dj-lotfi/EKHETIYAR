@@ -4,6 +4,7 @@ class CommentaireModel extends Model{
         $table = 'Commentaires';
         parent::__construct($table);
     }
+    /*
     public function Rate($id_bank,$id_commentaire,$texte,$date_heure) {
         $TabReview =array("id_commentaire"=>$id_commentaire ,"banque"=> $id_bank ,"texte"=> $texte ,"date_heure"=> $date_heure); 
         if($this->findById($id_commentaire,"id_commentaire"))$this->update($id_commentaire,"id_commentaire",$TabReview);
@@ -13,4 +14,5 @@ class CommentaireModel extends Model{
     {
        $this->delete($idreveiw,"id_commentaire");
     }
+    */
 }
