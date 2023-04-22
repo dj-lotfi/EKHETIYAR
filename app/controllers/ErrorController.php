@@ -1,6 +1,6 @@
 <?php
 
-class Error404Controller extends Controller {
+class ErrorController extends Controller {
 
     public function __construct($controller, $action)
     {
@@ -10,7 +10,7 @@ class Error404Controller extends Controller {
 
     public function IndexAction()
     {
-        $this->view->render('error404');
+        $this->view->render('error');
     }
 
 

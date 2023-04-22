@@ -1,7 +1,7 @@
-<?php $this->setSiteTitle('Error 404  - Page Not Found'); ?>
+<?php $this->setSiteTitle('404 Not Found'); ?>
 <?php $this->start('head'); ?>
 
-<link rel='stylesheet' type='text/css' href='css/error404.css?v=<?php echo time(); ?>'>
+<link rel='stylesheet' type='text/css' href='css/error.css?v=<?php echo time(); ?>'>
 
 <?php $this->end(); ?>
 

@@ -8,7 +8,7 @@ class Router {
         $controller = (isset($url[0]) && $url != '') ?ucwords($url[0]).'Controller' : DEFAULT_CONTROLLER.'Controller';
         $controller_name = str_replace('Controller','',$controller);
         if ($controller_name == 'Login' || $controller_name == 'Admin' ) {
-            Router::redirect('Error404');
+            Router::redirect('Error');
             exit;
         } elseif ($controller_name == ucwords(Admin)) {
             $controller_name = 'Admin';
@@ -31,11 +31,11 @@ class Router {
 
         if (!class_exists($controller)) {
             
-            Router::redirect('Error404');
+            Router::redirect('Error');
             exit;
         }else {
             if(!method_exists($controller, $action)){//$action existe dans la classe controlleur...
-                Router::redirect('Error404');
+                Router::redirect('Error');
                 
 
                 exit;
