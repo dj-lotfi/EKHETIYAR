@@ -2,7 +2,7 @@
 function generateHeader()
 { ?>
     <header>
-        <img class="logo" src="<?= PROOT ?>/img/Site_Logo.svg" alt="Logo du site">
+        <a href="<?php echo PROOT . DS ;?>"><img class="logo" src="<?= PROOT ?>/img/Site_Logo.svg" alt="Logo du site"></a>
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <nav class="navbar">
             <ul>
@@ -22,12 +22,12 @@ function generateFooter()
     <footer class="site-footer">
         <div class="footer--container">
             <div class="footer--logo">
-                <a href="<?= PROOT ?>/accueil" aria-label="Ikhteyar">
+                <a href="<?php echo PROOT . DS ;?>" aria-label="Ikhteyar">
                     <img class="svg-icon" src="<?= PROOT ?>/img/Site_Logo.svg" alt="Logo du site" width="62"> </a>
             </div>
             <nav class="footer--nav">
                 <div class="footer--col">
-                    <div class="col-title"><a href="<?= PROOT ?>/accueil">Ikhteyar</a></div>
+                    <div class="col-title"><a href="<?php echo PROOT . DS ;?>">Ikhteyar</a></div>
                     <ul class="col-list">
                         <li><a href="<?= PROOT ?>/accueil">Accueil</a></li>
                         <li><a href="<?= PROOT ?>/comparatif">Comparatif</a></li>

@@ -7,7 +7,7 @@ bankCards.forEach(bankCard => {
   var moreInfo = bankCard.querySelector('.more-info');
 
 
-  bankCard.addEventListener('click', function () {
+  viewButton.addEventListener('click', function () {
     if (moreInfo.style.display === 'none' || moreInfo.style.display === "") {
       moreInfo.style.display = 'block';
       moreInfo.style.animation = 'fade-in 1s';

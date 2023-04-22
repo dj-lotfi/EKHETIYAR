@@ -175,20 +175,20 @@
                 <span>Trier Par:</span>
                 <div class="custom-select">
                     <select autocomplete="off">
-                    <?php
+                        <?php
                         function generateOrderChoices()
                         {
                             $model = new PrestationModel();
 
-                            $nom = array() ;
+                            $nom = array();
                             $nom = $model->getPrestationsNom();
 
                             echo '<option value="" selected>Defaut</option>';
-                            for ($i=0; $i < count($nom); $i++) { 
-                                echo '<option value="'.$nom[$i].'">'.$nom[$i].'</option>';
+                            for ($i = 0; $i < count($nom); $i++) {
+                                echo '<option value="' . $nom[$i] . '">' . $nom[$i] . '</option>';
                             }
                         }
-                            generateOrderChoices();
+                        generateOrderChoices();
                         ?>
                     </select>
                     <span class="custom-arrow"></span>
@@ -209,15 +209,20 @@
 
                 $buttonId = 'prestations-button-' . $bankId;
                 $modalId = 'prestations-modal-' . $bankId;
-            ?>
+                ?>
 
-                <!-- #region -->
                 <div class="bank-card__container">
                     <div class="bank-card">
-                        <p class="title">
-                            <?php echo $bank->nom ?>
-                        </p>
-                        <div class="bank-logo"><img src="<?= PROOT ?>/app/logos/<?= $logo->logo ?>" /></div>
+                        <div class="vertically-centered">
+                            <p class="title">
+                                <?php echo $bank->nom ?>
+                            </p>
+                        </div>
+                        <div class="vertically-centered">
+                            <a class="bank-logo" href="<?= $bank->site_banque ?>" target="_blank"><img
+                                    src="<?= PROOT ?>/app/logos/<?= $logo->logo ?>" /></a>
+                        </div>
+
                         <div class="general-info">
                             <div class="seige-social">
                                 <?php echo $bank->adresse_siege_social ?>
@@ -230,13 +235,10 @@
                             </div>
                         </div>
                         <div class="more-info">
-                            <div><a href="<?php echo $bank->site_banque ?>" class="site-link"><?php echo $bank->site_banque ?></a></div>
-                            <div class="prestations-button">Prestations
+                            <div><a href="<?php echo $bank->site_banque ?>" target="_blank" class="site-link"><?php echo $bank->site_banque ?></a></div>
+                            <div class="prestations-button vertically-centered">Prestations
                                 <div class="prestations-button__handler" data-id="<?= $bankId ?>">?</div>
                             </div>
-
-
-
                             <div class="map__container">
                                 <iframe src="<?= $map->lienmap ?>" frameborder="0" class="hide-map-bar"></iframe>
                             </div>
@@ -251,11 +253,6 @@
 
                         <!--Modal content-->
                         <div class="modal-content">
-                        <div id="modal" class="modal">
-                            <div class="modal-content" id="modal-content">
-                                <!-- Modal content will be inserted here -->
-                            </div>
-                            </div>
                             <span class="close">&times;</span>
                             <h2>Prestations</h2>
                             <!-- Add a loading screen -->
@@ -267,7 +264,6 @@
                         </div>
                     </div>
                 </div>
-
 
             <?php } ?>
             <div>
