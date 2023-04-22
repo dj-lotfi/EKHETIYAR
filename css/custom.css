@@ -1,110 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 :root {
-    --dark-color-1: #222823ff;
-    --dark-color-2: #343a40ff;
-    --dark-color-3: #575a5eff;
-    --dark-color-4: #a7a2a9ff;
-    --dark-color-5: #f4f7f5ff;
+    /*--dark-color-1: #222823;
+    --dark-color-2: #343a40;
+    --dark-color-3: #575a5e;
+    --dark-color-4: #a7a2a9;
+    --dark-color-5: #f4f7f5;
 
-    --light-color-1: #3D5A80ff;
-    --light-color-2: #c6d8ffff;
-    --light-color-3: #f4f7f5ff;
-    --light-color-4: #388697ff;
-    --light-color-5: #f77f00ff;
+    --light-color-1: #3D5A80;
+    --light-color-2: #c6d8ff;
+    --light-color-3: #f4f7f5;
+    --light-color-4: #388697;
+    --light-color-5: #f77f00;
 
     --main1: var(--light-color-1);
     --main2: var(--light-color-2);
     --support: var(--light-color-3);
     --accent1: var(--light-color-4);
-    --accent2: var(--light-color-5);
+    --accent2: var(--light-color-5);*/
 
-    --neutral-50: #fafafaff;
-    --neutral-100: #f5f5f5ff;
-    --neutral-200: #e5e5e5ff;
-    --neutral-300: #d4d4d4ff;
-    --neutral-400: #a3a3a3ff;
-    --neutral-500: #737373ff;
-    --neutral-600: #525252ff;
-    --neutral-700: #404040ff;
-    --neutral-800: #262626ff;
-    --neutral-900: #171717ff;
-    --neutral-950: #0a0a0aff;
-
-    --blue-50: #EFF6FFff;
-    --blue-100: #DBEAFEff;
-    --blue-200: #BFDBFEff;
-    --blue-300: #93C5FDff;
-    --blue-400: #60A5FAff;
-    --blue-500: #3B82F6ff;
-    --blue-600: #2563EBff;
-    --blue-700: #1D4ED8ff;
-    --blue-800: #1E40AFff;
-    --blue-900: #1E3A8Aff;
-    --blue-950: #172554ff;
-
-    --indigo-50: #eef2ffff;
-    --indigo-100: #e0e7ffff;
-    --indigo-200: #c7d2feff;
-    --indigo-300: #818cf8ff;
-    --indigo-400: #818cf8ff;
-    --indigo-500: #6366f1ff;
-    --indigo-600: #4f46e5ff;
-    --indigo-700: #4338caff;
-    --indigo-800: #3730a3ff;
-    --indigo-900: #312e81ff;
-    --indigo-950: #1e1b4bff;
-
-    --amber-50: #fffbebff;
-    --amber-100: #fef3c7ff;
-    --amber-200: #fde68aff;
-    --amber-300: #fcd34dff;
-    --amber-400: #fbbf24ff;
-    --amber-500: #f59e0bff;
-    --amber-600: #d97706ff;
-    --amber-700: #b45309ff;
-    --amber-800: #92400eff;
-    --amber-900: #78350fff;
-    --amber-950: #451a03ff;
-
-    --orange-50: #fff7edff;
-    --orange-100: #ffedd5ff;
-    --orange-200: #fed7aaff;
-    --orange-300: #fdba74ff;
-    --orange-400: #fb923cff;
-    --orange-500: #f97316ff;
-    --orange-600: #ea580cff;
-    --orange-700: #c2410cff;
-    --orange-800: #9a3412ff;
-    --orange-900: #7c2d12ff;
-    --orange-950: #431407ff;
-
-
-    --green-50: #f0fdf4ff;
-    --green-100: #dcfce7ff;
-    --green-200: #bbf7d0ff;
-    --green-300: #86efacff;
-    --green-400: #4ade80ff;
-    --green-500: #22c55eff;
-    --green-600: #16a34aff;
-    --green-700: #15803dff;
-    --green-800: #166534ff;
-    --green-900: #14532dff;
-    --green-950: #052e16ff;
-
-    --red-50: #fef2f2ff;
-    --red-100: #fee2e2ff;
-    --red-200: #fecacaff;
-    --red-300: #fca5a5ff;
-    --red-400: #f87171ff;
-    --red-500: #ef4444ff;
-    --red-600: #dc2626ff;
-    --red-700: #b91c1cff;
-    --red-800: #991b1bff;
-    --red-900: #7f1d1dff;
-    --red-950: #450a0aff;
+    --ff-title: 'Rubik', Verdana;
+    --ff-general: 'Atkinson Hyperlegible', system-ui;
 
     --fs-100: clamp(0.55rem, 0.92vw + 0.32rem, 0.9rem);
     --fs-200: clamp(0.6rem, 1.025vw + 0.35rem, 1rem);
@@ -112,6 +29,91 @@
     --fs-400: clamp(0.8rem, 1.28vw + 0.45rem, 1.25rem);
     --fs-500: clamp(1rem, 1.66vw + 0.6rem, 1.625rem);
     --fs-600: ;
+
+    --neutral-50: #fafafa;
+    --neutral-100: #f5f5f5;
+    --neutral-200: #e5e5e5;
+    --neutral-300: #d4d4d4;
+    --neutral-400: #a3a3a3;
+    --neutral-500: #737373;
+    --neutral-600: #525252;
+    --neutral-700: #404040;
+    --neutral-800: #262626;
+    --neutral-900: #171717;
+    --neutral-950: #0a0a0a;
+
+    --blue-50: #EFF6FF;
+    --blue-100: #DBEAFE;
+    --blue-200: #BFDBFE;
+    --blue-300: #93C5FD;
+    --blue-400: #60A5FA;
+    --blue-500: #3B82F6;
+    --blue-600: #2563EB;
+    --blue-700: #1D4ED8;
+    --blue-800: #1E40AF;
+    --blue-900: #1E3A8A;
+    --blue-950: #172554;
+
+    --indigo-50: #eef2ff;
+    --indigo-100: #e0e7ff;
+    --indigo-200: #c7d2fe;
+    --indigo-300: #818cf8;
+    --indigo-400: #818cf8;
+    --indigo-500: #6366f1;
+    --indigo-600: #4f46e5;
+    --indigo-700: #4338ca;
+    --indigo-800: #3730a3;
+    --indigo-900: #312e81;
+    --indigo-950: #1e1b4b;
+
+    --amber-50: #fffbeb;
+    --amber-100: #fef3c7;
+    --amber-200: #fde68a;
+    --amber-300: #fcd34d;
+    --amber-400: #fbbf24;
+    --amber-500: #f59e0b;
+    --amber-600: #d97706;
+    --amber-700: #b45309;
+    --amber-800: #92400e;
+    --amber-900: #78350f;
+    --amber-950: #451a03;
+
+    --orange-50: #fff7ed;
+    --orange-100: #ffedd5;
+    --orange-200: #fed7aa;
+    --orange-300: #fdba74;
+    --orange-400: #fb923c;
+    --orange-500: #f97316;
+    --orange-600: #ea580c;
+    --orange-700: #c2410c;
+    --orange-800: #9a3412;
+    --orange-900: #7c2d12;
+    --orange-950: #431407;
+
+
+    --green-50: #f0fdf4;
+    --green-100: #dcfce7;
+    --green-200: #bbf7d0;
+    --green-300: #86efac;
+    --green-400: #4ade80;
+    --green-500: #22c55e;
+    --green-600: #16a34a;
+    --green-700: #15803d;
+    --green-800: #166534;
+    --green-900: #14532d;
+    --green-950: #052e16;
+
+    --red-50: #fef2f2;
+    --red-100: #fee2e2;
+    --red-200: #fecaca;
+    --red-300: #fca5a5;
+    --red-400: #f87171;
+    --red-500: #ef4444;
+    --red-600: #dc2626;
+    --red-700: #b91c1c;
+    --red-800: #991b1b;
+    --red-900: #7f1d1d;
+    --red-950: #450a0a;
 
     --main-50: var(--indigo-50);
     --main-100: var(--indigo-100);
@@ -149,16 +151,11 @@
 
 body {
     font-size: 100%;
-    font-family: 'Atkinson Hyperlegible', system-ui, 'Open Sans';
+    font-family: var(--ff-general);
     margin: 0;
     overflow-y: overlay;
 
-    background-image: linear-gradient(45deg,
-            var(--neutral-800),
-            var(--neutral-700),
-            var(--neutral-600));
-    background-size: 400%;
-    animation: bg-animation 25s infinite alternate;
+    background: var(--neutral-700);
 }
 
 a:hover,
@@ -167,6 +164,7 @@ a:link {
     text-decoration: none;
 }
 
+ul,
 li {
     list-style: none;
 }
@@ -250,7 +248,6 @@ header {
 .navbar ul {
     margin: 0;
     padding: 0;
-    list-style: none;
 }
 
 .navbar li {
@@ -389,37 +386,6 @@ header {
     }
 }
 
-footer {
-    background: var(--main-500);
-    width: 100%;
-    font-size: 0.8rem;
-
-    border-top: 5px solid transparent;
-    border-color: var(--main-900);
-}
-
-footer>ul {
-    margin-top: 0.32rem;
-    margin-bottom: 0.64rem;
-}
-
-footer>ul>li>a {
-    margin-left: 5%;
-    color: var(--main-300);
-}
-
-footer>ul>li>a:hover {
-    color: var(--main-50);
-}
-
-.copyright {
-    width: 100%;
-    float: left;
-    font-size: 1rem;
-    background-color: var(--main-900);
-    color: var(--main-100);
-}
-
 .loading-screen {
     display: none;
     position: relative;
@@ -536,4 +502,78 @@ footer>ul>li>a:hover {
         box-shadow: 0 -8px #076fe5;
         height: 40px;
     }
+}
+
+/* Footer Section */
+footer,
+footer nav {
+    display: block;
+}
+
+footer ul,
+footer li {
+    margin: 0;
+    padding: 0;
+}
+
+footer a {
+    color: hsl(210, 8%, 60%);
+}
+
+footer a:hover,
+footer a:active {
+    color: hsl(210, 8%, 65%);
+}
+
+.site-footer {
+    background-color: var(--neutral-900);
+    border-top: hsl(0, 0%, 100%);
+    color: hsl(210, 8%, 60%);
+}
+
+.footer--container {
+    max-width: 1264px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 32px 12px 12px 12px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.footer--logo {
+    flex: 0 0 124px;
+    margin: -12px 0 32px 0;
+}
+
+.svg-icon {
+    vertical-align: bottom;
+}
+
+.footer--nav {
+    display: flex;
+    flex: 2 1 auto;
+    flex-wrap: wrap;
+}
+
+.footer--col {
+    padding: 0 12px 24px 0;
+    flex: 1 0 auto;
+}
+
+.col-title {
+    font-family: var(--ff-title);
+    font-size: var(--fs-300);
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: var(--fs-200);
+    color: hsl(210, 8%, 75%);
+}
+
+.col-title a {
+    color: hsl(210, 8%, 75%);
+    cursor: default;
+}
+
+.footer--col .col-list> li+li {
+    margin-top: calc(var(--fs-100)/2);
 }

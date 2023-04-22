@@ -84,9 +84,15 @@
 .filters {
     height: min-content;
     background: var(--neutral-100);
-    margin: 0 10px 2% 5px;
+    margin: 0 0 2% 0;
     /*border-radius: 10px;*/
     box-shadow: 2px 5px 10px var(--neutral-600);
+}
+
+@media screen and (orientation:landscape) {
+    .filters {
+        margin-right: 2%;
+    }
 }
 
 .filters-subcategory {
@@ -338,7 +344,7 @@ select option {
     background: var(--main-500);
     border-radius: 25px;
     padding: 25px;
-    margin: 2vh auto 0 auto;
+    margin: 1rem auto 0 auto;
     width: clamp(80%, 55vw, 800px);
     overflow: hidden;
 
@@ -371,7 +377,6 @@ select option {
     opacity: 0.75;
     pointer-events: none;
     transform: translate(0.5rem, 0.5rem);
-    ;
 }
 
 .vertically-centered {
@@ -455,7 +460,7 @@ select option {
 
 .bank-logo {
     /* set a default aspect ratio */
-    max-width: clamp(100px, 32.2vw - 28.67px, 293px);
+    max-width: clamp(75px, 37.5vw - 75px, 300px);
     height: min-content;
     /*background: rgba(255,255,255,0.5);*/
     margin-left: auto;
@@ -537,15 +542,22 @@ select option {
     font-family: sans-serif;
     font-weight: bold;
     font-size: var(--fs-200);
-    border-radius: 50%;
-    padding: 0 0.25rem;
     margin-left: 5px;
     color: var(--main-900);
-    border: 2px solid;
     cursor: pointer;
+    width: 2ch;
+    height: 2ch;
+    display: inline-flex;
+    /* you can also use 'grid' or just 'flex'*/
+    justify-content: center;
+    align-items: center;
+    border:2px solid var(--main-900);
+    padding: calc(1ch - 2px);
+    border-radius: 100vw;
 }
 
 .prestations-button__handler:hover {
+    border: 2px solid var(--main-300);
     color: var(--main-300);
 }
 
@@ -554,7 +566,7 @@ select option {
     overflow: hidden;
     border-width: 4px;
     border-style: solid;
-    border-image: linear-gradient(var(--main-700) 0%, var(--main-500) 15% 85%, var(--main-700) 100%) 1;
+    border-image: linear-gradient(var(--main-700) 0%, transparent 15% 85%, var(--main-700) 100%) 1;
 }
 
 .hide-map-bar {
