@@ -79,9 +79,10 @@
         public function displayAllBanques()
         {
             $res = $this->controller->getAllBanques();
+            array_unshift($res,null);
+            for ($i = 1; $i < count($res); $i++) {
 
-            for ($i = 1; $i <= count($res); $i++) {
-                $this->displayBank($i-1,$res);
+                $this->displayBank($i,$res);
             }
         }
     }
