@@ -9,7 +9,6 @@ class Controller extends Application {
         parent::__construct();
         $this->_controller = $controller;
         $this->_action = $action;
-        $this->view = new View($this);
     }
 
     /*public function load_model($path){

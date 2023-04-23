@@ -37,6 +37,8 @@ class PrestationModel extends Model
         $res = $contact->getFirstResult();
         return $res;
     }
+
+/*
     public function getPrestations($IdBank)
     {
         // Banque_Prestation->id_banque->id_prestation
@@ -48,4 +50,32 @@ class PrestationModel extends Model
         }
         return $TabPrestation;
     }
+*/
+
+    public function getPrestations($id)
+    {
+        $contact = $this->_db->query("SELECT * FROM `prestations` p INNER JOIN `banque_prestation` bp ON p.id_prestation = bp.id_prestation  WHERE id_banque=" . $id . " ORDER BY categorie",[],get_class($this));
+        return $contact->getResult();
+    }
+
+    public function getNom()
+    {
+        return $this->nom ;
+    }
+
+    public function getCategorie()
+    {
+        return $this->categorie ;
+    }
+
+    public function getPrix()
+    {
+        return $this->prix ;
+    }
+
+    public function getDateValeur()
+    {
+        return $this->date_valeur ;
+    }
+
 }

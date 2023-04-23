@@ -100,7 +100,6 @@ class AccueilView extends view
     public function render()
     {
         $this->setSiteTitle('Accueil');
-        include __DIR__ . "../CommenViewFunctions.php";
 
         $this->start('head');
         ?>
@@ -117,7 +116,7 @@ class AccueilView extends view
         $this->start('body'); ?>
 
         <body class="main-layout">
-            <?php generateHeader(); ?>
+            <?php $this->generateHeader(); ?>
             <?php $this->generateCarousel(); ?>
             <main class="content-layout">
                 <div class="filters">
@@ -260,7 +259,7 @@ class AccueilView extends view
                     <?php $this->displayAllBanque(); ?>
                 </div>
             </main>
-            <?php generateFooter(); ?>
+            <?php $this->generateFooter(); ?>
         </body>
         <?php $this->end();
 

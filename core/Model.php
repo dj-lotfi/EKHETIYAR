@@ -28,6 +28,16 @@ class Model
         return $resultsQuery;
     }
 
+    public function findInTable($Table,$params = [])
+    //return les lignes qui correspond aux conditions $params dans un tableau de type nom_model[]
+    {
+        $resultsQuery = $this->_db->find($Table, $params,get_class($this));
+        if (!$resultsQuery) {
+            return [];
+        }
+        return $resultsQuery;
+    }
+
     public function findFirst($params = [])
     {
         $resultsQuery = $this->_db->findFirst($this->_table, $params,get_class($this));

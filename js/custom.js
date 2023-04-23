@@ -43,7 +43,7 @@ banksPrestations.forEach(bankPrestations => {
 
       // Send AJAX request
       xhr = new XMLHttpRequest();
-      xhr.open('GET', 'Prestations?id=' + bankId, true);
+      xhr.open('GET', 'Prestation/displayPrestation/' + bankId, true);
       xhr.onload = function () {
         if (this.status == 200) {
           loadingScreen.style.display = "none";

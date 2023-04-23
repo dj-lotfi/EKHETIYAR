@@ -4,7 +4,6 @@ class ComparatifView extends View
     public function render()
     {
         $this->setSiteTitle('Comparatif');
-        include __DIR__ . "../CommenViewFunctions.php";
 
         $this->start('head'); ?>
 
@@ -18,7 +17,7 @@ class ComparatifView extends View
         $this->start('body'); ?>
 
         <body class="main-layout">
-            <?php generateHeader(); ?>
+            <?php $this->generateHeader(); ?>
             <main class="comparatif-layout">
                 <?php
                 $model = new BanqueModel();
@@ -51,7 +50,7 @@ class ComparatifView extends View
 
             </main>
             <section></section>
-            <?php generateFooter(); ?>
+            <?php $this->generateFooter(); ?>
         </body>
 
         <?php $this->end();

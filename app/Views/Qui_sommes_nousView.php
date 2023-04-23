@@ -5,7 +5,6 @@
         public function render()
         {
             $this->setSiteTitle('Qui Sommes-Nous'); 
-            include __DIR__ . "../CommenViewFunctions.php";
 
             $this->start('head'); ?>
 
@@ -19,7 +18,7 @@
             $this->start('body'); ?>
 
                 <body class="main-layout">
-                    <?php generateHeader(); ?>
+                    <?php $this->generateHeader(); ?>
                     <section></section>
                     <main>
                         <div class="prop">
@@ -55,7 +54,7 @@
                         </div>
 
                     </main>
-                    <?php generateFooter(); ?>
+                    <?php $this->generateFooter(); ?>
                 </body>
 
             <?php $this->end();

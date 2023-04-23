@@ -2,41 +2,47 @@
 
     class PrestationView extends View 
     {
-        public function render()
+
+        public function displayPrestation($id)
         {
-            $id = $_GET['id'];
-            $pres = new PrestationModel();
-            $table = 'table' . $id;
             ?>
-            <table id="<?php echo $table; ?>">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Categorie</th>
-                        <th>Prix</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $prpr = $pres->getPrestations($id);
-                    for ($i = 0; $i < sizeof($prpr); $i++) {
-                        echo '<tr>';
-                        echo '<td>' . $prpr[$i]->nom . '</td>';
-                        echo '<td>' . $prpr[$i]->categorie . '</td>';
-                        if ($prpr[$i]->prix == null) {
-                            echo '<td>' . '?' . '</td>';
-                        } else {
-                            echo '<td>' . $prpr[$i]->prix . '</td>';
-                        }
+            <div id="<?php echo 'table' . $id; ?>">
+                <?php
+                $p = $this->controller->getPrestationsById($id);
+                $categorie = '';
+                $i = 0;
+                while ($i < count($p)) {
+                    if ($p[$i]->getCategorie() != $categorie) {
+                        $categorie = $p[$i]->getCategorie();
+                        ?>
+                            <p><?php echo $categorie ;?></p>
+                            <table>
+                                <tbody>
+                                    <?php
+                                        while ($i < count($p) ) {
+                                            if ($p[$i]->getCategorie() == $categorie) {
+                                                ?>
+                                                    <tr>
+                                                        <td align="left"><?php echo $p[$i]->getNom() ; ?></td>
+                                                        <td align="center"><?php echo ($p[$i]->getPrix() == null) ? '?' : $p[$i]->getPrix() ; ?></td>
+                                                        <td align="right"><?php echo ($p[$i]->getDateValeur() == null) ? '?' : $p[$i]->getDateValeur() ; ?></td>
+                                                    </tr>
+                                                <?php
+                                                $i++;
+                                            } else {
+                                                break;
+                                            }
+                                        }
+                                    ?>
 
-
-                        echo '</tr>';
+                                </tbody>
+                            </table>
+                        <?php
                     }
-                    ?>
-                </tbody>
-            </table>
+                }
+                ?>
+            </div>
             <?php
-
         }
     }
     
