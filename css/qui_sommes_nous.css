@@ -1,0 +1,55 @@
+.prop {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.prop section {
+    margin-bottom: 20px;
+}
+
+.prop h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.prop h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.prop p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.prop ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.prop li {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .prop {
+        flex-direction: column;
+    }
+}

@@ -13,6 +13,7 @@ class view {
 
         $this->controller = $controller;
     }
+    /*
     public function render($viewName)
     {
         $viewArray = explode('/',$viewName);
@@ -24,6 +25,9 @@ class view {
             die('The view "' . $viewName . '" does not exist.');
         }
     }
+    */
+
+    public function render(){}
 
     public function content($type)
     {

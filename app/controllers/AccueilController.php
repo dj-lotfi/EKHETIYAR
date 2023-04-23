@@ -7,6 +7,7 @@ class AccueilController extends Controller
     {
         parent::__construct($controller, $action);
         //$this->load_model('AccueilModel');
+        $this->view = new AccueilView($this);
         $this->view->setLayout('default');
     }
     
@@ -34,7 +35,13 @@ class AccueilController extends Controller
         
 
 
-        $this->view->render('accueil');
+        $this->view->render();
+    }
+
+    public function displayAllBanques()
+    {
+        $c = new BanqueController('BanqueController','');
+        $c->displayAllBanques();
     }
 
     

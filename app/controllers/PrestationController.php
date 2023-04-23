@@ -1,16 +1,15 @@
 <?php 
-class PrestationsController extends Controller {
+class PrestationController extends Controller {
     private $model ;
     public function __construct($controller, $action)
     {
         parent::__construct($controller, $action);
-        //$this->load_model('AccueilModel');
+        $this->load_model('PrestationModel');
         $this->view->setLayout('default');
-        $this->model = new PrestationModel();
     }
 
     public function indexaction() {
-        $this->view->render('prestations');
+        $this->view->render();
     }
     
 }

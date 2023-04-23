@@ -3,7 +3,7 @@
 class Controller extends Application {
     protected $_controller;
     protected $_action;
-    public $view;
+    protected $view;
 
     public function __construct($controller, $action) {
         parent::__construct();
