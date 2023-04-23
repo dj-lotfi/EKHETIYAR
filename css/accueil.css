@@ -170,20 +170,20 @@ textarea {
     font-size: 100%;
     vertical-align: middle;
 }
-
+/*
 .scrollable-checkboxes {
     height: 5rem;
     overflow: auto;
-    /* Hide scrollbar for IE, Edge and Firefox */
+    /* Hide scrollbar for IE, Edge and Firefox
     -ms-overflow-style: none;
-    /* IE and Edge */
+    /* IE and Edg
     scrollbar-width: none;
-    /* Firefox */
+    /* Firefox
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
+/* Hide scrollbar for Chrome, Safari and Opera
 .scrollable-checkboxes::-webkit-scrollbar {
     display: none;
 }
@@ -191,7 +191,7 @@ textarea {
 .scrollable-checkboxes li {
     scroll-snap-align: start;
 }
-
+*/
 .scrollable-checkboxes li+li {
     margin-top: 2.5%;
     border-top: 1px solid var(--neutral-500);

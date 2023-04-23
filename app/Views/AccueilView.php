@@ -135,20 +135,34 @@ class AccueilView extends view
                                     <li>
                                         <input type="checkbox" id="check2">
                                         <label for="check2">Compte en devise</label>
+                                        <div class="tarifs-interval">
+                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
+                                                name="low-price">
+                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
+                                                name="high-price">
+                                        </div>
                                     </li>
                                     <li>
                                         <input type="checkbox" id="check3">
                                         <label for="check3">Compte d'épargne</label>
+                                        <div class="tarifs-interval">
+                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
+                                                name="low-price">
+                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
+                                                name="high-price">
+                                        </div>
                                     </li>
                                     <li>
                                         <input type="checkbox" id="check4">
                                         <label for="check4">Compte professionnel</label>
+                                        <div class="tarifs-interval">
+                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
+                                                name="low-price">
+                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
+                                                name="high-price">
+                                        </div>
                                     </li>
                                 </ul>
-                            </ul>
-                            <ul class="tarifs-interval">
-                                <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
-                                <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
                             </ul>
                         </dd>
                         </dd>
@@ -162,24 +176,44 @@ class AccueilView extends view
                                     <li>
                                         <input type="checkbox" id="check1" checked>
                                         <label for="check1">Tous</label>
+                                        <div class="tarifs-interval">
+                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
+                                                name="low-price">
+                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
+                                                name="high-price">
+                                        </div>
                                     </li>
                                     <li>
                                         <input type="checkbox" id="check2">
                                         <label for="check2">Versement espèces tiers</label>
+                                        <div class="tarifs-interval">
+                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
+                                                name="low-price">
+                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
+                                                name="high-price">
+                                        </div>
                                     </li>
                                     <li>
                                         <input type="checkbox" id="check3">
                                         <label for="check3">Virement devise reçue de l'étranger</label>
+                                        <div class="tarifs-interval">
+                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
+                                                name="low-price">
+                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
+                                                name="high-price">
+                                        </div>
                                     </li>
                                     <li>
                                         <input type="checkbox" id="check4">
                                         <label for="check4">Émission Chèque de banque déplacée</label>
+                                        <div class="tarifs-interval">
+                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
+                                                name="low-price">
+                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
+                                                name="high-price">
+                                        </div>
                                     </li>
                                 </ul>
-                            </ul>
-                            <ul class="tarifs-interval">
-                                <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
-                                <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
                             </ul>
                         </dd>
                     </dl>
@@ -196,16 +230,24 @@ class AccueilView extends view
                                     <li>
                                         <input type="checkbox" id="check2">
                                         <label for="check2">Commission de paiement sur TPE/Commerçant</label>
+                                        <div class="tarifs-interval">
+                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
+                                                name="low-price">
+                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
+                                                name="high-price">
+                                        </div>
                                     </li>
                                     <li>
                                         <input type="checkbox" id="check3">
                                         <label for="check3">Changement de code PIN</label>
+                                        <div class="tarifs-interval">
+                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
+                                                name="low-price">
+                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
+                                                name="high-price">
+                                        </div>
                                     </li>
                                 </ul>
-                            </ul>
-                            <ul class="tarifs-interval">
-                                <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
-                                <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
                             </ul>
                         </dd>
                     </dl>
