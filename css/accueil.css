@@ -416,7 +416,7 @@ select option {
     animation: bg-animation 750ms;
 }
 
-@media screen and (orientation:landscape) {
+@media screen and (min-width: 900px) and (orientation: landscape) {
     .title {
         display: block;
     }
