@@ -205,6 +205,11 @@ body::-webkit-scrollbar-track-piece:end {
     }
 }
 
+::selection {
+    color: var(--neutral-700);
+    background: var(--accent-400);
+}
+
 /* Layout Specifications */
 .main-layout {
     min-height: 100vh;

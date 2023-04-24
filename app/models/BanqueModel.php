@@ -68,7 +68,12 @@ public function addBanque($nom , $logo , $adr , $tel ,$fax ,$site ,$id=null){
 
 public function getNom()
 {
-    return $this->nom ;
+    return $this->nom;
+}
+
+public function getAbbr()
+{
+    return $this->abbreviation;
 }
 
 public function getLogo()
