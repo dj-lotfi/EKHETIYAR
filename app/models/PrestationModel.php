@@ -37,7 +37,13 @@ class PrestationModel extends Model
         $res = $contact->getFirstResult();
         return $res;
     }
-
+/*
+    public function getAllCategorie()
+    {
+        $contact = $this->_db->query("SELECT DI `categorie` FROM `prestations` " );
+        return $contact->getFirstResult();
+    }
+*/
 /*
     public function getPrestations($IdBank)
     {
@@ -54,7 +60,7 @@ class PrestationModel extends Model
 
     public function getPrestations($id)
     {
-        $contact = $this->_db->query("SELECT * FROM `prestations` p INNER JOIN `banque_prestation` bp ON p.id_prestation = bp.id_prestation  WHERE id_banque=? ORDER BY categorie , nom",array($id),get_class($this));
+        $contact = $this->_db->query("SELECT * FROM `prestations` p INNER JOIN `banque_prestation` bp ON p.id_prestation = bp.id_prestation  WHERE (id_banque=?) ORDER BY categorie , nom",array($id),get_class($this));
         return $contact->getResult();
     }
 

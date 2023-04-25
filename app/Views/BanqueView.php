@@ -85,7 +85,7 @@ class BanqueView extends View
 
    public function displayAllBanques()
    {
-    $o = $this->controller->getOrder("default",1);
+    $o = $this->controller->getOrder("alphabetical",1);
     
     $res = $this->controller->getAllBanques();
     

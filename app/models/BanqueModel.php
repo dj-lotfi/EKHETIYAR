@@ -97,12 +97,12 @@ class BanqueModel extends Model
     public function getOtherOrder($order, $asc_desc)
     {
         if ($asc_desc == 'ASC') {
-            $o = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque), p.prix FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom = ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.prix ASC", array($order), false);
+            $o = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque), p.prix FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom = ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.prix * a.iteration ASC", array($order), false);
 
             //$no = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque) FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom <> ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.nom  ",array($order),false);
 
         } elseif ($asc_desc == 'DESC') {
-            $o = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque), p.prix FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom = ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.prix DESC", array($order), false);
+            $o = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque), p.prix FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom = ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.prix * a.iteration DESC", array($order), false);
 
             //$no = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque) FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom <> ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.nom  ",array($order),false);   
         } else {

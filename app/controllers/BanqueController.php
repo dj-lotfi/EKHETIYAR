@@ -44,7 +44,7 @@ class BanqueController extends Controller
             return null ;
         }
         $o = array();
-        if ($order == 'alphabetic') {
+        if ($order == 'alphabetical') {
             $o = $this->alphabeticalOrder($asc_desc);
         } else {
             $o = $this->otherOrder($order,$asc_desc);
@@ -68,6 +68,10 @@ class BanqueController extends Controller
         $p = array();
         $min = array();
         $max = array();
+
+        array_push($p,);
+        array_push($max,);
+        array_push($min,);
 
         $f = array();
         $f = $this->model->getFilter($p,$min,$max);

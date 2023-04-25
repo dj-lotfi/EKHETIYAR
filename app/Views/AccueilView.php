@@ -94,6 +94,57 @@ class AccueilView extends view
 
     public function generateFilterField()
     {
+        /*
+        $p = new PrestationController('PrestationController', '');
+        $res = array();
+        $res = $p->getPrestationsNom();
+        $categorie = '';
+        $i=0;
+        ?>
+        <div class="filters"><?php
+
+        while ($i < count($res)) {
+            if ($res->controller->getCategorie() != $categorie) {   
+                $categorie = $res->controller->getCategorie();
+                ?>
+                <dl class="filters-subcategory">
+                    <dt><?php $categorie ?></dt>
+                    <dd class="criteres">
+                        <ul>
+                            <li>Doit avoir: </li>
+                            <li>
+                                <input type="checkbox" id="check1" value="shouldBePrestationName/SpecialIDFoundInDATABASE" checked>
+                                <label for="check1">Tous</label>
+                            </li>
+                            <?php
+                                while ($i < count($res) && $res->controller->getCategorie() == $categorie) {
+                                    ?>
+                                    
+                                    <li>
+                                    <input type="checkbox" id="check2">
+                                    <label for="check2">Compte en devise</label>
+                                    <div class="tarifs-interval">
+                                        <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
+                                        <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
+                                    </div>
+                                     </li>
+                                    <?php
+                                    $i++;
+                                }
+
+                            ?>
+                        </ul>
+                    </dd>
+                </dl>
+                <?php
+
+            }
+            
+        }
+        ?>
+        </div>
+        <?php
+        */
     ?>
         <div class="filters">
             <dl class="filters-subcategory">
@@ -132,7 +183,6 @@ class AccueilView extends view
                             </li>
                         </ul>
                     </ul>
-                </dd>
                 </dd>
             </dl>
             <dl class="filters-subcategory">
