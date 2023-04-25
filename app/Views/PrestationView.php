@@ -11,7 +11,7 @@ class PrestationView extends View
         while ($i < count($p)) {
             if ($p[$i]->getCategorie() != $categorie) {
                 $categorie = $p[$i]->getCategorie();
-                ?>
+?>
                 <dt class="category">
                     <?php echo $categorie; ?>
                 </dt>
@@ -19,7 +19,7 @@ class PrestationView extends View
                     <?php
                     while ($i < count($p)) {
                         if ($p[$i]->getCategorie() == $categorie) {
-                            ?>
+                    ?>
                             <ul class="prestation">
                                 <li class="prestation-name">
                                     <?php echo $p[$i]->getNom(); ?>
@@ -40,7 +40,7 @@ class PrestationView extends View
                                     <?php } ?>
                                 </li>
                             </ul>
-                            <?php
+                    <?php
                             $i++;
                         } else {
                             break;
@@ -49,7 +49,7 @@ class PrestationView extends View
                     ?>
 
                 </dd>
-                <?php
+<?php
             }
         }
     }

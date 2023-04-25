@@ -1,10 +1,8 @@
 <?php
 class BanqueView extends View
 {
-    function displayBank($bankId, $array)
+    function displayBank($bank)
     {
-
-        $bank = $array[$bankId];
 
         $nom = $bank->getNom();
         $abbr = $bank->getAbbr();
@@ -50,7 +48,7 @@ class BanqueView extends View
                     <div><a href="<?php echo $site_banque ?>" target="_blank" class="site-link"><?php echo $site_banque ?></a>
                     </div>
                     <div class="prestations-button vertically-centered">Prestations
-                        <div class="prestations-button__handler" data-id="<?= $bankId ?>">?</div>
+                        <div class="prestations-button__handler" data-id="<?= $bank->getId_banque() ?>">?</div>
                     </div>
                     <div class="map__container">
                         <iframe src="<?= $lienmap ?>" frameborder="0" class="hide-map-bar"></iframe>
@@ -79,14 +77,22 @@ class BanqueView extends View
     <?php
     }
 
-    public function displayAllBanques()
+    public function getFilter($p,$min,$max)
     {
-        $res = $this->controller->getAllBanques();
-        array_unshift($res, null);
-        for ($i = 1; $i < count($res); $i++) {
-
-            $this->displayBank($i, $res);
-        }
+          $this->controller->getFilter($p,$min,$max);
     }
-}
-?>
+   
+
+   public function displayAllBanques()
+   {
+    $o = $this->controller->getOrder("default",1);
+    
+    $res = $this->controller->getAllBanques();
+    
+    foreach ($o as $key => $value) {
+        $this->displayBank($res[$value]);
+    }
+
+   }
+
+}?>

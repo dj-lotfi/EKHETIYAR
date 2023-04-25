@@ -16,10 +16,17 @@ class adminView extends View
 
     <?php $this->end(); ?>
 
-    <?php $this->start('body'); ?>
+    <?php $this->start('body');
+    if ($_SESSION['loggedin'] == false) {
+      Router::redirect(Login);
+      exit;
+    }
+    $_SESSION["loggedin"] = false;
+    ?>
+
     <h>admin</h>
 
-    <?php $this->end();
+<?php $this->end();
 
     require_once(ROOT . DS . 'app' . DS . 'Views' . DS . 'layouts' . DS . $this->_layout . '.php'); //affiche la page layouts/default.php
 

@@ -62,10 +62,10 @@ class AccueilView extends view
 
     private function generateOrderChoices()
     {
-        $model = new PrestationModel();
+        $p = new PrestationController('PrestationController', '');
 
         $nom = array();
-        $nom = $model->getPrestationsNom();
+        $nom = $p->getPrestationsNom();
 
         echo '<option value="" selected>Defaut</option>';
         for ($i = 0; $i < count($nom); $i++) {
@@ -92,6 +92,126 @@ class AccueilView extends view
         </div>
     <?php }
 
+    public function generateFilterField()
+    {
+    ?>
+        <div class="filters">
+            <dl class="filters-subcategory">
+                <dt>Gestion et tenue de comtpe</dt>
+                <dd class="criteres">
+                    <ul>
+                        <li>Doit avoir: </li>
+                        <ul class="scrollable-checkboxes">
+                            <li>
+                                <input type="checkbox" id="check1" value="shouldBePrestationName/SpecialIDFoundInDATABASE" checked>
+                                <label for="check1">Tous</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="check2">
+                                <label for="check2">Compte en devise</label>
+                                <div class="tarifs-interval">
+                                    <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
+                                    <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
+                                </div>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="check3">
+                                <label for="check3">Compte d'épargne</label>
+                                <div class="tarifs-interval">
+                                    <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
+                                    <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
+                                </div>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="check4">
+                                <label for="check4">Compte professionnel</label>
+                                <div class="tarifs-interval">
+                                    <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
+                                    <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
+                                </div>
+                            </li>
+                        </ul>
+                    </ul>
+                </dd>
+                </dd>
+            </dl>
+            <dl class="filters-subcategory">
+                <dt>Opérations</dt>
+                <dd class="criteres">
+                    <ul>
+                        <li>Doit avoir: </li>
+                        <ul class="scrollable-checkboxes">
+                            <li>
+                                <input type="checkbox" id="check1" checked>
+                                <label for="check1">Tous</label>
+                                <div class="tarifs-interval">
+                                    <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
+                                    <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
+                                </div>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="check2">
+                                <label for="check2">Versement espèces tiers</label>
+                                <div class="tarifs-interval">
+                                    <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
+                                    <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
+                                </div>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="check3">
+                                <label for="check3">Virement devise reçue de l'étranger</label>
+                                <div class="tarifs-interval">
+                                    <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
+                                    <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
+                                </div>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="check4">
+                                <label for="check4">Émission Chèque de banque déplacée</label>
+                                <div class="tarifs-interval">
+                                    <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
+                                    <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
+                                </div>
+                            </li>
+                        </ul>
+                    </ul>
+                </dd>
+            </dl>
+            <dl class="filters-subcategory">
+                <dt>Monétique</dt>
+                <dd class="criteres">
+                    <ul>
+                        <li>Doit avoir: </li>
+                        <ul class="scrollable-checkboxes">
+                            <li>
+                                <input type="checkbox" id="check1" checked>
+                                <label for="check1">Tous</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="check2">
+                                <label for="check2">Commission de paiement sur TPE/Commerçant</label>
+                                <div class="tarifs-interval">
+                                    <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
+                                    <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
+                                </div>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="check3">
+                                <label for="check3">Changement de code PIN</label>
+                                <div class="tarifs-interval">
+                                    <input type="text" maxlength="6" class="low-price" placeholder="Min" name="low-price">
+                                    <input type="text" maxlength="6" class="high-price" placeholder="Max" name="high-price">
+                                </div>
+                            </li>
+                        </ul>
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+
+    <?php
+    }
+
     public function displayAllBanque()
     {
         $this->controller->displayAllBanques();
@@ -102,7 +222,7 @@ class AccueilView extends view
         $this->setSiteTitle('Accueil');
 
         $this->start('head');
-        ?>
+    ?>
 
         <meta charset="utf8mb4">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -119,138 +239,7 @@ class AccueilView extends view
             <?php $this->generateHeader(); ?>
             <?php $this->generateCarousel(); ?>
             <main class="content-layout">
-                <div class="filters">
-                    <dl class="filters-subcategory">
-                        <dt>Gestion et tenue de comtpe</dt>
-                        <dd class="criteres">
-                            <ul>
-                                <li>Doit avoir: </li>
-                                <ul class="scrollable-checkboxes">
-                                    <li>
-                                        <input type="checkbox" id="check1"
-                                            value="shouldBePrestationName/SpecialIDFoundInDATABASE" checked>
-                                        <label for="check1">Tous</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="check2">
-                                        <label for="check2">Compte en devise</label>
-                                        <div class="tarifs-interval">
-                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
-                                                name="low-price">
-                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
-                                                name="high-price">
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="check3">
-                                        <label for="check3">Compte d'épargne</label>
-                                        <div class="tarifs-interval">
-                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
-                                                name="low-price">
-                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
-                                                name="high-price">
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="check4">
-                                        <label for="check4">Compte professionnel</label>
-                                        <div class="tarifs-interval">
-                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
-                                                name="low-price">
-                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
-                                                name="high-price">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </ul>
-                        </dd>
-                        </dd>
-                    </dl>
-                    <dl class="filters-subcategory">
-                        <dt>Opérations</dt>
-                        <dd class="criteres">
-                            <ul>
-                                <li>Doit avoir: </li>
-                                <ul class="scrollable-checkboxes">
-                                    <li>
-                                        <input type="checkbox" id="check1" checked>
-                                        <label for="check1">Tous</label>
-                                        <div class="tarifs-interval">
-                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
-                                                name="low-price">
-                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
-                                                name="high-price">
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="check2">
-                                        <label for="check2">Versement espèces tiers</label>
-                                        <div class="tarifs-interval">
-                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
-                                                name="low-price">
-                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
-                                                name="high-price">
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="check3">
-                                        <label for="check3">Virement devise reçue de l'étranger</label>
-                                        <div class="tarifs-interval">
-                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
-                                                name="low-price">
-                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
-                                                name="high-price">
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="check4">
-                                        <label for="check4">Émission Chèque de banque déplacée</label>
-                                        <div class="tarifs-interval">
-                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
-                                                name="low-price">
-                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
-                                                name="high-price">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </ul>
-                        </dd>
-                    </dl>
-                    <dl class="filters-subcategory">
-                        <dt>Monétique</dt>
-                        <dd class="criteres">
-                            <ul>
-                                <li>Doit avoir: </li>
-                                <ul class="scrollable-checkboxes">
-                                    <li>
-                                        <input type="checkbox" id="check1" checked>
-                                        <label for="check1">Tous</label>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="check2">
-                                        <label for="check2">Commission de paiement sur TPE/Commerçant</label>
-                                        <div class="tarifs-interval">
-                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
-                                                name="low-price">
-                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
-                                                name="high-price">
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="check3">
-                                        <label for="check3">Changement de code PIN</label>
-                                        <div class="tarifs-interval">
-                                            <input type="text" maxlength="6" class="low-price" placeholder="Min"
-                                                name="low-price">
-                                            <input type="text" maxlength="6" class="high-price" placeholder="Max"
-                                                name="high-price">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </ul>
-                        </dd>
-                    </dl>
-                </div>
+                <?php $this->generateFilterField(); ?>
                 <div>
                     <?php $this->generateSortField(); ?>
                     <!-- 
@@ -261,10 +250,9 @@ class AccueilView extends view
             </main>
             <?php $this->generateFooter(); ?>
         </body>
-        <?php $this->end();
+<?php $this->end();
 
         require_once(ROOT . DS . 'app' . DS . 'Views' . DS . 'layouts' . DS . $this->_layout . '.php'); //affiche la page layouts/default.php
 
     }
-
 } ?>

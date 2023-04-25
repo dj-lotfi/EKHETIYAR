@@ -8,58 +8,17 @@ class BanqueModel extends Model
         parent::__construct($this->table);
     }
 
+    public function getId_banque()
+    {
+        return $this->id_banque;
+    }
+
     public function getBanque($bank)
     {
         $contact = $this->_db->query("select * from banques where id_banque=" . $bank);
         $res = $contact->getFirstResult();
         return $res;
-    } /*
-     public function addBanque($nom , $logo , $adr , $tel ,$fax ,$site ,$id=null){
-     if ($id == null ){
-     $banque = array(
-     "nom"=> $nom ,
-     "logo"=> $logo ,
-     "adresse_siege_social"=> $adr , 
-     "telephone" => $tel , 
-     "fax" => $fax , 
-     "site_banque" => $site
-     );   
-     }
-     else {
-     $banque = array(
-     "id_banque"=>$id ,
-     "nom"=> $nom ,
-     "logo"=> $logo ,
-     "adresse_siege_social"=> $adr , 
-     "telephone" => $tel , 
-     "fax" => $fax , 
-     "site_banque" => $site
-     );
-     }
-     return $this->insert($banque); 
-     }
-     public function addBanque($nom , $logo , $adr , $tel ,$fax ,$site ,$id=null){
-     if ($id == null){
-     $this->_db->query("INSERT INTO {$this->table} (nom ,logo , adresse_siege_social , telephone , fax , site ) 
-     VALUES ({$nom}, {$logo}, {$adr}, {$tel}, {$fax}, {$site} )");
-     }
-     else {
-     $this->_db->query("INSERT INTO {$this->table} ( id_banque ,nom ,logo , adresse_siege_social , telephone , fax , site ) 
-     VALUES ({$id}, {$nom}, {$logo}, {$adr}, {$tel}, {$fax}, {$site} )");
-     }
-     
-     }
-     public function getLogo($idBank){
-     $contact = $this->_db->query("select (`logo`) from banques where id_banque=" . $idBank);
-     $res = $contact->getFirstResult();
-     return $res;
-     }
-     public function getMap($idBank){
-     $contact = $this->_db->query("select (`lienmap`) from banques where id_banque=" . $idBank);
-     $res = $contact->getFirstResult();
-     return $res;
-     }
-     */
+    } 
 
     public function getNom()
     {
@@ -106,11 +65,55 @@ class BanqueModel extends Model
         return $this->find(array('order' => 'id_banque'));
     }
 
+    public function getAlphabeticalOrder($asc_desc)
+    {
+        if ($asc_desc == 'ASC') {
+            $int = 1;
+            $o = $this->_db->query("SELECT id_banque FROM `banques` b ORDER BY `nom` ASC");
+        } elseif ($asc_desc == 'DESC') {
+            $o = $this->_db->query("SELECT id_banque  FROM `banques` b ORDER BY `nom` DESC");
+        } else {
+            return null;
+        }
+        return $o->getResult();
+    }
 
+    public function getFilter($p, $min, $max)
+    {
+        $s = 'SELECT b.id_banque FROM `bank` b ';
+        for ($i = 0; $i < count($p); $i++) {
+            $s += 'INNER JOIN `pres` p' + $i + ' ON b.id_banque = p' + $i + '.id_banque AND p' + $i + '.nom = \"' + $p[$i] + '\" ';
+        }
+        $s += 'WHERE ';
+        for ($i = 0; $i < count($p) - 1; $i++) {
+            $s += '(p' + $i + '.price BETWEEN ' + $min[$i] + ' AND ' + $max[$i] + ') AND ';
+        }
+        $s += '(p' + count($p) - 1 + '.price BETWEEN ' + $min[count($p) - 1] + ' AND ' + $max[count($p) - 1] + ')';
 
+        $o = $this->_db->query($s);
+        return $o->getResult();
+    }
+
+    public function getOtherOrder($order, $asc_desc)
+    {
+        if ($asc_desc == 'ASC') {
+            $o = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque), p.prix FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom = ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.prix ASC", array($order), false);
+
+            //$no = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque) FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom <> ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.nom  ",array($order),false);
+
+        } elseif ($asc_desc == 'DESC') {
+            $o = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque), p.prix FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom = ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.prix DESC", array($order), false);
+
+            //$no = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque) FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom <> ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.nom  ",array($order),false);   
+        } else {
+            return null;
+        }
+
+        $a = array();
+        $a = $o->getResult();
+        //array_push($a,null);
+        //return array_merge($a,$no->getResult());
+        return $a;
+    }
 }
-
-
-
-
 ?>

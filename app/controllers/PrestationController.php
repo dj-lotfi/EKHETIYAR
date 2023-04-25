@@ -9,6 +9,11 @@ class PrestationController extends Controller {
         $this->view->setLayout('default');
     }
 
+    public function getPrestationsNom()
+    {
+        return $this->model->getPrestationsNom();
+    }
+
     public function indexaction() {
         $this->view->render();
     }
