@@ -1,7 +1,46 @@
 <?php
 class ComparatifView extends View
 {
-    public function render()
+    function displayComparaison($bank1, $bank2)
+    {
+        $mod = new PrestationModel();
+        $pres1 = $mod->getPrestations($bank1);
+        $pres2 = $mod->getPrestations($bank2);
+        ?>
+        <div>
+            <?php
+            $categorie = '';
+            for ($k = 0; $k < count(min($pres1, $pres2)); $k++) {
+                $cat1[$k] = $pres1[$k]->categorie;
+                $cat2[$k] = $pres2[$k]->categorie;
+
+            }
+            $categories = array_unique(array_merge($cat1, $cat2));
+
+            //var_dump($categories);
+    
+
+
+            $i = 0;
+            while ($i < count($categories)) {
+                if ($categories[$i] != $categorie) {
+                    $categorie = $categories[$i];
+                    ?>
+                    <p>
+                        <?php echo $categorie; ?>
+                    </p>
+
+                    <?php
+                }
+                $i++;
+            }
+            ?>
+        </div>
+        <?php
+
+    }
+
+    public function renderHead()
     {
         $this->setSiteTitle('Comparatif');
 
@@ -13,6 +52,10 @@ class ComparatifView extends View
         <link rel="stylesheet" href="css/comparatif.css?v=<?php echo time(); ?>">
 
         <?php $this->end();
+    }
+    public function renderBody()
+    {
+
 
         $this->start('body'); ?>
 
@@ -24,7 +67,7 @@ class ComparatifView extends View
                 ?>
                 <div class="container">
                     <h1>Select Banks</h1>
-                    <form method="post">
+                    <form id="choix" method="post">
                         <div class="select-container">
                             <div></div>
                             <div>
@@ -44,13 +87,43 @@ class ComparatifView extends View
                                 </select>
                             </div>
                             <input type="submit" value="Submit">
+
+
+                            <div id="popup" class="modal">
+
+                                <div class="modal-content2">
+                                    <span class="close" onclick="closePopup()">&times;</span>
+                                    <h1>Comparaison</h1>
+                                    <div id="loader" class="loader">
+                                        <div class="justify-content-center jimu-primary-loading"></div>
+                                    </div>
+                                    <div id="comparaison" class="comparaison"></div>
+                                </div>
+
+                            </div>
+                            <div id="error" class="modal">
+                                <div class="modal-content2">
+                                    <span class="close" onclick="closePopup()">&times;</span>
+                                    <h3>Selectionnez deux banques differents !!</h3>
+                                </div>
+                            </div>
+
+
                         </div>
                     </form>
                 </div>
 
             </main>
             <section></section>
-            <?php $this->generateFooter(); ?>
+            <?php
+    }
+
+
+
+    public function renderFooter()
+    {
+        $this->generateFooter(); ?>
+            <script src="js\comparaison.js"></script>
         </body>
 
         <?php $this->end();

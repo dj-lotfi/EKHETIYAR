@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
 const scrollableCheckboxes = document.querySelectorAll('.scrollable-checkboxes');
 
 // Loop through each UL element
-scrollableCheckboxes.forEach(function(checkboxList) {
+scrollableCheckboxes.forEach(function (checkboxList) {
   // Get all the checkboxes in this UL element
   const checkboxes = checkboxList.querySelectorAll('input[type="checkbox"]');
 
@@ -107,11 +107,11 @@ scrollableCheckboxes.forEach(function(checkboxList) {
   const firstCheckbox = checkboxList.querySelector('input[type="checkbox"]:first-child');
 
   // Add an event listener to each checkbox
-  checkboxes.forEach(function(checkbox) {
-    checkbox.addEventListener('change', function() {
+  checkboxes.forEach(function (checkbox) {
+    checkbox.addEventListener('change', function () {
       if (this.checked) {
         if (this === firstCheckbox) {
-          checkboxes.forEach(function(otherCheckbox) {
+          checkboxes.forEach(function (otherCheckbox) {
             if (otherCheckbox !== checkbox) {
               otherCheckbox.checked = false;
             }
@@ -126,12 +126,13 @@ scrollableCheckboxes.forEach(function(checkboxList) {
 
 const minMaxContainers = document.querySelectorAll('.temp');
 
-minMaxContainers.forEach(function(minMaxContainer) {
+minMaxContainers.forEach(function (minMaxContainer) {
   const inputedText = minMaxContainer.querySelectorAll('input[type="text"]');
-  
-  inputedText.forEach(function(text) {
-    text.addEventListener('input', function() {
+
+  inputedText.forEach(function (text) {
+    text.addEventListener('input', function () {
       this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');
     });
   });
 });
+
