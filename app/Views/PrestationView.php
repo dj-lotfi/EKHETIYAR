@@ -26,9 +26,14 @@ class PrestationView extends View
                                 </li>
                                 <li class="prestation-value">
                                     <p>
-                                        <?php echo (($p[$i]->getPrix() == null)||($p[$i]->getPrix() == '?')) ? 'NC' : $p[$i]->getPrix(); ?>
+                                        <?php if (($p[$i]->getPrix() == null) || ($p[$i]->getPrix() == '?'))
+                                            echo 'NC';
+                                        elseif ($p[$i]->getPrix() == 0)
+                                            echo 'gratuit';
+                                        else
+                                            echo $p[$i]->getPrix(); ?>
                                     </p>
-                                    <?php if (($p[$i]->getPrix() != null)&&($p[$i]->getPrix() != '?')&&($p[$i]->getPrix() != '')) { ?>
+                                    <?php if (($p[$i]->getPrix() != null) && ($p[$i]->getPrix() != '?') && ($p[$i]->getPrix() != '')) { ?>
                                         <p>
                                             <?php echo $p[$i]->getDateValeur(); ?>
                                         </p>

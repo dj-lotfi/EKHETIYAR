@@ -1,3 +1,9 @@
+@property --gradient-angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
 .center {
     display: flex;
     justify-content: center;
@@ -6,13 +12,36 @@
 }
 
 .frame {
-    box-shadow: 0 0 10px 5px var(--main-500);
-    border: 2px solid var(--main-600);
+    position: relative;
     border-radius: 10px;
     padding-bottom: 35px;
     padding-left: 20px;
     padding-right: 20px;
     background: var(--neutral-500);
+}
+
+.frame::before,.frame::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -2px;
+    background:conic-gradient(from var(--gradient-angle),
+    var(--main-300),
+    var(--main-600) 2.5% 47.5%,
+    var(--main-300),
+    var(--main-600) 52.5% 97.5%,
+    var(--main-300));
+    border-radius: inherit;
+    animation: rotation 50s linear infinite;
+}
+
+.frame::after{
+    filter: blur(1rem);
+}
+
+@keyframes rotation {
+    0% {--gradient-angle: 0deg;}
+    100% {--gradient-angle: 360deg;}
 }
 
 .password-input {

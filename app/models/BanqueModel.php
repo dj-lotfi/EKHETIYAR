@@ -66,20 +66,15 @@ class BanqueModel extends Model
         return $this->nom;
     }
 
+    public function getAbbr()
+    {
+        return $this->abbreviation;
+    }
+
     public function getLogo()
     {
         return $this->logo;
     }
-
-public function getNom()
-{
-    return $this->nom;
-}
-
-public function getAbbr()
-{
-    return $this->abbreviation;
-}
 
     public function getAdresse_siege_social()
     {
@@ -99,6 +94,11 @@ public function getAbbr()
     public function getSite_banque()
     {
         return $this->site_banque;
+    }
+
+    public function getLienmap()
+    {
+        return $this->lienmap;
     }
 
     public function getAllBanques()

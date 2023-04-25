@@ -96,7 +96,7 @@ input[type="submit"]:hover {
     text-decoration: none;
     cursor: pointer;
 }
-
+/*
 .loading-screen {
     display: none;
     position: relative;
@@ -213,7 +213,7 @@ input[type="submit"]:hover {
         box-shadow: 0 -8px #076fe5;
         height: 40px;
     }
-}
+}*/
 
 .comparaison {
     position: relative;

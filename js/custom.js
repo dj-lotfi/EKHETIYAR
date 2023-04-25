@@ -124,14 +124,14 @@ scrollableCheckboxes.forEach(function (checkboxList) {
   });
 });
 
-const minMaxContainers = document.querySelectorAll('.temp');
+const minMaxContainers = document.querySelectorAll('.tarifs-interval');
 
-minMaxContainers.forEach(function (minMaxContainer) {
+minMaxContainers.forEach(function(minMaxContainer) {
   const inputedText = minMaxContainer.querySelectorAll('input[type="text"]');
-
-  inputedText.forEach(function (text) {
-    text.addEventListener('input', function () {
-      this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');
+  
+  inputedText.forEach(function(text) {
+    text.addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
     });
   });
 });
