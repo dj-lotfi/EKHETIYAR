@@ -170,6 +170,7 @@ textarea {
     font-size: 100%;
     vertical-align: middle;
 }
+
 /*
 .scrollable-checkboxes {
     height: 5rem;
@@ -357,7 +358,7 @@ select option {
 
 .bank-card:hover {
     background-image: linear-gradient(30deg, var(--main-500), var(--main-500), var(--main-300), var(--main-500), var(--main-500));
-    background-size: 500%;
+    background-size: 1000%;
     animation: bg-animation 750ms;
     transform: translate(-0.5rem, -0.5rem);
     box-shadow: var(--fs-200) var(--fs-200) var(--main-600);
@@ -386,31 +387,53 @@ select option {
 
 
 .title {
+    display: none;
     font-family: 'Rubik';
     font-size: var(--fs-500);
     font-weight: 800;
     color: var(--main-200);
-
-    /*height: calc( 2.45*var(--fs-500));
-    overflow: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    scroll-behavior: smooth;
-    scroll-snap-align: start;*/
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera
-.title::-webkit-scrollbar {
-    display: none;
-}*/
+.mobile.title {
+    display: block;
+}
 
-.bank-card:hover .title {
+.mobile.sub-title {
+    font-family: 'Rubik';
+    color: var(--main-200);
+    font-size: var(--fs-300);
+    font-weight: 700;
+    margin: 1.5% 0 3% 0;
+}
+
+.bank-card:hover .title,
+.bank-card:hover .mobile.sub-title {
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
     background-image: linear-gradient(30deg, var(--main-200), var(--main-200), var(--main-400), var(--main-200), var(--main-200));
-    background-size: 500%;
+    background-size: 1000%;
     animation: bg-animation 750ms;
+}
+
+@media screen and (min-width: 900px) and (orientation: landscape) {
+    .title {
+        display: block;
+    }
+
+    .mobile.title,
+    .mobile.sub-title {
+        display: none;
+    }
+
+    .bank-card:hover {
+        background-size: 750%;
+    }
+
+    .bank-card:hover .title,
+    .bank-card:hover .mobile.sub-title {
+        background-size: 750%;
+    }
 }
 
 @keyframes bg-animation {
@@ -552,7 +575,7 @@ select option {
     /* you can also use 'grid' or just 'flex'*/
     justify-content: center;
     align-items: center;
-    border:2px solid var(--main-900);
+    border: 2px solid var(--main-900);
     padding: calc(1ch - 2px);
     border-radius: 100vw;
     transition: all 100ms ease-in;
@@ -562,6 +585,74 @@ select option {
     border: 2px solid var(--main-300);
     color: var(--main-300);
     transition: all 250ms ease-in;
+}
+
+.prestations-content {
+    margin-left: 2.5%;
+}
+
+.category {
+    color: var(--main-800);
+    text-transform: uppercase;
+    font-family: var(--ff-title);
+    font-size: calc(var(--fs-400) + 2.5px);
+    font-weight: 700;
+    margin-top: 1rem;
+}
+
+.category:first-child {
+    margin-top: 4rem;
+}
+
+.prestations {
+    margin-left: 2.75%;
+}
+
+.prestation {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 0.4rem;
+    font-family: var(--ff-general);
+    font-size: var(--fs-400);
+    display: flex;
+    flex-wrap: wrap;
+    transition: transform 100ms linear;
+}
+
+.prestation:first-child {
+    margin-top: 0.5rem;
+}
+
+
+.prestation:hover,
+.prestation:focus {
+    transform: scale(1.1) translateX(5vw);
+    transition: transform 200ms ease-in-out;
+}
+
+.prestation-name {
+    color: var(--main-950);
+}
+
+.prestation-name::after {
+    content: " :";
+    font-weight: bold;
+    margin-right: 0.6rem;
+    color: var(--main-800);
+}
+
+.prestation-value {
+    display: flex;
+    text-transform: uppercase;
+    color: var(--main-500);
+}
+
+.prestation-value p {
+    margin: 0;
+}
+
+.prestation-value p:not(:first-child) {
+    margin-left: 0.6rem;
 }
 
 .map__container {
@@ -636,14 +727,13 @@ select option {
     box-shadow: 0px 0px 20px #888;
     width: 80%;
     /* Could be more or less, depending on screen size */
-    text-align: center;
     border-radius: 20px;
     z-index: 1001;
 }
 
 /* Close Button */
 .close {
-    color: #aaaaaa;
+    color: var(--neutral-300);
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -654,7 +744,7 @@ select option {
 
 .close:hover,
 .close:focus {
-    color: #ff0000;
+    color: var(--red-500);
     text-decoration: none;
     cursor: pointer;
 }

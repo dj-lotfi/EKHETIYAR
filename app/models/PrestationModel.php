@@ -54,7 +54,7 @@ class PrestationModel extends Model
 
     public function getPrestations($id)
     {
-        $contact = $this->_db->query("SELECT * FROM `prestations` p INNER JOIN `banque_prestation` bp ON p.id_prestation = bp.id_prestation  WHERE id_banque=" . $id . " ORDER BY categorie",[],get_class($this));
+        $contact = $this->_db->query("SELECT * FROM `prestations` p INNER JOIN `banque_prestation` bp ON p.id_prestation = bp.id_prestation  WHERE id_banque=" . $id . " ORDER BY categorie , nom",[],get_class($this));
         return $contact->getResult();
     }
 

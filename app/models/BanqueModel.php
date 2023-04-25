@@ -71,10 +71,15 @@ class BanqueModel extends Model
         return $this->logo;
     }
 
-    public function getLienmap()
-    {
-        return $this->lienmap;
-    }
+public function getNom()
+{
+    return $this->nom;
+}
+
+public function getAbbr()
+{
+    return $this->abbreviation;
+}
 
     public function getAdresse_siege_social()
     {

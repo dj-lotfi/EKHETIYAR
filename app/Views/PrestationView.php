@@ -1,51 +1,55 @@
 <?php
 
-    class PrestationView extends View 
+class PrestationView extends View
+{
+
+    public function displayPrestation($id)
     {
-
-        public function displayPrestation($id)
-        {
-            ?>
-            <div id="<?php echo 'table' . $id; ?>">
-                <?php
-                $p = $this->controller->getPrestationsById($id);
-                $categorie = '';
-                $i = 0;
-                while ($i < count($p)) {
-                    if ($p[$i]->getCategorie() != $categorie) {
-                        $categorie = $p[$i]->getCategorie();
-                        ?>
-                            <p><?php echo $categorie ;?></p>
-                            <table>
-                                <tbody>
-                                    <?php
-                                        while ($i < count($p) ) {
-                                            if ($p[$i]->getCategorie() == $categorie) {
-                                                ?>
-                                                    <tr>
-                                                        <td align="left"><?php echo $p[$i]->getNom() ; ?></td>
-                                                        <td align="center"><?php echo ($p[$i]->getPrix() == null) ? '?' : $p[$i]->getPrix() ; ?></td>
-                                                        <td align="right"><?php echo ($p[$i]->getDateValeur() == null) ? '?' : $p[$i]->getDateValeur() ; ?></td>
-                                                    </tr>
-                                                <?php
-                                                $i++;
-                                            } else {
-                                                break;
-                                            }
-                                        }
-                                    ?>
-
-                                </tbody>
-                            </table>
-                        <?php
-                    }
-                }
+        $p = $this->controller->getPrestationsById($id);
+        $categorie = '';
+        $i = 0;
+        while ($i < count($p)) {
+            if ($p[$i]->getCategorie() != $categorie) {
+                $categorie = $p[$i]->getCategorie();
                 ?>
-            </div>
-            <?php
+                <dt class="category">
+                    <?php echo $categorie; ?>
+                </dt>
+                <dd class="prestations">
+                    <?php
+                    while ($i < count($p)) {
+                        if ($p[$i]->getCategorie() == $categorie) {
+                            ?>
+                            <ul class="prestation">
+                                <li class="prestation-name">
+                                    <?php echo $p[$i]->getNom(); ?>
+                                </li>
+                                <li class="prestation-value">
+                                    <p>
+                                        <?php echo (($p[$i]->getPrix() == null)||($p[$i]->getPrix() == '?')) ? 'NC' : $p[$i]->getPrix(); ?>
+                                    </p>
+                                    <?php if (($p[$i]->getPrix() != null)&&($p[$i]->getPrix() != '?')&&($p[$i]->getPrix() != '')) { ?>
+                                        <p>
+                                            <?php echo $p[$i]->getDateValeur(); ?>
+                                        </p>
+                                    <?php } ?>
+                                </li>
+                            </ul>
+                            <?php
+                            $i++;
+                        } else {
+                            break;
+                        }
+                    }
+                    ?>
+
+                </dd>
+                <?php
+            }
         }
     }
-    
+}
+
 
 
 
