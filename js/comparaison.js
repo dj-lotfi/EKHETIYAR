@@ -1,15 +1,29 @@
 var body = document.body;
 var cached = 0;
 
+function afficheCategorie(checkbox){
+    if (checkbox.checked) {
+        checkbox.nextElementSibling.style.height = '400px';
+        checkbox.nextElementSibling.style.overflow = 'hidden';
+    }
+    else {
+        checkbox.nextElementSibling.style.height = '0px';
+    }
+} 
+
+
+
+
 document.getElementById("choix").addEventListener("submit", function (event) {
-    event.preventDefault(); // prevent form submission
+    event.preventDefault();
     openPopup(); // show the pop-up
-    cached = 1;
+    //document.getElementById("choix").reset();
     return false;
 });
 
 
 function openPopup() {
+    console.log('checked');
     // Get the values of the form fields
     var bank1 = document.getElementById("bank1").value;
     var bank2 = document.getElementById("bank2").value;
@@ -27,8 +41,7 @@ function openPopup() {
         var popup = document.getElementById("popup");
         var content = document.getElementById("comparaison");
         popup.style.display = "block";
-        body.style.overflowY = 'hidden';
-
+        content.style.display = "none";
         loadingScreen.style.display = "block";
 
         // Load the PHP script into the popup
@@ -36,25 +49,33 @@ function openPopup() {
         // Construct the URL for the PHP function with the form values as parameters
         var url = "Comparatif/displayComparaison/" + bank1 + "/" + bank2;
         xhttp.open("GET", url, true);
+        xhttp.setRequestHeader("Cache-Control", "no-cache");
+        xhttp.setRequestHeader("Pragma", "no-cache");
+        xhttp.setRequestHeader("Expires", "0");
         xhttp.onload = function () {
             if (this.status == 200) {
                 loadingScreen.style.display = "none";
-
-                content.innerHTML = this.responseText;
+                content.style.display = "block";
                 popup.style.display = "block";
-                body.style.overflowY = 'hidden';
+                content.innerHTML = this.responseText;
 
             }
         };
 
         xhttp.send();
+        //document.getElementById("choix").reset();
+        document.getElementById('SubmitBtn').removeAttribute("disabled");
 
     }
-}
+};
 
 function closePopup() {
     var popup = document.getElementById("popup");
     var err = document.getElementById("error");
     err.style.display = "none";
     popup.style.display = "none";
-}
+};
+
+
+
+
