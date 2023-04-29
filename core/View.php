@@ -77,7 +77,7 @@ class view {
     function generateHeader()
     { ?>
         <header>
-            <a href="<?php echo PROOT . DS ;?>"><img class="logo" src="<?= PROOT ?>/img/Site_Logo.svg" alt="Logo du site"></a>
+            <a href="<?php echo PROOT . DS ;?>"><img aria-hidden="true" class="logo" src="<?= PROOT ?>/img/Site_Logo.svg" alt="Logo du site"></a>
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
             <nav class="navbar">
                 <ul>

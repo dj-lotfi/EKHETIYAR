@@ -280,6 +280,7 @@ select option {
     position: relative;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .sort-order-toggle-label>span {

@@ -1,0 +1,229 @@
+@media screen and (width < 900px) {
+
+    .no-content-available {
+        display: block;
+    }
+
+}
+
+
+
+@media screen and (orientation:landscape) {
+
+    .no-content-available {
+        display: none;
+    }
+
+    .admin-layout {
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+        column-gap: 1rem;
+
+        height: 100dvh;
+    }
+
+    .nav {
+        background-color: var(--neutral-500);
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav-input {
+        display: none;
+    }
+
+    .nav-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    .nav-label>p {
+        position: relative;
+        display: block;
+
+        font-family: var(--ff-title);
+        font-size: var(--fs-400);
+        font-weight: 700;
+        color: var(--neutral-800);
+    }
+
+    .nav-label>p::after {
+        content: '';
+        position: absolute;
+        display: block;
+        background: var(--neutral-800);
+        height: 5px;
+        width: 100%;
+        border-radius: 5px;
+        content: '';
+        bottom: -1rem;
+    }
+
+    ul {
+        all: unset;
+        display: relative;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0 auto;
+
+        width: 100%;
+
+        overflow: auto;
+        /* Hide scrollbar for IE, Edge and Firefox*/
+        -ms-overflow-style: none;
+        /* IE and Edg*/
+        scrollbar-width: none;
+        /* Firefox*/
+        scroll-behavior: smooth;
+        scroll-snap-type: y mandatory;
+    }
+
+    .nav-label ul {
+        height: 100px;
+    }
+
+    .nav-label:first-of-type ul {
+        height: 450px;
+    }
+
+    .nav-label ul::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .nav-item {
+        background-image: linear-gradient(to top, var(--neutral-800), var(--neutral-600) 48% 52%, var(--neutral-800));
+        color: var(--neutral-900);
+        font-family: var(--ff-title);
+        font-size: var(--fs-300);
+        font-weight: 500;
+        text-align: left;
+        margin: 0.2rem auto;
+        border-radius: calc(var(--fs-300) / 4);
+        box-shadow: 0 0 2px var(--neutral-800);
+
+        width: 95%;
+        scroll-snap-align: start;
+    }
+
+    .nav-item p {
+        margin: calc(var(--fs-300) / 2) 0;
+        padding: 0.8rem 2px;
+    }
+
+    .modifying-window {
+        overflow: auto;
+        /* Hide scrollbar for IE, Edge and Firefox*/
+        -ms-overflow-style: none;
+        /* IE and Edg*/
+        scrollbar-width: none;
+        /* Firefox*/
+        scroll-behavior: smooth;
+        scroll-snap-type: y mandatory;
+    }
+
+    .modifying-window::-webkit-scrollbar {
+        display: none;
+    }
+
+    .bank-info {
+        display: grid;
+        grid-template-rows: auto auto auto;
+        grid-template-columns: 4fr 2fr;
+        margin: 1.5rem 0.5rem;
+
+        background: var(--neutral-500);
+        border-radius: 20px;
+    }
+
+    .general {
+        grid-column: 1 / span 2;
+    }
+
+    .contacts {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .image-preview {
+        background: var(--neutral-700);
+        margin: 1rem 1rem 1rem 0;
+        border-radius: 1rem;
+    }
+
+    .map {
+        grid-column: 1 / span 2;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        margin: 0;
+        font-size: 100%;
+        vertical-align: middle;
+    }
+
+    input[type=text] {
+        background-color: #fff;
+        height: 31px;
+        padding: 3px 7px;
+        line-height: normal;
+        margin: 1rem;
+        border: 1px solid #888C8C;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(15, 17, 17, .15) inset;
+        outline: 0;
+    }
+
+    input[type=file] {
+        height: 31px;
+        padding: 3px 7px;
+        line-height: normal;
+        margin: 1rem;
+    }
+
+    .bank-name {
+        width: 70%;
+    }
+
+    .abbreviation {
+        width: calc(30% - 4.4rem);
+    }
+
+    .seige-social {
+        width: calc(100% - 2rem);
+    }
+
+
+    .tel {}
+
+    .fax {}
+
+    .logo {}
+
+    .map-link {
+        width: calc(100% - 2rem);
+    }
+
+    .map__container {
+        object-fit: cover;
+        overflow: hidden;
+        border-width: 4px;
+        border-style: solid;
+        margin: 1rem;
+        border-image: linear-gradient(var(--neutral-700) 0%, transparent 15% 85%, var(--neutral-700) 100%) 1;
+    }
+
+    .hide-map-bar {
+        margin-top: -68px;
+        width: 100%;
+        height: 50vh;
+    }
+}
