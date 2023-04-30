@@ -110,6 +110,7 @@
 
         width: 95%;
         scroll-snap-align: start;
+        cursor: pointer;
     }
 
     .nav-item p {
@@ -225,5 +226,47 @@
         margin-top: -68px;
         width: 100%;
         height: 50vh;
+    }
+
+    .show-at-first {
+        display: block;
+        overflow: auto;
+        /* Hide scrollbar for IE, Edge and Firefox*/
+        -ms-overflow-style: none;
+        /* IE and Edg*/
+        scrollbar-width: none;
+        /* Firefox*/
+        scroll-behavior: smooth;
+        scroll-snap-type: y mandatory;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content2 {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        width: 80%;
+        max-width: 1000px;
+    }
+
+    .close {
+        color: #000;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
     }
 }

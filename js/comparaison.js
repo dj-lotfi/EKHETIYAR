@@ -19,6 +19,8 @@ document.getElementById("choix").addEventListener("submit", function (event) {
     openPopup(); // show the pop-up
     //document.getElementById("choix").reset();
     return false;
+    
+
 });
 
 
@@ -49,9 +51,6 @@ function openPopup() {
         // Construct the URL for the PHP function with the form values as parameters
         var url = "Comparatif/displayComparaison/" + bank1 + "/" + bank2;
         xhttp.open("GET", url, true);
-        xhttp.setRequestHeader("Cache-Control", "no-cache");
-        xhttp.setRequestHeader("Pragma", "no-cache");
-        xhttp.setRequestHeader("Expires", "0");
         xhttp.onload = function () {
             if (this.status == 200) {
                 loadingScreen.style.display = "none";
