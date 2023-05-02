@@ -1,33 +1,6 @@
 <?php
 class AdminView extends View
 {
-
-  public function displayBankButtons()
-  {
-    $bdd = new BanqueModel();
-    $res = $bdd->getAllBanques();
-    //var_dump($res); ?>
-    <label for="banques" class="nav-label">
-      <p>Banques</p>
-      <ul>
-        <?php
-
-        for ($i = 0; $i < count($res); $i++) {
-          ?>
-          <li class="nav-item" id="<?= $i ?>" onclick="ModifBanque(this.id)">
-            <p>
-              <?php echo $res[$i]->getAbbr(); ?>
-            </p>
-          </li>
-          <?php
-        }
-        ?>
-      </ul>
-    </label>
-    <?php
-  }
-
-  
   public function render()
   {
     $this->setSiteTitle('Admin');
@@ -59,8 +32,17 @@ class AdminView extends View
         <input class="nav-input" type="radio" id="banques" checked>
         <input class="nav-input" type="radio" id="prestations_globales">
         <input class="nav-input" type="radio" id="a_props">
-
-        <?php $this->displayBankButtons(); ?>
+        <label for="banques" class="nav-label">
+          <p>Banques</p>
+          <ul>
+            <li class="nav-item" id="add_bnq" onclick="AjoutBanque()" style="color: Blue;">
+              <p>
+                Ajouter
+              </p>
+            </li>
+            <?php $this->displayBankButtons(); ?>
+          </ul>
+        </label>
 
         <label for="prestations_globales" class="nav-label">
           <p>Prestations Globales</p>
@@ -84,25 +66,19 @@ class AdminView extends View
       <div class="show-at-first">
         <h1>Welcome to the admin page , please select an option on the left to proceed</h1>
       </div>
+      <div id="warning" class="modal">
+        <div class="modal-content2">
+          <span class="close" onclick="closeWarning()">&times;</span>
+          <h3 class="supp-warning">Vous etes sur de supprimer cette banque ?</h3>
+          <button class="confirm" id="confirm">Confirmer</button>
+          <button class="annul" id="annul" onclick="closeWarning()">Annuler</button>
+        </div>
+      </div>
       <div class="modifying-window">
-        <div class="bank-modif-content">
-          <div id="loader" class="loader">
-            <div class="justify-content-center jimu-primary-loading"></div>
-          </div>
-          <div class="modification" id="modification"></div>
+        <div id="loader" class="loader">
+          <div class="justify-content-center jimu-primary-loading"></div>
         </div>
-        <button id="up">UPLOAD IMADE</button>
-        <div id="upload-image" class="modal">
-          <div class="modal-content2">
-            <span class="close" onclick="closeUpload()">&times;</span>
-            <form method="post" enctype="multipart/form-data" id="upload-logo">
-              <label for="image">Select an image to upload:</label>
-              <input type="file" name="image" id="image">
-              <input type="submit" value="Upload Image" name="submit">
-            </form>
-            <div id="upload-feedback"></div>
-          </div>
-        </div>
+        <div class="modification" id="modification"></div>
         <!--
         <div class="bank-info">
           <div class="general">
@@ -135,6 +111,174 @@ class AdminView extends View
 
 
   }
+
+  public function ajBanque()
+  {
+    ?>
+    <div id="addbanquePop" class="modifying-window">
+      <form id="addbanque" method="post" onsubmit="ajoutSubmitted();event.preventDefault();">
+        <div class="general">
+          <input class="bank-name" type="text" name="nom" placeholder="Nom">
+          <input class="abbreviation" type="text" name="abbreviation" placeholder="Abbreviation">
+          <input class="seige-social" type="text" name="siege_social" placeholder="Adresse siege social">
+        </div>
+        <div class="contacts">
+          <input class="tel" type="text" name="telephone" placeholder="Phone number">
+          <input class="fax" type="text" name="fax" placeholder="Fax">
+          <input type="text" name="site" placeholder="Site officiel">
+          <input class="logo" type="text" name="logo">
+        </div>
+        <input class="map-link" type="text" name="map">
+        <button name="submit" type="submit" class="button">Ajouter</button>
+      </form>
+    </div>
+    <?php
+  }
+
+  public function displayBankButtons()
+  {
+    $bdd = new BanqueModel();
+    $res = $bdd->getAllBanques();
+    //var_dump($res); ?>
+
+    <?php
+
+    for ($i = 0; $i < count($res); $i++) {
+      ?>
+      <li class="nav-item" id="<?= $res[$i]->getId_banque() ?>" onclick="ModifBanque(this.id)">
+        <p>
+          <?php echo $res[$i]->getAbbr(); ?>
+        </p>
+        <button class="DeleteBtn" type="button" id="<?= $i ?>" onclick="SupprimBanque(this.parentNode.id)">
+          <img src="img/delete-icon.png" alt="-">
+        </button>
+      </li>
+      <?php
+    }
+    ?>
+
+    <?php
+  }
+
+  public function Affichagebanque($id)
+  {
+    $banque = new BanqueModel();
+    $var = $banque->getBanque($id);
+    ?>
+    <form id="update" method="post" onsubmit="MAJBanque();event.preventDefault();">
+      <div class="general">
+        <input class="bank-name" type="text" name="nom" value="<?php echo $var->nom; ?>" placeholder="Nom">
+        <input class="abbreviation" type="text" name="abbreviation" value="<?php echo $var->abbreviation; ?>"
+          placeholder="Abbreviation">
+        <input class="seige-social" type="text" name="siege_social" value="<?php echo $var->adresse_siege_social; ?>"
+          placeholder="Adresse siege social">
+      </div>
+      <div class="contacts">
+        <input class="tel" type="text" name="telephone" value="<?php echo $var->telephone; ?>" placeholder="Phone number">
+        <input class="fax" type="text" name="fax" value="<?php echo $var->fax; ?>" placeholder="Fax">
+        <input type="text" name="site" value="<?php echo $var->site_banque; ?>" placeholder="Site officiel">
+      </div>
+      <div class="image-preview">
+        <img src="app/logos/<?php echo $var->logo ?>" alt="<?php echo $var->logo ?>" class="img">
+      </div>
+      <button id="up" class="uploadlogo" type="button" onclick="uploadDisplay()">UPLOAD IMADE</button>
+      <div class="map">
+        <input class="map-link" type="text" name="map" value="<?php echo $var->lienmap; ?>">
+        <div class="map__container">
+          <iframe class="hide-map-bar" src="<?php echo $var->lienmap ?>" frameborder="0">
+          </iframe>
+        </div>
+      </div>
+      <input type="text" name="id" value="<?php echo $var->id_banque ?>" hidden>
+      <button name="submit" type="submit" class="button">sauvegarder</button>
+    </form>
+    <div id="upload-image" class="modal">
+      <div class="modal-content2">
+        <span class="close" onclick="closeUpload()">&times;</span>
+        <form method="post" enctype="multipart/form-data" id="upload-logo" onsubmit="event.preventDefault();Upload();"
+          class="upload-form">
+          <label for="image" class="upload-label">
+            <span class="upload-label-text">Select an image to upload:</span>
+            <span class="upload-label-button">Choose File</span>
+          </label>
+          <input type="file" name="image" id="image" class="upload-input">
+          <button id="upLOGO" type="submit" class="upload-button">Upload Image</button>
+        </form>
+        <div id="upload-feedback"></div>
+      </div>
+    </div>
+    <?php $pres = new PrestationModel();
+    $pre = $pres->getPrestations($id);
+    ?>
+    <div class="background-table">
+      <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Categorie</th>
+              <th>Prix (DAZ)</th>
+              <th>Date_valeur</th>
+              <th>Description</th>
+              <th>Update</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+            <?php
+            for ($i = 0; $i < sizeof($pre); $i++) {
+              ?>
+              <tr>
+                <td>
+                  <?php echo $pre[$i]->getNom() ?>
+                </td>
+                <td>
+                  <?php echo $pre[$i]->getCategorie() ?>
+                </td>
+                <td>
+                  <?php echo $pre[$i]->getPrix() ?>
+                </td>
+                <td>
+                  <?php echo $pre[$i]->getDateValeur() ?>
+                </td>
+                <td>
+                  <?php echo $pre[$i]->getDescription() ?>
+                </td>
+                <td data="<?php echo $pre[$i]->getId() ?>" id="<?= $pre[$i]->getId() ?>" class="update"
+                  onclick="affichage(this.id)">
+                  <h3> <b> update </b> </h3>
+                </td>
+              </tr>
+            <?php }
+            ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </div>
+    <div id="popup" class="modal">
+      <div class="modal-content2">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <form id="updatepres" method="post" enctype="multipart/form-data">
+          <h4>Nom : </h4><input class="bank-name" type="text" id="nompres" placeholder="Nom" value="" required><br><br>
+          <h4>Prix : </h4><input class="abbreviation" type="text" id="prixpres" value="" placeholder="Prix"><br><br>
+          <h4>date de valeur : </h4><input class="abbreviation" type="text" id="datevaleur" value=""
+            placeholder="Prix"><br><br>
+          <h4>Categorie : </h4><input class="seige-social" type="text" id="categoriepres" value=""
+            placeholder="Categorie"><br><br>
+          <h4>Description : </h4><input class="bank-name" type="text" id="description" value=""
+            placeholder="Description"><br><br>
+          <input type="submit" name="submit" class="button" value="Update">
+        </form>
+        <div id="error">
+
+        </div>
+      </div>
+    </div>
+  <?php }
 }
 
 ?>

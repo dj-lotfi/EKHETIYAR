@@ -18,7 +18,7 @@ class BanqueModel extends Model
         $contact = $this->_db->query("select * from banques where id_banque=" . $bank);
         $res = $contact->getFirstResult();
         return $res;
-    } 
+    }
 
     public function getNom()
     {
@@ -114,6 +114,20 @@ class BanqueModel extends Model
         //array_push($a,null);
         //return array_merge($a,$no->getResult());
         return $a;
+    }
+
+    function generateid()
+    {
+        $i = 10;
+        $continue = true;
+        while ($continue) {
+            $tab = $this->_db->query("SELECT id_banque FROM banques WHERE id_banque={$i}");
+            if (sizeof($tab) == 0)
+                $continue = false;
+            else
+                $i++;
+        }
+        return $i;
     }
 }
 ?>

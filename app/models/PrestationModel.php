@@ -44,8 +44,8 @@ class PrestationModel extends Model
         return $contact->getFirstResult();
     }
 */
-/*
-    public function getPrestations($IdBank)
+
+    /*public function getPrestations($IdBank)
     {
         // Banque_Prestation->id_banque->id_prestation
         $contact = $this->_db->query("SELECT * FROM banque_prestation WHERE id_banque=" . $IdBank);
@@ -55,21 +55,33 @@ class PrestationModel extends Model
             $TabPrestation[$i] = $pres;
         }
         return $TabPrestation;
-    }
-*/
+    }*/
 
     public function getPrestations($id)
     {
         $contact = $this->_db->query("SELECT * FROM `prestations` p INNER JOIN `banque_prestation` bp ON p.id_prestation = bp.id_prestation  WHERE (id_banque=?) ORDER BY categorie , nom",array($id),get_class($this));
         return $contact->getResult();
     }
-
+    public function getAllCategories()
+    {
+        $contact = $this->_db->query("SELECT DISTINCT categorie FROM prestations");
+        return $contact->getResult();       
+    }
+    public function prestations()
+    {
+        $contact = $this->_db->query("SELECT DISTINCT nom FROM prestations");
+        return $contact->getResult();       
+    }
+    public function getId()
+    {
+        return $this->id_prestation;
+    }
     public function getNom()
     {
         return $this->nom ;
     }
 
-    public function getCategorie()
+  public function getCategorie()
     {
         return $this->categorie ;
     }
@@ -83,5 +95,8 @@ class PrestationModel extends Model
     {
         return $this->date_valeur ;
     }
-
+    public function getDescription()
+    {
+        return $this->description ;
+    }
 }
