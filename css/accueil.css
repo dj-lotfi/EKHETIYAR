@@ -628,7 +628,7 @@ select option {
     transition: visibility 1s;
 }
 
-.more-info>div *{
+.more-info>div>*{
     margin-top: var(--fs-200);
 }
 

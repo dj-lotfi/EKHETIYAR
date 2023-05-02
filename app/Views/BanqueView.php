@@ -15,7 +15,7 @@ class BanqueView extends View
 
         ?>
 
-        <div class="bank-card__container">
+<div class="bank-card__container">
             <div class="bank-card">
                 <div class="vertically-centered">
                     <p class="title">
@@ -26,8 +26,9 @@ class BanqueView extends View
                     </p>
                 </div>
                 <div class="vertically-centered">
-                    <a class="bank-logo" href="<?= $site_banque ?>" target="_blank"><img
-                            src="<?= PROOT ?>/app/logos/<?= $logo ?>" /></a>
+                    <a class="bank-logo" href="<?= $site_banque ?>" target="_blank">
+                        <img src="<?= PROOT ?>/app/logos/<?= $logo ?>" />
+                    </a>
                 </div>
 
                 <div class="general-info">
@@ -49,9 +50,9 @@ class BanqueView extends View
                         <div><a href="<?php echo $site_banque ?>" target="_blank" class="site-link"><?php echo $site_banque ?></a>
                         </div>
                         <div class="prestations-button vertically-centered">Prestations
-                            <div class="prestations-buttonhandler" data-id="<?= $bank->getId_banque() ?>">?</div>
+                            <div class="prestations-button__handler" data-id="<?= $bank->getId_banque() ?>">?</div>
                         </div>
-                        <div class="mapcontainer">
+                        <div class="map__container">
                             <iframe src="<?= $lienmap ?>" frameborder="0" class="hide-map-bar"></iframe>
                         </div>
                     </div>
@@ -62,11 +63,8 @@ class BanqueView extends View
                 </button>
             </div>
 
-
             <!-- The Modal -->
             <div class="modal">
-
-
                 <!--Modal content-->
                 <div class="modal-content">
                     <span class="close">&times;</span>
