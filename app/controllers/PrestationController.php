@@ -14,6 +14,16 @@ class PrestationController extends Controller {
         return $this->model->getPrestationsNom();
     }
 
+    public function getCategoriesNom()
+    {
+        return $this->model->getCategoriesNom();
+    }
+
+    public function getPrestationsNomCategorie ()
+    {
+        return $this->model->getPrestationsNomCategorie();
+    }
+
     public function indexaction() {
         $this->view->render();
     }

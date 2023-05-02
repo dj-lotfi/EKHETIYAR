@@ -79,30 +79,25 @@ class BanqueModel extends Model
     }
 
     public function getFilter($p, $min, $max)
-    {
-        $s = 'SELECT b.id_banque FROM `bank` b ';
-        for ($i = 0; $i < count($p); $i++) {
-            $s += 'INNER JOIN `pres` p' + $i + ' ON b.id_banque = p' + $i + '.id_banque AND p' + $i + '.nom = \"' + $p[$i] + '\" ';
-        }
-        $s += 'WHERE ';
-        for ($i = 0; $i < count($p) - 1; $i++) {
-            $s += '(p' + $i + '.price BETWEEN ' + $min[$i] + ' AND ' + $max[$i] + ') AND ';
-        }
-        $s += '(p' + count($p) - 1 + '.price BETWEEN ' + $min[count($p) - 1] + ' AND ' + $max[count($p) - 1] + ')';
+    {        
+        //$o = $this->_db->query('SELECT bp.id_banque FROM `banque_prestation` bp INNER JOIN `prestations` p ON bp.id_prestation = p.id_prestation WHERE p.nom = ? AND (p.prix / p.iteration BETWEEN ? AND ? ) AND p.prix IS NOT NULL AND p.iteration IS NOT NULL', array($p, $min, $max),false  );
+        $o = $this->_db->query('SELECT * FROM `banque_prestation` bp INNER JOIN `prestations` p ON bp.id_prestation = p.id_prestation WHERE p.nom = ? AND (p.prix BETWEEN ? AND ? ) AND p.prix IS NOT NULL', array($p, $min, $max),get_class($this)  );
 
-        $o = $this->_db->query($s);
+
         return $o->getResult();
     }
 
     public function getOtherOrder($order, $asc_desc)
     {
         if ($asc_desc == 'ASC') {
-            $o = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque), p.prix FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom = ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.prix * a.iteration ASC", array($order), false);
+            //$o = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque), p.prix , p.iteration FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom = ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY (a.prix / a.iteration) ASC", array($order), false);
+            $o = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque), p.prix , p.iteration FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom = ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY (a.prix) ASC", array($order), get_class($this));
 
             //$no = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque) FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom <> ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.nom  ",array($order),false);
 
         } elseif ($asc_desc == 'DESC') {
-            $o = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque), p.prix FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom = ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.prix * a.iteration DESC", array($order), false);
+            //$o = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque), p.prix , p.iteration FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom = ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY (a.prix / a.iteration) DESC", array($order), false);
+            $o = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque), p.prix , p.iteration FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom = ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY (a.prix) DESC", array($order), get_class($this));
 
             //$no = $this->_db->query("SELECT a.id_banque FROM (SELECT  (bp.id_banque) FROM `banque_prestation` bp INNER JOIN `prestations` p ON p.id_prestation = bp.id_prestation WHERE p.nom <> ? ) a INNER JOIN banques ON a.id_banque = banques.id_banque ORDER BY a.nom  ",array($order),false);   
         } else {

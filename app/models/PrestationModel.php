@@ -11,10 +11,25 @@ class PrestationModel extends Model
     */
 
 
-    public function getPrestationsNom()
+    public function getPrestationsNomCategorie()
     {
         
-        $contact = $this->_db->query("SELECT DISTINCT nom FROM prestations");
+        $contact = $this->_db->query("SELECT DISTINCT nom , categorie FROM prestations ORDER BY categorie");
+        $res = $contact->getResult();
+        $array1 = array();
+        $array2 = array();
+        
+        for ($i=0; $i < sizeof($res); $i++) { 
+            array_push($array1 , $res[$i]->nom);
+            array_push($array2, $res[$i]->categorie);
+        }
+        $array =array($array1,$array2);
+        return $array;
+    }
+
+    public function getPrestationsNom()
+    {
+        $contact = $this->_db->query("SELECT DISTINCT nom  FROM prestations");
         $res = $contact->getResult();
         $array =array();
         for ($i=0; $i < sizeof($res); $i++) { 
@@ -23,12 +38,11 @@ class PrestationModel extends Model
         return $array;
     }
 
-    /*
-    public function FunctionName(Type $var = null)
+    public function getCategoriesNom()
     {
-        # code...
+        $contact = $this->_db->query("SELECT DISTINCT categorie FROM prestations");
+        return $contact->getResult();
     }
-*/
     
 
     public function getPrestation($IdPrestation)
@@ -37,26 +51,6 @@ class PrestationModel extends Model
         $res = $contact->getFirstResult();
         return $res;
     }
-/*
-    public function getAllCategorie()
-    {
-        $contact = $this->_db->query("SELECT DI `categorie` FROM `prestations` " );
-        return $contact->getFirstResult();
-    }
-*/
-/*
-    public function getPrestations($IdBank)
-    {
-        // Banque_Prestation->id_banque->id_prestation
-        $contact = $this->_db->query("SELECT * FROM banque_prestation WHERE id_banque=" . $IdBank);
-        $res = $contact->getResult();
-        for ($i = 0; $i < sizeof($res); $i++) {
-            $pres = $this->getPrestation($res[$i]->id_prestation);
-            $TabPrestation[$i] = $pres;
-        }
-        return $TabPrestation;
-    }
-*/
 
     public function getPrestations($id)
     {

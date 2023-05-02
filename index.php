@@ -24,8 +24,6 @@ spl_autoload_register(function($className){
         require_once(ROOT . DS . 'app' . DS . 'Views' . DS . $className . '.php');
     }
 });
-
-
 session_start();
 
 

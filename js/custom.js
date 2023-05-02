@@ -1,24 +1,4 @@
 var body = document.body;
-var bankCards = document.querySelectorAll('.bank-card');
-
-bankCards.forEach(bankCard => {
-
-  var viewButton = bankCard.querySelector('.view-button');
-  var moreInfo = bankCard.querySelector('.more-info');
-
-
-  viewButton.addEventListener('click', function () {
-    if (moreInfo.style.display === 'none' || moreInfo.style.display === "") {
-      moreInfo.style.display = 'block';
-      moreInfo.style.animation = 'fade-in 1s';
-      viewButton.innerHTML = 'Voir Moins';
-    } else {
-      moreInfo.style.animation = 'fade-out 1s';
-      setTimeout(function () { moreInfo.style.display = 'none'; viewButton.innerHTML = 'Voir Plus'; }, 800);
-    }
-
-  });
-});
 
 var banksPrestations = document.querySelectorAll('.bank-card__container');
 

@@ -14,6 +14,12 @@ function sanitize($dirty)
     return htmlentities($dirty, ENT_QUOTES, 'UTF-8');
 }
 
+function print_array($array) {
+    echo '<pre>';
+    print_r($array);
+    echo '</pre>';
+  }
+
 
 function getObjectProperties($obj){
     return get_object_vars($obj);

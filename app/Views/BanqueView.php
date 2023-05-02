@@ -45,16 +45,21 @@ class BanqueView extends View
                     </div>
                 </div>
                 <div class="more-info">
-                    <div><a href="<?php echo $site_banque ?>" target="_blank" class="site-link"><?php echo $site_banque ?></a>
-                    </div>
-                    <div class="prestations-button vertically-centered">Prestations
-                        <div class="prestations-button__handler" data-id="<?= $bank->getId_banque() ?>">?</div>
-                    </div>
-                    <div class="map__container">
-                        <iframe src="<?= $lienmap ?>" frameborder="0" class="hide-map-bar"></iframe>
+                    <div>
+                        <div><a href="<?php echo $site_banque ?>" target="_blank" class="site-link"><?php echo $site_banque ?></a>
+                        </div>
+                        <div class="prestations-button vertically-centered">Prestations
+                            <div class="prestations-buttonhandler" data-id="<?= $bank->getId_banque() ?>">?</div>
+                        </div>
+                        <div class="mapcontainer">
+                            <iframe src="<?= $lienmap ?>" frameborder="0" class="hide-map-bar"></iframe>
+                        </div>
                     </div>
                 </div>
-                <button class="view-button">Voir Plus</button>
+                <button class="view-button">
+                    <input type="checkbox" id="ViewMoreLess">
+                    <label for="ViewMoreLess">Voir Plus</label>
+                </button>
             </div>
 
 
@@ -83,15 +88,34 @@ class BanqueView extends View
     }
    
 
-   public function displayAllBanques()
+   public function displayAllBanques($order,$acs_desc)
    {
-    $o = $this->controller->getOrder("alphabetical",1);
     
+    $o = $this->controller->getOrder($order,$acs_desc);
+    $t = $this->controller->filtercollecter();
+    $p = $t[0];
+    $min = $t[1];
+    $max = $t[2];
+
+
+    
+
+    $f = $this->controller->getFilter($p,$min,$max);
+
     $res = $this->controller->getAllBanques();
+
+    //var_dump($o);
+        for ($i=0; $i < count($o); $i++) { 
+            
+            if(in_array($o[$i],$f))
+            {
+                $this->displayBank($res[$o[$i]]);
+            }
+            
+        }
     
-    foreach ($o as $key => $value) {
-        $this->displayBank($res[$value]);
-    }
+    
+        //var_dump($o);
 
    }
 
