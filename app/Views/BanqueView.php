@@ -58,8 +58,8 @@ class BanqueView extends View
                     </div>
                 </div>
                 <button class="view-button">
-                    <input type="checkbox" id="ViewMoreLess">
-                    <label for="ViewMoreLess">Voir Plus</label>
+                    <input type="checkbox" id="ViewMoreLess<?= $bank->getId_banque() ?>">
+                    <label for="ViewMoreLess<?= $bank->getId_banque() ?>"></label>
                 </button>
             </div>
 

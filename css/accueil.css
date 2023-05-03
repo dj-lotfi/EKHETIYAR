@@ -26,14 +26,15 @@
     transform: translateY(-50%);
     display: flex;
     cursor: pointer;
-    width:clamp(25px, 2.5vw + 15px, 40px);
+    width: clamp(25px, 2.5vw + 15px, 40px);
 
     fill: var(--main-500);
 
     transition: all 250ms ease-in;
 }
 
-.slider-control:hover,.slider-control:active {
+.slider-control:hover,
+.slider-control:active {
     fill: var(--accent-400);
 }
 
@@ -101,17 +102,18 @@
     grid-template-columns: 5fr 1fr;
     color: var(--neutral-400);
     font-size: var(--fs-400);
-    border-bottom: 5px solid var(--accent-300);;
+    border-bottom: 5px solid var(--accent-300);
+    ;
     font-weight: 600;
     font-family: 'Rubik';
     text-transform: uppercase;
-    
+
     padding: 10px 0 15px 5%;
 }
 
-.filtre-heading p{
+.filtre-heading p {
     display: inline-block;
-    
+
     justify-content: center;
     align-items: center;
     margin: 0;
@@ -135,7 +137,8 @@
     transition: fill 250ms ease-in;
 }
 
-.filter>svg:hover,.filter>svg:focus {
+.filter>svg:hover,
+.filter>svg:focus {
     fill: var(--accent-300);
     transition: fill 350ms ease-in;
     cursor: pointer;
@@ -194,10 +197,10 @@
     border-bottom: none;
 }
 
-input[type=checkbox]:checked~.tarifs-interval{
+input[type=checkbox]:checked~.tarifs-interval {
     display: flex;
-    
-    
+
+
 }
 
 input[type=text] {
@@ -218,7 +221,8 @@ input[type=checkbox] {
     accent-color: var(--main-400);
 }
 
-input[type=checkbox]:hover,input[type=checkbox]:focus {
+input[type=checkbox]:hover,
+input[type=checkbox]:focus {
     accent-color: var(--accent-500);
     cursor: pointer;
 }
@@ -254,11 +258,12 @@ textarea {
     scroll-snap-align: start;
     margin-top: 2.5%;
     padding-top: 2.5%;
-    
+
     transition: color 250ms ease-in;
 }
 
-.scrollable-checkboxes li:hover,.scrollable-checkboxes li:focus {
+.scrollable-checkboxes li:hover,
+.scrollable-checkboxes li:focus {
     color: var(--accent-300);
     transition: color 350ms ease-in;
 }
@@ -280,6 +285,7 @@ textarea {
     display: flex;
     align-items: center;
     padding: 10px;
+    border-radius: 10px;
 }
 
 .custom-select {
@@ -522,26 +528,6 @@ select option {
     }
 }
 
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fade-out {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
 .general-info {
     grid-column: 1 / span 2;
 }
@@ -606,33 +592,34 @@ select option {
     font-weight: 700;
     color: var(--main-900);
 }
+
 .more-info {
     grid-column: 1 / span 2;
 
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 1s;
+    transition: grid-template-rows 1s ease-in-out;
 }
 
 .view-button input[type="checkbox"] {
     display: none;
 }
 
-.bank-card:has(.view-button input[type="checkbox"]:checked) .more-info{
+.bank-card:has(.view-button input[type="checkbox"]:checked) .more-info {
     grid-template-rows: 1fr;
 }
 
 .more-info>div {
     min-height: 0;
     visibility: hidden;
-    transition: visibility 1s;
+    transition: visibility 1s ease-in-out;
 }
 
-.more-info>div>*{
+.more-info>div>* {
     margin-top: var(--fs-200);
 }
 
-.bank-card:has(input[type="checkbox"]:checked) .more-info> div{
+.bank-card:has(input[type="checkbox"]:checked) .more-info>div {
     visibility: visible;
 }
 
@@ -777,10 +764,30 @@ select option {
     font-family: 'Rubik';
     font-weight: 500;
     color: var(--accent-500);
+
+    z-index: 2;
 }
 
 .view-button:hover {
     text-shadow: 1px 0 10px var(--neutral-50);
+}
+
+.view-button>label::before {
+    content: 'Voir Plus';
+}
+
+.view-button>input[type="checkbox"]:checked+label::before {
+    content: 'Voir Moins';
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Styles for the "prestations" pop-up window */

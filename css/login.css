@@ -4,6 +4,10 @@
     inherits: false;
 }
 
+body{
+    background: var(--slate-200);
+}
+
 .center {
     display: flex;
     justify-content: center;
@@ -17,7 +21,7 @@
     padding-bottom: 35px;
     padding-left: 20px;
     padding-right: 20px;
-    background: var(--neutral-500);
+    background: var(--slate-300);
 }
 
 .frame::before,.frame::after {
@@ -46,6 +50,7 @@
 
 .password-input {
     position: relative;
+    z-index: 2;
 }
 
 .password-input>span {
@@ -56,7 +61,7 @@
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
     width: 25%;
-    background: var(--neutral-300);
+    background: var(--slate-200);
     justify-content: center;
     align-items: center;
 }
@@ -82,7 +87,7 @@ input[type="password"] {
     border: 2px solid var(--main-600);
     border-radius: 4px;
     color: var(--neutral-800);
-    background-color: var(--neutral-300);
+    background-color: var(--slate-200);
     transition: all 250ms ease-in;
 }
 

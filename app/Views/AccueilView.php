@@ -218,9 +218,6 @@ class AccueilView extends view
                             
                         </div>
                     </div>
-                    
-
-                    
                 </div>
             </main>
             <?php $this->generateFooter(); ?>
