@@ -1,4 +1,47 @@
 var modif_sec_loaded = 0;
+function Upload() {
+    console.log('test2');
+
+    var fd = new FormData();
+    var bank = $('#bank_id').val();
+    console.log(bank);
+
+    var files = $('#file')[0].files;
+
+    // Check file selected or not
+    if (files.length > 0) {
+
+        fd.append('file', files[0]);
+
+        $.ajax({
+            url: 'j2sJDpUgQQmLF5EF/UploadLogo/' + bank,
+            type: 'post',
+            data: fd,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.status == 1) {
+                    var extension = response.extension;
+                    var path = response.path;
+                    console.log(response.name);
+
+                    $('.prevel').hide();
+                    if (extension == 'pdf' || extension == 'docx') {
+                        $("#fileprev").attr("href", path);
+                        $("#fileprev").show();
+                    } else {
+                        $("#imgprev").attr("src", path);
+                        $("#imgprev").show();
+                    }
+
+                } else {
+                    alert('File not uploaded');
+                }
+            }
+        });
+    }
+}
 function ModifBanque(bankId) {
     document.querySelector('.show-at-first').style.display = 'none';
     console.log('Modifier banque ' + bankId);
@@ -54,15 +97,15 @@ function SupprimBanque(bankId) {
     var confirmer = document.getElementById('confirm');
 
     confirmer.addEventListener('click', () => {
-        //var xhttp = new XMLHttpRequest();
-        //var url = "admin/DeleteBank/" + bankId;
-        //xhttp.open("POST", url, true);
-        //xhttp.onload = function () {
-        //   if (this.status == 200) {
-        console.log('Banque ' + bankId + ' supprime');
-        //   }
-        // };
-        location.reload();
+        var xhttp = new XMLHttpRequest();
+        var url = "j2sJDpUgQQmLF5EF/DeleteBank/" + bankId;
+        xhttp.open("GET", url, true);
+        xhttp.onload = function () {
+            if (this.status == 200) {
+                console.log('Banque ' + bankId + ' supprime');
+            }
+        };
+        //location.reload();
     });
 };
 
@@ -136,30 +179,11 @@ function uploadDisplay() {
     var popup = document.getElementById('upload-image');
     popup.style.display = 'grid';
 };
-function Upload() {
-    var form = document.getElementById('upload-logo');
-    var content = document.getElementById('upload-feedback');
-    var formData = new FormData(form);
-    var xhr = new XMLHttpRequest();
-    xhr.open('FILES', 'j2sJDpUgQQmLF5EF/UploadLogo');
-    xhr.send(formData);
-    var xhr2 = new XMLHttpRequest();
-    xhr2.open('POST', 'j2sJDpUgQQmLF5EF/UploadLogo');
-    xhr2.send(formData);
-    var resp = new XMLHttpRequest();
-    resp.open('GET', 'j2sJDpUgQQmLF5EF/UploadLogo');
-    resp.onload = function () {
-        if (this.status == 200) {
-            console.log('Uploaded successfully');
-            content.innerHTML = this.responseText;
-        }
-    };
-    resp.send();
-};
 
 //===============================================================================================================================
 
 function MAJBanque() {
+    Upload();
     sendData_bank();
     updatebanque(); // show the pop-up
     return false;
@@ -170,9 +194,16 @@ function updatebanque() {
         var xhttp = new XMLHttpRequest();
         // Construct the URL for the PHP function with the form values as parameters
         var url = "j2sJDpUgQQmLF5EF/update";
+        var content = document.getElementById('feedback_place');
         // var url ="j2sJDpUgQQmLF5EF/update/1/Banque%20Ext%C3%A9rieure%20d'Alg%C3%A9rie/BEA/C%3A%5Cfakepath%5Cleft.svg/48%2C%20Rue%20des%20Fr%C3%A8res%20Bouadou%2C%20Bir%20Mourad%20Ra%C3%AFs%20-%20Alger/021%2056%2025%2070%20/021%2056%2030%2050%20%2F%2056%2051%2054/https%3A%2F%2Fwww.google.com%2Fmaps%2Fd%2Fu%2F0%2Fembed%3Fmid%3D1SVoCi0deGeTdAOY9SvH8TAHijD4iZo8%26ehbc%3D2E312F%26z%3D12/https%3A%2F%2Fwww.bea.dz%2F" ;
         console.log(url);
         xhttp.open("GET", url, true);
+        xhttp.onload = function () {
+            if (this.status == 200) {
+                console.log('Uploaded successfully');
+                content.innerHTML = this.responseText;
+            }
+        };
         xhttp.send();
     }
 }
@@ -187,8 +218,12 @@ function sendData_bank() {
     var xhr = new XMLHttpRequest();
     var url = "j2sJDpUgQQmLF5EF/update";
     var formData = new FormData(document.getElementById("update"));
+    for (var pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+    }
     xhr.open("POST", url, true);
     xhr.send(formData);
+    console.log('data sent');
 }
 function affichage(data) {
     var popup = document.getElementById("popup");

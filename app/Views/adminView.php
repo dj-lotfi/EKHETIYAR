@@ -12,6 +12,7 @@ class AdminView extends View
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/admin.css">
     <script defer src="js/admin.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 
     <?php $this->end(); ?>
@@ -145,7 +146,7 @@ class AdminView extends View
 
     for ($i = 0; $i < count($res); $i++) {
       ?>
-      <li class="nav-item" id="<?= $res[$i]->getId_banque() ?>" onclick="ModifBanque(this.id)">
+      <li class="nav-item" id="<?= $res[$i]->getId_banque() ?>" onclick="ModifBanque(this.id);this.disabled=true;">
         <p>
           <?php echo $res[$i]->getAbbr(); ?>
         </p>
@@ -156,19 +157,18 @@ class AdminView extends View
       <?php
     }
     ?>
-
     <?php
   }
 
   public function Affichagebanque($id)
   {
-    $banque = new BanqueModel();
-    $var = $banque->getBanque($id);
+    $mod = new AdminModel();
+    $var = $mod->get($id ,'banques');
     ?>
-    <form id="update" method="post" onsubmit="MAJBanque();event.preventDefault();">
+    <form id="update" method="post" onsubmit="MAJBanque();event.preventDefault();" enctype='multipart/form-data'>
       <div class="general">
         <input class="bank-name" type="text" name="nom" value="<?php echo $var->nom; ?>" placeholder="Nom">
-        <input class="abbreviation" type="text" name="abbreviation" value="<?php echo $var->abbreviation; ?>"
+        <input class="abbreviation" type="text" name="abbreviation" value="<?php echo $var->abb; ?>"
           placeholder="Abbreviation">
         <input class="seige-social" type="text" name="siege_social" value="<?php echo $var->adresse_siege_social; ?>"
           placeholder="Adresse siege social">
@@ -177,11 +177,26 @@ class AdminView extends View
         <input class="tel" type="text" name="telephone" value="<?php echo $var->telephone; ?>" placeholder="Phone number">
         <input class="fax" type="text" name="fax" value="<?php echo $var->fax; ?>" placeholder="Fax">
         <input type="text" name="site" value="<?php echo $var->site_banque; ?>" placeholder="Site officiel">
+        <input class="logo" type="text" name="logo" value="<?php echo $var->logo; ?>" placeholder="Logo" hidden>
       </div>
       <div class="image-preview">
         <img src="app/logos/<?php echo $var->logo ?>" alt="<?php echo $var->logo ?>" class="img">
       </div>
-      <button id="up" class="uploadlogo" type="button" onclick="uploadDisplay()">UPLOAD IMADE</button>
+
+      
+      <!-- Upload a new logo section -->
+      <div>
+        <div>
+          <label for="file" class="upload-label">
+            <span class="upload-label-text">Upload a logo:</span>
+            <span class="upload-label-button">Choose File</span>
+          </label>
+          <input type="file" id="file" name="file" style="display:none;" />
+          <!--<input type="button" class="button" value="Upload" id="but_upload">-->
+          <input type="hidden" id="bank_id" value="<?= $id ?>">
+        </div>
+      </div>
+      <!---->
       <div class="map">
         <input class="map-link" type="text" name="map" value="<?php echo $var->lienmap; ?>">
         <div class="map__container">
@@ -192,21 +207,6 @@ class AdminView extends View
       <input type="text" name="id" value="<?php echo $var->id_banque ?>" hidden>
       <button name="submit" type="submit" class="button">sauvegarder</button>
     </form>
-    <div id="upload-image" class="modal">
-      <div class="modal-content2">
-        <span class="close" onclick="closeUpload()">&times;</span>
-        <form method="post" enctype="multipart/form-data" id="upload-logo" onsubmit="event.preventDefault();Upload();"
-          class="upload-form">
-          <label for="image" class="upload-label">
-            <span class="upload-label-text">Select an image to upload:</span>
-            <span class="upload-label-button">Choose File</span>
-          </label>
-          <input type="file" name="image" id="image" class="upload-input">
-          <button id="upLOGO" type="submit" class="upload-button">Upload Image</button>
-        </form>
-        <div id="upload-feedback"></div>
-      </div>
-    </div>
     <?php $pres = new PrestationModel();
     $pre = $pres->getPrestations($id);
     ?>
@@ -259,6 +259,7 @@ class AdminView extends View
       </div>
     </div>
     </div>
+    <div id="feedback_place"></div>
     <div id="popup" class="modal">
       <div class="modal-content2">
         <span class="close" onclick="closePopup()">&times;</span>
@@ -278,6 +279,7 @@ class AdminView extends View
         </div>
       </div>
     </div>
+    
   <?php }
 }
 

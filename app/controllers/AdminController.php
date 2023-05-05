@@ -29,7 +29,8 @@ class AdminController extends Controller
         $adm->AddBanque($newbanque);
     }
 
-    public function ajBanque(){
+    public function ajBanque()
+    {
         $this->view->ajBanque();
     }
 
@@ -53,82 +54,88 @@ class AdminController extends Controller
     }
     public function update()
     {
-        $adm = new AdminModel();
-        $newinfo = array(
-            "id_banque" => $_POST['id'],
-            "nom" => $_POST['nom'],
-            "abb" => $_POST['abbreviation'],
-            "logo" => $_POST['logo'],
-            "adresse_siege_social" => $_POST['siege_social'],
-            "telephone" => $_POST['telephone'],
-            "fax" => $_POST['fax'],
-            "rating" => 0,
-            "lienmap" => $_POST['map'],
-            "site_banque" => $_POST['site'],
-        );
-        $adm->UpdateBank($newinfo);
+        if (isset($_POST['site'])) {
+            $adm = new AdminModel();
+            if ($_FILES['file']['name'] != "") {
+                $newinfo = array(
+                    "id_banque" => $_POST['id'],
+                    "nom" => $_POST['nom'],
+                    "abb" => $_POST['abbreviation'],
+                    "logo" => $_FILES['file']['name'],
+                    "adresse_siege_social" => $_POST['siege_social'],
+                    "telephone" => $_POST['telephone'],
+                    "fax" => $_POST['fax'],
+                    "rating" => 0,
+                    "lienmap" => $_POST['map'],
+                    "site_banque" => $_POST['site'],
+                );
+                $response['choix1'] = '1';
+            }else{
+                $newinfo = array(
+                    "id_banque" => $_POST['id'],
+                    "nom" => $_POST['nom'],
+                    "abb" => $_POST['abbreviation'],
+                    "logo" => $_POST['logo'],
+                    "adresse_siege_social" => $_POST['siege_social'],
+                    "telephone" => $_POST['telephone'],
+                    "fax" => $_POST['fax'],
+                    "rating" => 0,
+                    "lienmap" => $_POST['map'],
+                    "site_banque" => $_POST['site'],
+                );
+                $response['choix2'] = '2';
+            }
+            $adm->UpdateBank($newinfo);
+            $response['data'] = 'Data sent successufully';
+        }
+        echo json_encode($response);
     }
 
     public function DeleteBank($id)
     {
         $this->model->DeleteBank($id);
     }
-    function UploadLogo()
+    function UploadLogo($id)
     {
-        $target_dir = "C:/Users/Folokee/Desktop/zb/";
-        $target_file = $target_dir . basename($_FILES["image"]["name"]);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        if (isset($_FILES['file']['name'])) {
 
-        // Check if image file is a actual image or fake image
-        if (isset($_POST["submit"])) {
-            $check = getimagesize($_FILES["image"]["tmp_name"]);
-            if ($check !== false) {
-                ?> <p> <?php   echo "File is an image - " . $check["mime"] . ".";?> </p> <?php
-                $uploadOk = 1;
-            } else {
-                ?> <p> <?php echo "File is not an image."; ?> </p> <?php
-                $uploadOk = 0;
+            /* Getting file name */
+            $filename = $_FILES['file']['name'];
+
+            /* Location */
+            $location = "app/logos/" . $filename;
+
+            /* Extension */
+            $extension = pathinfo($location, PATHINFO_EXTENSION);
+            $extension = strtolower($extension);
+
+            /* Allowed file extensions */
+            $allowed_extensions = array("jpg", "jpeg", "png", "svg");
+
+            $response = array();
+            $status = 0;
+
+            /* Check file extension */
+            if (in_array(strtolower($extension), $allowed_extensions)) {
+
+                /* Upload file */
+                if (move_uploaded_file($_FILES['file']['tmp_name'], $location)) {
+
+                    $status = 1;
+                    $response['path'] = $location;
+                    $response['extension'] = $extension;
+
+                }
             }
+
+            $response['status'] = $status;
+            $response['name'] = $filename;
+            echo json_encode($response);
+            exit;
         }
+        echo 0;
 
-        // Check if file already exists
-        if (file_exists($target_file)) {
-            ?> <p> <?php echo "Sorry, file already exists."; ?> </p> <?php
-            $uploadOk = 0;
-        }
 
-        // Check file size
-        if ($_FILES["image"]["size"] > 500000) {
-            ?> <p> <?php echo "Sorry, your file is too large."; ?> </p> <?php
-            $uploadOk = 0;
-        }
-
-        // Allow certain file formats
-        if (
-            $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" && $imageFileType != "svg"
-        ) {
-            ?> <p> <?php echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";?> </p> <?php
-            $uploadOk = 0;
-        }
-
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            ?> <p> <?php echo "Sorry, your file was not uploaded."; ?> </p> <?php
-            // if everything is ok, try to upload file
-        } else {
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                ?> <p> <?php echo "The file " . htmlspecialchars(basename($_FILES["image"]["name"])) . " has been uploaded."; ?> </p> <?php
-            } else {
-                ?> <p> <?php echo "Sorry, there was an error uploading your file."; ?> </p> <?php
-            }
-        }
-
-    }
-
-    public function getUploadedLogoName(){
-        return $_FILES["image"]["name"] ;
     }
 
     public function indexAction()
