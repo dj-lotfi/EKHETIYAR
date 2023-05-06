@@ -13,9 +13,7 @@ class ComparatifController extends Controller
 
     public function indexAction() //nom_de_la_method+Action
     {
-        $this->view->renderHead();
-        $this->view->renderBody();
-        $this->view->renderFooter();
+        $this->view->render();
     }
 
     public function displayComparaison($bank1,$bank2){

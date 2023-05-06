@@ -1,19 +1,6 @@
 var body = document.body;
 var cached = 0;
 
-function afficheCategorie(checkbox){
-    if (checkbox.checked) {
-        checkbox.nextElementSibling.style.height = '400px';
-        checkbox.nextElementSibling.style.overflow = 'hidden';
-    }
-    else {
-        checkbox.nextElementSibling.style.height = '0px';
-    }
-} 
-
-
-
-
 document.getElementById("choix").addEventListener("submit", function (event) {
     event.preventDefault();
     openPopup(); // show the pop-up
@@ -38,9 +25,7 @@ function openPopup() {
 
         var loadingScreen = document.getElementById('loader');
         // Display the popup
-        var popup = document.getElementById("popup");
         var content = document.getElementById("comparaison");
-        popup.style.display = "block";
         content.style.display = "none";
         loadingScreen.style.display = "block";
 
@@ -55,8 +40,7 @@ function openPopup() {
         xhttp.onload = function () {
             if (this.status == 200) {
                 loadingScreen.style.display = "none";
-                content.style.display = "block";
-                popup.style.display = "block";
+                content.style.display = "grid";
                 content.innerHTML = this.responseText;
 
             }
@@ -70,10 +54,8 @@ function openPopup() {
 };
 
 function closePopup() {
-    var popup = document.getElementById("popup");
     var err = document.getElementById("error");
     err.style.display = "none";
-    popup.style.display = "none";
 };
 
 
