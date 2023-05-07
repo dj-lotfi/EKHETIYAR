@@ -1,5 +1,5 @@
 <?php
-class PrestationModel extends Model
+class PrestationAdminModel extends Model_admin
 {
     public function __construct()
     {
@@ -37,25 +37,6 @@ class PrestationModel extends Model
         $res = $contact->getFirstResult();
         return $res;
     }
-/*
-    public function getAllCategorie()
-    {
-        $contact = $this->_db->query("SELECT DI `categorie` FROM `prestations` " );
-        return $contact->getFirstResult();
-    }
-*/
-
-    /*public function getPrestations($IdBank)
-    {
-        // Banque_Prestation->id_banque->id_prestation
-        $contact = $this->_db->query("SELECT * FROM banque_prestation WHERE id_banque=" . $IdBank);
-        $res = $contact->getResult();
-        for ($i = 0; $i < sizeof($res); $i++) {
-            $pres = $this->getPrestation($res[$i]->id_prestation);
-            $TabPrestation[$i] = $pres;
-        }
-        return $TabPrestation;
-    }*/
 
     public function getPrestations($id)
     {
@@ -72,24 +53,6 @@ class PrestationModel extends Model
         $contact = $this->_db->query("SELECT DISTINCT nom FROM prestations");
         return $contact->getResult();       
     }
-
-    public function generateid()
-    {
-        $i = 10 ; 
-        $continue = true ; //DB_USER_ADMIN
-        $conn = mysqli_connect(DB_HOST_ADMIN, DB_USER_ADMIN, DB_PASSWORD_ADMIN, DB_NAME_ADMIN);
-        while($continue)
-        {
-            $sql = "SELECT COUNT(*) AS count FROM prestations WHERE id_prestation = {$i}";
-            $result = mysqli_query($conn, $sql);
-            $count = mysqli_fetch_assoc($result)['count'];
-            if($count==0)$continue = false  ;
-            else $i++ ;
-        }
-        mysqli_close($conn);
-        return $i ;
-    }
-
     public function getId()
     {
         return $this->id_prestation;

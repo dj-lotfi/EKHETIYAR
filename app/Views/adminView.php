@@ -50,22 +50,16 @@ class AdminView extends View
         </label>
 
         <label for="a_props" class="nav-label">
-          <p>A Propos</p>
+          <p>Autres</p>
           <ul>
-            <li class="nav-item">
-              <p>Description</p>
+            <li id="modifaprop" class="nav-item" onclick="ModifApropos(this.id);">
+              <p>A propos</p>
             </li>
-            <li class="nav-item">
-              <p>Contact1</p>
-            </li>
-            <li class="nav-item">
-              <p>Contact2</p>
+            <li id="modifpub" class="nav-item" onclick="ModifPub(this.id);">
+              <p>Publicites</p>
             </li>
           </ul>
         </label>
-      </div>
-      <div class="show-at-first">
-        <h1>Welcome to the admin page , please select an option on the left to proceed</h1>
       </div>
       <div id="warning" class="modal">
         <div class="modal-content2">
@@ -80,29 +74,6 @@ class AdminView extends View
           <div class="justify-content-center jimu-primary-loading"></div>
         </div>
         <div class="modification" id="modification"></div>
-        <!--
-        <div class="bank-info">
-          <div class="general">
-            <input class="bank-name" type="text" placeholder="Nom">
-            <input class="abbreviation" type="text" placeholder="Abbreviation">
-            <input class="seige-social" type="text" placeholder="Seige Social">
-          </div>
-          <div class="contacts">
-            <input class="tel" type="text" placeholder="Téléphone">
-            <input class="fax" type="text" placeholder="Fax">
-            <input class="logo" type="file">
-          </div>
-          <div class="image-preview">
-            <img src="" alt="Image Preview Here">
-          </div>
-          <div class="map">
-            <input class="map-link" type="text" placeholder="Lien-map">
-            <div class="map__container">
-              <iframe class="hide-map-bar" src="" frameborder="0">
-              </iframe>
-            </div>
-          </div>
-        </div>-->
       </div>
     </body>
 
@@ -113,23 +84,59 @@ class AdminView extends View
 
   }
 
+  public function ModifApropos()
+  {
+    ?>
+    <div id="updatePropos">
+      <?php $adm = new AdminModel();
+      $prop = $adm->getApropos(); ?>
+      <form id="updateProposhh" method="post" onsubmit="event.preventDefault();AjouterSiteLogo();SendApropos();">
+        <h4>Logo du site : <!--</h4><input class="bank-name" type="text" name="Logo_site" placeholder="Nom"
+            value="<?php /*echo $prop->site_logo;*/?>" required><br><br>-->
+          <div class="image-preview">
+            <img src="img/<?php echo $prop->site_logo ?>" alt="<?php echo $prop->site_logo ?>" class="img">
+          </div>
+          <!-- Site logo Upload -->
+          <label for="sitelogo" class="upload-label">
+            <span class="upload-label-text">Upload a Logo for the site:</span>
+            <span class="upload-label-button">Choose File</span>
+          </label>
+          <input type="file" id="sitelogo" name="sitelogo" style="display:none;" />
+
+          <h4>Prop : </h4><input class="bank-name" type="text" name="prop" value="<?php echo $prop->prop; ?>"
+            placeholder="Prix"><br><br>
+          <h4>Vision : </h4><input class="bank-name" type="text" name="vision" value="<?php echo $prop->vision; ?>"
+            placeholder="Prix"><br><br>
+          <h4>Fonctionnement : </h4><input class="seige-social" type="text" name="fonctionnement"
+            value="<?php echo $prop->fonctionnement; ?>" placeholder="Categorie"><br><br>
+          <h4>Email : </h4><input class="bank-name" type="text" name="email" value="<?php echo $prop->email; ?>"
+            placeholder="Description"><br><br>
+          <h4>Telephone : </h4><input class="bank-name" type="text" name="tele" value="<?php echo $prop->telephone; ?>"
+            placeholder="Description"><br><br>
+          <input type="text" id="idbank" value="<?php echo $prop->id ?>" hidden>
+          <input type="submit" name="submitprop" class="button" value="Update">
+      </form>
+    </div>
+    </div>
+    <?php
+  }
   public function ajBanque()
   {
     ?>
     <div id="addbanquePop" class="modifying-window">
       <form id="addbanque" method="post" onsubmit="ajoutSubmitted();event.preventDefault();">
         <div class="general">
-          <input class="bank-name" type="text" name="nom" placeholder="Nom">
-          <input class="abbreviation" type="text" name="abbreviation" placeholder="Abbreviation">
-          <input class="seige-social" type="text" name="siege_social" placeholder="Adresse siege social">
+          <input class="bank-name" type="text" name="nomj" placeholder="Nom">
+          <input class="abbreviation" type="text" name="abbreviationj" placeholder="Abbreviation">
+          <input class="seige-social" type="text" name="siege_socialj" placeholder="Adresse siege social">
         </div>
         <div class="contacts">
-          <input class="tel" type="text" name="telephone" placeholder="Phone number">
-          <input class="fax" type="text" name="fax" placeholder="Fax">
-          <input type="text" name="site" placeholder="Site officiel">
-          <input class="logo" type="text" name="logo">
+          <input class="tel" type="text" name="telephonej" placeholder="Phone number">
+          <input class="fax" type="text" name="faxj" placeholder="Fax">
+          <input type="text" name="sitej" placeholder="Site officiel">
+          <input class="logo" type="text" name="logoj">
         </div>
-        <input class="map-link" type="text" name="map">
+        <input class="map-link" type="text" name="mapj">
         <button name="submit" type="submit" class="button">Ajouter</button>
       </form>
     </div>
@@ -138,32 +145,34 @@ class AdminView extends View
 
   public function displayBankButtons()
   {
-    $bdd = new BanqueModel();
-    $res = $bdd->getAllBanques();
+    $bdd = new AdminModel();
+    $res = $bdd->get("*", 'banques');
     //var_dump($res); ?>
 
     <?php
 
     for ($i = 0; $i < count($res); $i++) {
       ?>
-      <li class="nav-item" id="<?= $res[$i]->getId_banque() ?>" onclick="ModifBanque(this.id);this.disabled=true;">
+      <li class="nav-item" id="<?= $res[$i]->id_banque ?>" onclick="ModifBanque(this.id);">
         <p>
-          <?php echo $res[$i]->getAbbr(); ?>
+          <?php echo $res[$i]->abb; ?>
         </p>
-        <button class="DeleteBtn" type="button" id="<?= $i ?>" onclick="SupprimBanque(this.parentNode.id)">
-          <img src="img/delete-icon.png" alt="-">
-        </button>
+
       </li>
+      <button class="DeleteBtn" type="button" id="<?= $i . $res[$i]->abb ?>"
+        onclick="SupprimBanque(this.previousElementSibling.id)">
+        <img src="img/delete-icon.png" alt="-">
+      </button>
       <?php
     }
-    ?>
-    <?php
+  ?>
+  <?php
   }
 
   public function Affichagebanque($id)
   {
     $mod = new AdminModel();
-    $var = $mod->get($id ,'banques');
+    $var = $mod->get($id, 'banques');
     ?>
     <form id="update" method="post" onsubmit="MAJBanque();event.preventDefault();" enctype='multipart/form-data'>
       <div class="general">
@@ -182,8 +191,6 @@ class AdminView extends View
       <div class="image-preview">
         <img src="app/logos/<?php echo $var->logo ?>" alt="<?php echo $var->logo ?>" class="img">
       </div>
-
-      
       <!-- Upload a new logo section -->
       <div>
         <div>
@@ -207,7 +214,7 @@ class AdminView extends View
       <input type="text" name="id" value="<?php echo $var->id_banque ?>" hidden>
       <button name="submit" type="submit" class="button">sauvegarder</button>
     </form>
-    <?php $pres = new PrestationModel();
+    <?php $pres = new PrestationAdminModel();
     $pre = $pres->getPrestations($id);
     ?>
     <div class="background-table">
@@ -221,6 +228,7 @@ class AdminView extends View
               <th>Date_valeur</th>
               <th>Description</th>
               <th>Update</th>
+              <th onclick="NewInfoPres()" class="update">ADD</button></th>
             </tr>
           </thead>
         </table>
@@ -247,11 +255,37 @@ class AdminView extends View
                 <td>
                   <?php echo $pre[$i]->getDescription() ?>
                 </td>
-                <td data="<?php echo $pre[$i]->getId() ?>" id="<?= $pre[$i]->getId() ?>" class="update"
-                  onclick="affichage(this.id)">
-                  <h3> <b> update </b> </h3>
+                <td id="<?= $pre[$i]->getId() ?>" class="update">
+                  <h3 onclick="affichage()"> <b> update </b> </h3>
                 </td>
+                <td>
+                  <button class="DeleteBtn" type="button" onclick="deletepres(<?= $pre[$i]->getId() ?>,<?= $id ?>)">
+                    <img src="img/delete-icon.png" alt="-">
+                  </button>
+                </td>
+
               </tr>
+              <div id="popup" class="modal">
+                <div class="modal-content2">
+                  <span class="close" onclick="closePopup()">&times;</span>
+                  <form id="updatepres" method="post">
+                    <h4>Nom : </h4><input class="bank-name" type="text" id="upnompres" placeholder="Nom" value=""
+                      required><br><br>
+                    <h4>Prix : </h4><input class="bank-name" type="text" id="upprixpres" value="" placeholder="Prix"><br><br>
+                    <h4>date de valeur : </h4><input class="bank-name" type="text" id="updatevaleur" value=""
+                      placeholder="Prix"><br><br>
+                    <h4>Categorie : </h4><input class="seige-social" type="text" id="upcategoriepres" value=""
+                      placeholder="Categorie"><br><br>
+                    <h4>Description : </h4><input class="bank-name" type="text" id="updescription" value=""
+                      placeholder="Description"><br><br>
+                    <input type="submit" name="submit" value="UpdatePrestation"
+                      onclick="updateprestation(<?= $pre[$i]->getId() ?>,<?= $id ?>);" />
+                  </form>
+                </div>
+                <div id="error">
+
+                </div>
+              </div>
             <?php }
             ?>
           </tbody>
@@ -259,28 +293,70 @@ class AdminView extends View
       </div>
     </div>
     </div>
-    <div id="feedback_place"></div>
-    <div id="popup" class="modal">
+
+    </div>
+
+    <div id="ajprestation" class="modal">
       <div class="modal-content2">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <form id="updatepres" method="post" enctype="multipart/form-data">
+        <span class="close" onclick="closeAjPres()">&times;</span>
+        <form id="addpres" method="post" onsubmit="addpres(<?= $id ?>);event.preventDefault();">
           <h4>Nom : </h4><input class="bank-name" type="text" id="nompres" placeholder="Nom" value="" required><br><br>
-          <h4>Prix : </h4><input class="abbreviation" type="text" id="prixpres" value="" placeholder="Prix"><br><br>
-          <h4>date de valeur : </h4><input class="abbreviation" type="text" id="datevaleur" value=""
+          <h4>Prix : </h4><input class="bank-name" type="text" id="prixpres" value="" placeholder="Prix"><br><br>
+          <h4>date de valeur : </h4><input class="bank-name" type="text" id="datevaleur" value=""
             placeholder="Prix"><br><br>
           <h4>Categorie : </h4><input class="seige-social" type="text" id="categoriepres" value=""
             placeholder="Categorie"><br><br>
           <h4>Description : </h4><input class="bank-name" type="text" id="description" value=""
             placeholder="Description"><br><br>
-          <input type="submit" name="submit" class="button" value="Update">
+          <input type="text" id="idbank" value="<?php echo $id ?>" hidden>
+          <input type="submit" name="submitnew" class="button" value="Update">
         </form>
-        <div id="error">
-
-        </div>
+      </div>
+      <div id="error">
       </div>
     </div>
-    
-  <?php }
-}
+    <div id="feedback_place"></div>
 
-?>
+    <?php
+  }
+
+  public function ModifPub()
+  {
+    ?>
+    <div class="container">
+      <h2>Ajouter une publicite au carousel</h2>
+      <div>
+        <div>
+          <form id="uploadpub" method="post" onsubmit="AjouterPub();event.preventDefault();" enctype='multipart/form-data'>
+            <label for="image" class="upload-label">
+              <span class="upload-label-text">Upload a carousel image:</span>
+              <span class="upload-label-button">Choose File</span>
+            </label>
+            <input type="file" id="image" name="image" style="display:none;" />
+            <input type="submit" name="submitPub" class="button" value="Ajouter Pub">
+          </form>
+        </div>
+      </div>
+
+      <h2>Select Images to Delete</h2>
+      <form id="suppub" method="post" onsubmit="SupprimerPub();event.preventDefault();">
+        <?php
+        // Define the path to the image folder
+        $imagePath = "img/carousel_images/";
+
+        // Get all image files in the folder
+        $images = glob($imagePath . "*.{jpg,png,gif,svg}", GLOB_BRACE);
+
+        // Loop through each image and display it
+        foreach ($images as $image) {
+          echo '<div><label><input type="checkbox" name="imagesToDelete[]" value="' . $image . '">';
+          echo '<img src="' . $image . '" width="100" height="100"></label></div>';
+        }
+        ?>
+        <input type="submit" name="deleteImages" value="Delete Selected Images">
+      </form>
+    </div>
+    <div id="pubfeedback"></div>
+    <?php
+  }
+}

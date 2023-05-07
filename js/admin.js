@@ -1,10 +1,13 @@
 var modif_sec_loaded = 0;
+//sessionStorage.setItem("lastvisitedelement", 4);
+window.onload = function () {
+    if (sessionStorage.getItem("lastvisitedelement") == null) sessionStorage.setItem("lastvisitedelement", 4);
+    console.log('Load bank ' + sessionStorage.getItem("lastvisitedelement"));
+    document.getElementById(sessionStorage.getItem("lastvisitedelement")).click();
+}
 function Upload() {
-    console.log('test2');
-
     var fd = new FormData();
-    var bank = $('#bank_id').val();
-    console.log(bank);
+    var path = 'app/logos/';
 
     var files = $('#file')[0].files;
 
@@ -12,9 +15,10 @@ function Upload() {
     if (files.length > 0) {
 
         fd.append('file', files[0]);
+        fd.append('path', path);
 
         $.ajax({
-            url: 'j2sJDpUgQQmLF5EF/UploadLogo/' + bank,
+            url: 'j2sJDpUgQQmLF5EF/Upload',
             type: 'post',
             data: fd,
             dataType: 'json',
@@ -43,7 +47,7 @@ function Upload() {
     }
 }
 function ModifBanque(bankId) {
-    document.querySelector('.show-at-first').style.display = 'none';
+    sessionStorage.setItem("lastvisitedelement", bankId);
     console.log('Modifier banque ' + bankId);
     var loadingScreen = document.getElementById('loader');
     var content = document.getElementById('modification');
@@ -64,8 +68,30 @@ function ModifBanque(bankId) {
         }
     };
     xhttp.send();
-    modif_sec_loaded = 1;
 };
+
+function ModifApropos(id){
+    sessionStorage.setItem("lastvisitedelement", id);
+    var loadingScreen = document.getElementById('loader');
+    var content = document.getElementById('modification');
+    var modifSpace = document.querySelector('.modifying-window');
+
+    modifSpace.style.display = "grid";
+    content.style.display = "none";
+    loadingScreen.style.display = "block";
+    var xhttp = new XMLHttpRequest();
+    var url = "j2sJDpUgQQmLF5EF/ModifApropos";
+    xhttp.open("GET", url, true);
+    xhttp.onload = function () {
+        if (this.status == 200) {
+            loadingScreen.style.display = "none";
+            content.style.display = "block";
+            modifSpace.style.display = "grid";
+            content.innerHTML = this.responseText;
+        }
+    };
+    xhttp.send();
+}
 
 function AjoutBanque() {
     document.querySelector('.show-at-first').style.display = 'none';
@@ -92,21 +118,21 @@ function AjoutBanque() {
 }
 
 function SupprimBanque(bankId) {
-    var popup = document.getElementById('warning');
-    popup.style.display = 'block';
-    var confirmer = document.getElementById('confirm');
-
-    confirmer.addEventListener('click', () => {
+    const confirmed = confirm("Are you sure you want to delete this bank?");
+    if (confirmed) {
+        sessionStorage.setItem("lastvisitedelement", idbank);
         var xhttp = new XMLHttpRequest();
         var url = "j2sJDpUgQQmLF5EF/DeleteBank/" + bankId;
+        console.log(url);
         xhttp.open("GET", url, true);
         xhttp.onload = function () {
             if (this.status == 200) {
                 console.log('Banque ' + bankId + ' supprime');
             }
         };
-        //location.reload();
-    });
+        xhttp.send();
+        location.reload();
+    }
 };
 
 function closeWarning() {
@@ -118,46 +144,13 @@ function closeUpload() {
     var err = document.getElementById("upload-image");
     err.style.display = "none";
 };
-/*
-document.getElementById('upload-logo').addEventListener('submit', function (event) {
-    event.preventDefault();
-    var xhttp = new XMLHttpRequest();
-    var url = "j2sJDpUgQQmLF5EF/UploadLogo" ;
-    var content = document.getElementById('upload-feedback');
-    xhttp.open("POST", url, true);
-    xhttp.onload = function () {
-        if (this.status == 200) {
-            console.log('Uploaded successfully');
-            content.innerHTML = this.responseText;
-        }
-    };
-    xhttp.send();
-    //document.getElementById("choix").reset();
-    return false;
-
-});
-
-function UploadLogo(event){
-    event.preventDefault();
-    var xhttp = new XMLHttpRequest();
-    var url = "j2sJDpUgQQmLF5EF/UploadLogo";
-    var content = document.getElementById('upload-feedback');
-    xhttp.open("GET", url, true);
-    xhttp.onload = function () {
-        if (this.status == 200) {
-            console.log('Uploaded successfully');
-            content.innerHTML = this.responseText;
-        }
-    };
-    xhttp.send();
-    //document.getElementById("choix").reset();
-
-}*/
 
 
 function ajoutSubmitted() {
+    sessionStorage.setItem("lastvisitedelement", idbank);
     sendData_newbank();
     addbanque(); // show the pop-up
+    location.reload();
     return false;
 };
 function sendData_newbank() {
@@ -183,9 +176,11 @@ function uploadDisplay() {
 //===============================================================================================================================
 
 function MAJBanque() {
+    sessionStorage.setItem("lastvisitedelement", idbank);
     Upload();
     sendData_bank();
     updatebanque(); // show the pop-up
+    location.reload();
     return false;
 };
 function updatebanque() {
@@ -207,13 +202,6 @@ function updatebanque() {
         xhttp.send();
     }
 }
-function sendData_pres() {
-    var xhr = new XMLHttpRequest();
-    var url = "j2sJDpUgQQmLF5EF/updateprestation";
-    var formData = new FormData(document.getElementById("updateprestation"));
-    xhr.open("POST", url, true);
-    xhr.send(formData);
-}
 function sendData_bank() {
     var xhr = new XMLHttpRequest();
     var url = "j2sJDpUgQQmLF5EF/update";
@@ -225,32 +213,29 @@ function sendData_bank() {
     xhr.send(formData);
     console.log('data sent');
 }
-function affichage(data) {
+function affichage() {
     var popup = document.getElementById("popup");
     popup.style.display = "block";
     body.style.overflowY = 'hidden';
-    document.getElementById("updatepres").addEventListener("submit", function (event) {
-        event.preventDefault();
-        var xhttp = new XMLHttpRequest();
-        //  ($id,$nom,$categorie,$prix,$date,$description)
-        var url = "j2sJDpUgQQmLF5EF/updateprestation/" + data + "/" + encodeURIComponent(document.getElementById("nompres").value) + "/" + encodeURIComponent(document.getElementById("categoriepres").value) + "/" + encodeURIComponent(document.getElementById("prixpres").value) + "/" + encodeURIComponent(document.getElementById("datevaleur").value) + "/" + encodeURIComponent(document.getElementById("description").value);
-        console.log(url);
-        xhttp.open("GET", url, true);
-        var error = document.getElementById("error");
-        xhttp.onload = function () {
-            if (this.status == 200) {
-                error.innerHTML = this.responseText;
-            }
-        }
-        xhttp.send();
-        //closePopup() ;
-        return false;
-    });
 }
-function updateprestation(data) {
+
+function deletepres(id, idbank) {
+    sessionStorage.setItem("lastvisitedelement", idbank);
     var xhttp = new XMLHttpRequest();
     // Construct the URL for the PHP function with the form values as parameters
-    var url = "j2sJDpUgQQmLF5EF/updateprestation/" + data;
+    var url = "j2sJDpUgQQmLF5EF/Deleteprestation/" + id;
+    xhttp.open("GET", url, true);
+    xhttp.send();
+    location.reload();
+
+}
+function updateprestation(data, idbank) {
+    sessionStorage.setItem("lastvisitedelement", idbank);
+    console.log('did it get to this point?');
+    console.log(data);
+    var xhttp = new XMLHttpRequest();
+    //  ($id,$nom,$categorie,$prix,$date,$description)
+    var url = "j2sJDpUgQQmLF5EF/updateprestation/" + data + "/" + encodeURIComponent(document.getElementById("upnompres").value) + "/" + encodeURIComponent(document.getElementById("upcategoriepres").value) + "/" + encodeURIComponent(document.getElementById("upprixpres").value) + "/" + encodeURIComponent(document.getElementById("updatevaleur").value) + "/" + encodeURIComponent(document.getElementById("updescription").value);
     console.log(url);
     xhttp.open("GET", url, true);
     var error = document.getElementById("error");
@@ -260,9 +245,149 @@ function updateprestation(data) {
         }
     }
     xhttp.send();
+    closePopup();
+    location.reload();
 }
 function closePopup() {
     var popup = document.getElementById("popup");
     popup.style.display = "none";
+}
+function NewInfoPres() {
+    document.getElementById('ajprestation').style.display = 'block';
+}
+function addpres(idbank) {
+    sessionStorage.setItem("lastvisitedelement", idbank);
+    var xhttp = new XMLHttpRequest();
+    // Construct the URL for the PHP function with the form values as parameters
+    var url = "j2sJDpUgQQmLF5EF/addprestation/" + encodeURIComponent(document.getElementById("idbank").value) + "/" + encodeURIComponent(document.getElementById("nompres").value) + "/" + encodeURIComponent(document.getElementById("categoriepres").value) + "/" + encodeURIComponent(document.getElementById("prixpres").value) + "/" + encodeURIComponent(document.getElementById("datevaleur").value) + "/" + encodeURIComponent(document.getElementById("description").value); xhttp.open("GET", url, true);
+    xhttp.send();
+    closeAjPres();
+    location.reload();
+}
+function closeAjPres() {
+    document.getElementById('ajprestation').style.display = 'none';
+}
+
+function ModifPub(id) {
+    sessionStorage.setItem("lastvisitedelement", id);
+    var loadingScreen = document.getElementById('loader');
+    var content = document.getElementById('modification');
+    var modifSpace = document.querySelector('.modifying-window');
+
+    modifSpace.style.display = "grid";
+    content.style.display = "none";
+    loadingScreen.style.display = "block";
+    var xhttp = new XMLHttpRequest();
+    var url = "j2sJDpUgQQmLF5EF/ModifPub";
+    xhttp.open("GET", url, true);
+    xhttp.onload = function () {
+        if (this.status == 200) {
+            loadingScreen.style.display = "none";
+            content.style.display = "block";
+            modifSpace.style.display = "grid";
+            content.innerHTML = this.responseText;
+        }
+    };
+    xhttp.send();
+}
+
+function AjouterSiteLogo(){
+    var fd = new FormData();
+    var path = 'img/';
+
+    var files = $('#sitelogo')[0].files;
+
+    // Check file selected or not
+    if (files.length > 0) {
+
+        fd.append('file', files[0]);
+        fd.append('path', path);
+        $.ajax({
+            url: 'j2sJDpUgQQmLF5EF/Upload',
+            type: 'post',
+            data: fd,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.status == 1) {
+                    console.log(response.name);
+                    location.reload();
+                } else {
+                    alert('File not uploaded');
+                }
+            }
+        });
+    }
+
+}
+
+function AjouterPub() {
+    var fd = new FormData();
+    var path = 'img/carousel_images/';
+
+    var files = $('#image')[0].files;
+
+    // Check file selected or not
+    if (files.length > 0) {
+
+        fd.append('file', files[0]);
+        fd.append('path', path);
+        $.ajax({
+            url: 'j2sJDpUgQQmLF5EF/Upload',
+            type: 'post',
+            data: fd,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.status == 1) {
+                    console.log(response.name);
+                    location.reload();
+                } else {
+                    alert('File not uploaded');
+                }
+            }
+        });
+    }
+
+}
+
+function SupprimerPub() {
+    SuppPub();
+    getDelresp();
+    location.reload();
+}
+
+function SuppPub() {
+    var xhttp = new XMLHttpRequest();
+    // Construct the URL for the PHP function with the form values as parameters
+    var url = "j2sJDpUgQQmLF5EF/deleteImage";
+    var data = new FormData(document.getElementById("suppub"));
+    xhttp.open("POST", url, true);
+    xhttp.send(data);
+}
+
+function SendApropos() {
+    send_info();
+    updateApropo();
+    return false;
+}
+
+function send_info()
+{
+  var xhr = new XMLHttpRequest();
+  var url = "j2sJDpUgQQmLF5EF/updateApropos";
+  var formData = new FormData(document.getElementById("updateProposhh"));
+  xhr.open("POST", url, true);
+  xhr.send(formData); 
+}
+function updateApropo()
+{
+  var xhttp = new XMLHttpRequest();
+  // Construct the URL for the PHP function with the form values as parameters
+  var url = "j2sJDpUgQQmLF5EF/updateApropos";
+  xhttp.open("GET", url, true);
+  xhttp.send(); 
 }
 

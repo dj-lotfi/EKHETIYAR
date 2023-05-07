@@ -118,16 +118,19 @@ class BanqueModel extends Model
 
     function generateid()
     {
-        $i = 10;
-        $continue = true;
-        while ($continue) {
-            $tab = $this->_db->query("SELECT id_banque FROM banques WHERE id_banque={$i}");
-            if (sizeof($tab) == 0)
-                $continue = false;
-            else
-                $i++;
+        $i = 10 ; 
+        $continue = true ; //DB_USER_ADMIN
+        $conn = mysqli_connect(DB_HOST_ADMIN, DB_USER_ADMIN, DB_PASSWORD_ADMIN, DB_NAME_ADMIN);
+        while($continue)
+        {
+            $sql = "SELECT COUNT(*) AS count FROM banques WHERE id_banque = {$i}";
+            $result = mysqli_query($conn, $sql);
+            $count = mysqli_fetch_assoc($result)['count'];
+            if($count==0)$continue = false  ;
+            else $i++ ;
         }
-        return $i;
+        mysqli_close($conn);
+        return $i ;
     }
 }
 ?>

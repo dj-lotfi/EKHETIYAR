@@ -51,7 +51,7 @@ class AdminModel extends Model_admin
         $this->_modelName = str_replace(' ', '', ucwords(str_replace('_', ' ', $this->_table)));
         $this->delete('id_banque', $IdBank);
         $this->DeletePrestationBanque($IdBank);
-        $this->DeleteCommentaireBanque($IdBank);
+        //$this->DeleteCommentaireBanque($IdBank);
         //$this->DeleteAgenceBanque($IdBank);
         $this->NombreBanque = -1;
     }
@@ -138,6 +138,13 @@ class AdminModel extends Model_admin
         $this->_table = 'a_propos';
         $this->_modelName = str_replace(' ', '', ucwords(str_replace('_', ' ', $this->_table)));
         $this->update(1, $NewInfo, "id");
+    }
+
+    public function getApropos()
+    {
+        $contact = $this->_db->query("select * from  a_propos");
+        $res = $contact->getFirstResult();
+        return $res;
     }
     /*public function UpdateAgence($Agence)
     {
