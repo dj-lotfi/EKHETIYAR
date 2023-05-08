@@ -14,22 +14,26 @@ class AdminController extends Controller
     public function addbanque()
     {
         if (isset($_POST['nomj'])) {
+
             $response['isset'] = 'it is set';
             $adm = new AdminModel();
             $bn = new BanqueModel();
-            $newbanque = array(
-                "id_banque" => $bn->generateid(),
-                "nom" => $_POST['nomj'],
-                "abb" => $_POST['abbreviationj'],
-                "logo" => $_POST['logoj'],
-                "adresse_siege_social" => $_POST['siege_socialj'],
-                "telephone" => $_POST['telephonej'],
-                "fax" => $_POST['faxj'],
-                "rating" => 0,
-                "lienmap" => $_POST['mapj'],
-                "site_banque" => $_POST['sitej'],
-            );
+            if ($_FILES['newbanklogo']['name'] != "") {
+                $newbanque = array(
+                    "id_banque" => $bn->generateid(),
+                    "nom" => $_POST['nomj'],
+                    "abb" => $_POST['abbreviationj'],
+                    "logo" => $_FILES['newbanklogo']['name'],
+                    "adresse_siege_social" => $_POST['siege_socialj'],
+                    "telephone" => $_POST['telephonej'],
+                    "fax" => $_POST['faxj'],
+                    "rating" => 0,
+                    "lienmap" => $_POST['mapj'],
+                    "site_banque" => $_POST['sitej'],
+                );
+            }
             $adm->AddBanque($newbanque);
+
         }
         echo json_encode($response);
 
@@ -136,13 +140,17 @@ class AdminController extends Controller
     }
     function Upload()
     {
-        if (isset($_FILES['file']['name']) || isset($_FILES['image']['name']) || isset($_FILES['sitelogo']['name'])) {
+        if (isset($_FILES['file']['name']) || isset($_FILES['image']['name']) || isset($_FILES['sitelogo']['name']) || isset($_FILES['newbanklogo']['name'])) {
 
             /* Getting file name */
-            if (isset($_FILES['file']['name'])) {
+            if ($_FILES['file']['name'] != "") {
                 $filename = $_FILES['file']['name'];
             } else {
-                $filename = $_FILES['image']['name'];
+                if ($_FILES['image']['name'] != "") {
+                    $filename = $_FILES['image']['name'];
+                } else {
+                    $filename = $_FILES['newbanklogo']['name'];
+                }
             }
             $path = $_POST['path'];
 
@@ -221,7 +229,7 @@ class AdminController extends Controller
                     "email" => $_POST["email"],
                     "telephone" => $_POST["tele"],
                 );
-            }else{
+            } else {
                 $tab = array(
                     "id" => 1,
                     "site_logo" => $_POST["Logo_site"],

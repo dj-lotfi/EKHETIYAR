@@ -1,7 +1,7 @@
 var modif_sec_loaded = 0;
 //sessionStorage.setItem("lastvisitedelement", 4);
 window.onload = function () {
-    if (sessionStorage.getItem("lastvisitedelement") == null) sessionStorage.setItem("lastvisitedelement", 4);
+    if (sessionStorage.getItem("lastvisitedelement") == null || document.getElementById(sessionStorage.getItem("lastvisitedelement")) == null) sessionStorage.setItem("lastvisitedelement", 4);
     console.log('Load bank ' + sessionStorage.getItem("lastvisitedelement"));
     document.getElementById(sessionStorage.getItem("lastvisitedelement")).click();
 }
@@ -93,8 +93,8 @@ function ModifApropos(id){
     xhttp.send();
 }
 
-function AjoutBanque() {
-    document.querySelector('.show-at-first').style.display = 'none';
+function AjoutBanque(id) {
+    sessionStorage.setItem("lastvisitedelement", id);
     var loadingScreen = document.getElementById('loader');
     var content = document.getElementById('modification');
     var modifSpace = document.querySelector('.modifying-window');
@@ -114,7 +114,7 @@ function AjoutBanque() {
         }
     };
     xhttp.send();
-    modif_sec_loaded = 1;
+    
 }
 
 function SupprimBanque(bankId) {
@@ -147,11 +147,12 @@ function closeUpload() {
 
 
 function ajoutSubmitted() {
-    sessionStorage.setItem("lastvisitedelement", idbank);
+    UploadnewbqLogo();
+    console.log('uploaded');
     sendData_newbank();
     addbanque(); // show the pop-up
-    location.reload();
-    return false;
+    //location.reload();
+    //return false;
 };
 function sendData_newbank() {
     var xhr = new XMLHttpRequest();
@@ -296,6 +297,37 @@ function AjouterSiteLogo(){
     var path = 'img/';
 
     var files = $('#sitelogo')[0].files;
+
+    // Check file selected or not
+    if (files.length > 0) {
+
+        fd.append('file', files[0]);
+        fd.append('path', path);
+        $.ajax({
+            url: 'j2sJDpUgQQmLF5EF/Upload',
+            type: 'post',
+            data: fd,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.status == 1) {
+                    console.log(response.name);
+                    location.reload();
+                } else {
+                    alert('File not uploaded');
+                }
+            }
+        });
+    }
+
+}
+
+function UploadnewbqLogo(){
+    var fd = new FormData();
+    var path = 'app/logos/';
+
+    var files = $('#newbanklogo')[0].files;
 
     // Check file selected or not
     if (files.length > 0) {

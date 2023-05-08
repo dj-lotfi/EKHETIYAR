@@ -36,7 +36,7 @@ class AdminView extends View
         <label for="banques" class="nav-label">
           <p>Banques</p>
           <ul>
-            <li class="nav-item" id="add_bnq" onclick="AjoutBanque()" style="color: Blue;">
+            <li class="nav-item" id="add_bnq" onclick="AjoutBanque(this.id)" style="color: Blue;">
               <p>
                 Ajouter
               </p>
@@ -124,7 +124,7 @@ class AdminView extends View
   {
     ?>
     <div id="addbanquePop" class="modifying-window">
-      <form id="addbanque" method="post" onsubmit="ajoutSubmitted();event.preventDefault();">
+      <form id="addbanque" method="post" enctype='multipart/form-data' onsubmit="event.preventDefault();ajoutSubmitted();">
         <div class="general">
           <input class="bank-name" type="text" name="nomj" placeholder="Nom">
           <input class="abbreviation" type="text" name="abbreviationj" placeholder="Abbreviation">
@@ -134,10 +134,14 @@ class AdminView extends View
           <input class="tel" type="text" name="telephonej" placeholder="Phone number">
           <input class="fax" type="text" name="faxj" placeholder="Fax">
           <input type="text" name="sitej" placeholder="Site officiel">
-          <input class="logo" type="text" name="logoj">
+          <label for="newbanklogo" class="upload-label">
+            <span class="upload-label-text">Upload Bank Logo</span>
+            <span class="upload-label-button">Choose File</span>
+          </label>
+          <input type="file" id="newbanklogo" name="newbanklogo" style="display:none;" />
         </div>
-        <input class="map-link" type="text" name="mapj">
-        <button name="submit" type="submit" class="button">Ajouter</button>
+        <input class="map-link" type="text" name="mapj" placeholder="Map Agences">
+        <input id="ajnewbank" name="submit" type="submit" class="button" value="Ajouter"/>
       </form>
     </div>
     <?php
