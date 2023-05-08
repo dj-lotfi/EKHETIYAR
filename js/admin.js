@@ -1,3 +1,26 @@
+var navItems = document.querySelectorAll('.nav-item');
+
+navItems.forEach(navItem => {
+  var expnaderButton = navItem.querySelector('p');
+  var expander = navItem.querySelector('.item-list__container');
+
+  expnaderButton.onclick = () => {
+    // Remove the "expanded" class from all "item-list__container" elements
+    navItems.forEach(item => {
+      var container = item.querySelector('.item-list__container');
+      if (container && container !== expander) {
+        container.classList.remove('expanded');
+      }
+    });
+
+    // Toggle the "expanded" class only on the clicked "item-list__container" element
+    if (expander) {
+      expander.classList.toggle('expanded');
+    }
+  };
+});
+
+
 var modif_sec_loaded = 0;
 //sessionStorage.setItem("lastvisitedelement", 4);
 window.onload = function () {
