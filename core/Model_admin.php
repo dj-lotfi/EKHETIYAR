@@ -94,7 +94,7 @@ class Model_admin
         {
             return false;
         }
-        return $this->_db->update($this->_table, $id, $fields,$indexid);
+        return $this->_db->update($this->_table, $id, $indexid,$fields);
     }
 
     public function delete($indexid,$id ='')
