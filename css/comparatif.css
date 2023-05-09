@@ -57,6 +57,16 @@
     background-color: var(--neutral-500);
     padding: 1rem;
     border-radius: 12.5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bank-logo__cmp img{
+    width: 100%;
+    max-height: 75px;
+    object-fit: contain;
 }
 
 select {
@@ -234,7 +244,7 @@ input[type="submit"]:hover {
 
 }
 
-@media screen and (580px <= width < 660px) {
+@media screen and (580px <=width < 660px) {
 
     .category-input:nth-child(1):checked~.label-accordion>.category-label:nth-child(1),
     .category-input:nth-child(2):checked~.label-accordion>.category-label:nth-child(2),
@@ -245,7 +255,7 @@ input[type="submit"]:hover {
 
 }
 
-@media screen and (660px <= width < 900px) {
+@media screen and (660px <=width < 900px) {
 
     .category-input:nth-child(1):checked~.label-accordion>.category-label:nth-child(1),
     .category-input:nth-child(2):checked~.label-accordion>.category-label:nth-child(2),
@@ -335,7 +345,7 @@ input[type="submit"]:hover {
     transition: fill 500ms ease-in-out 50ms;
 }
 
-.category-label:hover svg{
+.category-label:hover svg {
     fill: var(--main-950);
 }
 
@@ -369,7 +379,7 @@ input[type="submit"]:hover {
 }
 
 .prestation>* {
-    width: clamp( 300px, 9.564293305vw + 269.3942614px, 390px);
+    width: clamp(300px, 9.564293305vw + 269.3942614px, 390px);
 
     margin: 1rem 0 0.5rem 0;
 }
