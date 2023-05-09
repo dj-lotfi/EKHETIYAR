@@ -41,13 +41,10 @@ function loadbanks() {
       content.style.display = "block";
       
       content.innerHTML = xhr.responseText;
-      content.load("js/custom.js");      
+      
     }
   }
-  
-
   xhr.send(data);
-
 
   
 
