@@ -2,9 +2,6 @@
 
 class Qui_sommes_nousController extends Controller
 {
-
-    private $model ;
-
     public function __construct($controller, $action)
     {
         parent::__construct($controller, $action);

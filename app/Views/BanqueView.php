@@ -4,7 +4,6 @@ class BanqueView extends View
     function displayBank($bank)
     {
 
-        $pc = new PrestationController('','');
         $nom = $bank->getNom();
         $abbr = $bank->getAbbr();
         $logo = $bank->getLogo();
@@ -50,14 +49,13 @@ class BanqueView extends View
                     <div>
                         <div><a href="<?php echo $site_banque ?>" target="_blank" class="site-link"><?php echo $site_banque ?></a>
                         </div>
-                        
-                        <?php  $pc->displayPrestation($bank->getId_banque()) ?>
-
+                        <div class="prestations-button vertically-centered">Prestations
+                            <div class="prestations-button__handler" data-id="<?= $bank->getId_banque() ?>">?</div>
+                        </div>
                         <div class="map__container">
                             <iframe src="<?= $lienmap ?>" frameborder="0" class="hide-map-bar"></iframe>
                         </div>
                     </div>
-                    
                 </div>
                 <button class="view-button">
                     <input type="checkbox" id="ViewMoreLess<?= $bank->getId_banque() ?>">
@@ -115,7 +113,7 @@ class BanqueView extends View
         }
     
     
-    
+        //var_dump($o);
 
    }
 

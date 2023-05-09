@@ -23,7 +23,6 @@ function openPopup() {
         err.style.display = "none";
 
 
-
         var loadingScreen = document.getElementById('loader');
         // Display the popup
         var content = document.getElementById("comparaison");
@@ -58,20 +57,6 @@ function closePopup() {
     var err = document.getElementById("error");
     err.style.display = "none";
 };
-
-function changelogo() {
-    
-    var img1 = document.getElementById("b1");
-    var img2 = document.getElementById("b2");
-    
-
-    var selectedValue1 = document.getElementById('bank1').options[document.getElementById('bank1').selectedIndex].id;
-    var selectedValue2 = document.getElementById('bank2').options[document.getElementById('bank2').selectedIndex].id;
-
-    img1.src = "/ProjectFileV5/app/logos/"  + selectedValue1 ;
-    img2.src = "/ProjectFileV5/app/logos/"  +selectedValue2 ;
-
-}
 
 
 

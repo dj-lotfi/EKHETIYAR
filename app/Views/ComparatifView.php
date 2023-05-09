@@ -1,18 +1,6 @@
 <?php
 class ComparatifView extends View
 {
-
-    public function logoCorrespondense($banks,$id)
-    {
-        foreach ($banks as $object) {
-            if ($object->id_banque == $id) {
-              return $object->logo;
-            }
-          }
-        
-          return null;
-    }
-
     public function render()
     {
         $this->setSiteTitle('Comparatif');
@@ -34,34 +22,30 @@ class ComparatifView extends View
             <main class="comparatif-layout">
                 <?php
                 $model = new BanqueModel();
-                $b = array();
-                $b= $model->getBanknames();
-
                 ?>
                 <div class="container">
                     <h1>Comparaison</h1>
                     <form id="choix" method="post">
                         <div class="select-container">
                             <div class="vertically-centered">
-                                <div class="bank-logo__cmp"><img  src="" alt="" id="b1"></div>
-                                <select id="bank1" name="bank1" onchange="changelogo()">
-                                    <option value="disabled1" disabled selected="selected" >--Selectioner une banque</option>
-                                    <?php for ($i = 0; $i < count($b); $i++) { ?>
-                                        <option value="<?php echo $b[$i]->id_banque; ?>" id="<?php echo $b[$i]->logo ?>"><?php echo $b[$i]->nom; ?></option>
+                                <div class="bank-logo__cmp"><img class="" src="" alt=""></div>
+                                <select id="bank1" name="bank1">
+                                    <option value="disabled1" disabled selected="selected">--Selectioner une banque</option>
+                                    <?php for ($i = 1; $i <= 20; $i++) { ?>
+                                        <option value="<?php echo $i; ?>"><?php echo $model->getBanque($i)->nom; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
                             <div class="vertically-centered">
-                                <div class="bank-logo__cmp"><img  src="" alt="" id="b2"></div>
-                                <select id="bank2" name="bank2" onchange="changelogo()">
-                                    <option value="disabled2" disabled selected="selected" >--Selectioner une banque</option>
-                                    <?php for ($i = 0; $i < count($b); $i++) { ?>
-                                        <option value="<?php echo $b[$i]->id_banque; ?>" id="<?php echo $b[$i]->logo ?>"><?php echo $b[$i]->nom; ?></option>
+                                <div class="bank-logo__cmp"><img class="" src="" alt=""></div>
+                                <select id="bank2" name="bank2">
+                                    <option value="disabled2" disabled selected="selected">--Selectioner une banque</option>
+                                    <?php for ($i = 1; $i <= 20; $i++) { ?>
+                                        <option value="<?php echo $i; ?>"><?php echo $model->getBanque($i)->nom; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
-                            <input type="submit" id="SubmitBtn" value="Comparer" >
-                            
+                            <input type="submit" id="SubmitBtn" value="Comparer">
                         </div>
                     </form>
                 </div>
@@ -94,19 +78,19 @@ class ComparatifView extends View
 
     public function displayComparaison($bank1, $bank2)
     {
-        $pres1 = array();
-        $pres2 = array();
-
-
         $mod = new PrestationModel();
-
-        $bm = new BanqueModel();
-
-        $pres1 = $mod->getPrestationscom($bank1);
-        $pres2 = $mod->getPrestationscom($bank2);
+        $pres1 = $mod->getPrestations($bank1);
+        $pres2 = $mod->getPrestations($bank2);
         $bank = new BanqueModel();
 
-        $categories = array('Gestion et tenue de compte','Opération de paiement','Monétique/CARTE C.I.B','Monétique/Carte internationale');
+        for ($k = 0; $k < count(min($pres1, $pres2)); $k++) {
+            $cat1[$k] = $pres1[$k]->categorie;
+            $cat2[$k] = $pres2[$k]->categorie;
+
+        }
+
+        $categories = array_unique(array_merge($cat1, $cat2));
+        unset($cat1, $cat2);
 
         //var_dump($categories);
         ?>
@@ -152,166 +136,60 @@ class ComparatifView extends View
                 ?>
                 <ul class="category-slide">
                     <?php
-                    for ($i = 0; $i < count($pres1); $i++) {
-                        $trouv = 0;
-                        $j = 0;
-                        while ( ($trouv == 0) && ($j < count($pres2)) ) {
-                            if ($pres1[$i]->getNom() == $pres2[$j]->getNom() && $pres1[$i]->getCategorie() == $category && $pres2[$j]->getCategorie() == $category ) {
-                                $trouv =1;
-                            } else {
-                                $j++;
-                            }
-                        }
-
-                        if ($trouv == 1 && ($pres1[$i]->getPrix() != null || $pres2[$j]->getPrix() != null)) {
+                    for ($i = 0; $i < count(min($pres1, $pres2)); $i++) {
+                        if ($pres1[$i]->getNom() == $pres2[$i]->getNom() && $pres1[$i]->getCategorie() == $category && $pres2[$i]->getCategorie() == $category /*&& $pres1[$i]->getPrix() != null && $pres2[$i]->getPrix() != null*/) {
                             ?>
                             <li class="prestation">
                                 <div class="name">
                                     <?php echo $pres1[$i]->getNom() ?>
                                 </div>
                                 <div class="values">
-                                    <?php if (($pres1[$i]->getPrix() < $pres2[$j]->getPrix() && $pres1[$i]->getPrix() != null ) || $pres2[$j]->getPrix() == null) { ?>
+                                    <?php if ($pres1[$i]->getPrix() < $pres2[$i]->getPrix()) { ?>
                                         <div class="lower">
                                             <div class="value">
-                                                <?php echo $pres1[$i]->getPrix(); ?><span class="currency"><?php if($pres1[$i]->getPrix() != null){echo $pres1[$i]->getiso();} ?></span>
+                                                <?php echo $pres1[$i]->getPrix(); ?><span class="currency"></span>
                                             </div>
-                                            <div><?php echo $pres1[$i]->getDateValeur(); ?></div>
+                                            <div></div>
                                         </div>
                                         <div class="higher">
                                             <div class="value">
-                                                <?php if($pres2[$j]->getPrix() != null){echo $pres2[$j]->getPrix();} else {echo "NC";} ?><span class="currency"><?php if($pres2[$j]->getPrix() != null){echo $pres2[$j]->getiso();} ?></span>
+                                                <?php echo $pres2[$i]->getPrix(); ?><span class="currency"></span>
                                             </div>
-                                            <div><?php echo $pres2[$j]->getDateValeur(); ?></div>
+                                            <div></div>
                                         </div>
                                     </div>
                                     <?php ;
-                                    } elseif (($pres1[$i]->getPrix() > $pres2[$j]->getPrix() && $pres2[$j]->getPrix() != null) || $pres1[$i]->getPrix() == null) { ?>
+                                    } elseif ($pres1[$i]->getPrix() > $pres2[$i]->getPrix()) { ?>
                                     <div class="higher">
                                         <div class="value">
-                                            <?php if($pres1[$i]->getPrix() != null) {echo $pres1[$i]->getPrix();} else {echo "NC";} ?><span class="currency"><?php if($pres1[$i]->getPrix() != null){echo $pres1[$i]->getiso();} ?></span>
+                                            <?php echo $pres1[$i]->getPrix(); ?><span class="currency"></span>
                                         </div>
-                                        <div><?php echo $pres1[$i]->getDateValeur(); ?></div>
+                                        <div></div>
                                     </div>
                                     <div class="lower">
                                         <div class="value">
-                                            <?php echo $pres2[$j]->getPrix(); ?><span class="currency"><?php if($pres2[$j]->getPrix() != null){echo $pres2[$j]->getiso();} ?></span>
+                                            <?php echo $pres2[$i]->getPrix(); ?><span class="currency"></span>
                                         </div>
-                                        <div><?php echo $pres2[$j]->getDateValeur(); ?></div>
+                                        <div></div>
                                     </div>
                                     <?php ;
                                     } else { ?>
                                     <div>
                                         <div class="value">
-                                            <?php echo $pres1[$i]->getPrix(); ?><span class="currency"><?php if($pres1[$i]->getPrix() != null){echo $pres1[$i]->getiso();} ?></span>
+                                            <?php echo $pres1[$i]->getPrix(); ?><span class="currency"></span>
                                         </div>
-                                        <div><?php echo $pres1[$i]->getDateValeur(); ?></div>
+                                        <div></div>
                                     </div>
                                     <div>
                                         <div class="value">
-                                            <?php echo $pres2[$j]->getPrix(); ?><span class="currency"><?php if($pres2[$j]->getPrix() != null){echo $pres1[$i]->getiso();} ?></span>
+                                            <?php echo $pres2[$i]->getPrix(); ?><span class="currency"></span>
                                         </div>
-                                        <div><?php echo $pres2[$j]->getDateValeur(); ?></div>
+                                        <div></div>
                                     </div>
                                     <?php ;
                                     }
                         }
-
-                    }
-
-                    for ($i=0; $i < count($pres1) ; $i++) { 
-                        if ($pres1[$i]->getCategorie() == $category) {
-                            $trouv = 0;
-                        } else {
-                            $trouv = 1;
-                        }
-                        $j = 0;
-                        while ( ($trouv == 0) && ($j < count($pres2)) ) {
-                            if ($pres1[$i]->getCategorie() == $category) {
-                                if ($pres1[$i]->getNom() == $pres2[$j]->getNom()  && $pres2[$j]->getCategorie() == $category ) {
-                                    $trouv =1;
-                                } else {
-                                    $j++;
-                                }
-                            } else {
-                                $j++;
-                            }
-                            
-                        }
-
-                        if ($trouv == 0 && $pres1[$i]->getPrix() != null) {
-                            ?>
-                            <li class="prestation">
-                                <div class="name">
-                                    <?php echo $pres1[$i]->getNom() ?>
-                                </div>
-                                <div class="values">
-                                    <div class="lower">
-                                        <div class="value">
-                                            <?php echo $pres1[$i]->getPrix(); ?><span class="currency"><?php if($pres1[$i]->getPrix() != null){echo $pres1[$i]->getiso();} ?></span>
-                                        </div>
-                                        <div><?php echo $pres1[$i]->getDateValeur(); ?></div>
-                                    </div>
-                                    <div class="higher">
-                                        <div class="value">
-                                            <?php echo 'NC'; ?><span class="currency"></span>
-                                        </div>
-                                        <div></div>
-                                    </div>
-                                </div>
-                            <?php ;
-
-                        }
-                    }
-
-                    for ($i=0; $i < count($pres2) ; $i++) { 
-                        if ($pres2[$i]->getCategorie() == $category  ) {
-                            $trouv = 0;
-                        } else {
-                            $trouv = 1;
-                        }
-
-                        $j = 0;
-                        while ( ($trouv == 0) && ($j < count($pres1)) ) {
-                            if ($pres2[$i]->getCategorie() == $category) {
-                                if ($pres2[$i]->getNom() == $pres1[$j]->getNom() && $pres1[$j]->getCategorie() == $category) {
-                                    $trouv =1;
-                                } else {
-                                    $j++;
-                                }
-                            } else {
-                                $j++;
-                            }
-                        }
-
-                        if ($trouv == 0 && $pres2[$i]->getPrix() != null) {
-
-                            ?>
-                            <li class="prestation">
-                                <div class="name">
-                                    <?php echo $pres2[$i]->getNom() ?>
-                                </div>
-                                <div class="values">
-                                    <div class="higher">
-                                        <div class="value">
-                                            <?php echo 'NC'; ?><span class="currency"></span>
-                                        </div>
-                                        <div></div>
-                                    </div>
-                                    <div class="lower">
-                                        <div class="value">
-                                            <?php echo $pres2[$i]->getPrix(); ?><span class="currency"><?php if($pres2[$i]->getPrix() != null){echo $pres2[$i]->getiso();} ?></span>
-                                        </div>
-                                        <div><?php echo $pres2[$i]->getDateValeur(); ?></div>
-                                    </div>
-                            <?php ;
-    
-                        }
-
-                    }
-                    
-                    
-                    
-                    ?>
+                    } ?>
 
                 </ul>
 
