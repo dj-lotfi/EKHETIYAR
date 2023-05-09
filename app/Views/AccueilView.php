@@ -47,7 +47,7 @@ class AccueilView extends view
 
     public function generateCarousel()
     { ?>
-        <div class="slider-container" style="max-width: 800px; height: 400px;">
+        <div class="slider-container" style="max-width: 1000px;">
             <div class="slider" style="width: 100%;">
                 <?php
                 $this->imageFinder();

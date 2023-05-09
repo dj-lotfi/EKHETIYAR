@@ -9,14 +9,15 @@
 .slider {
     display: flex;
     transition: transform ease-in-out;
-    height: 100%;
+    width: 90%;
     transition-duration: 0.5s;
+    margin: 0 auto;
 }
 
 .slider img {
     flex-shrink: 0;
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 2 * clamp(25px, 5.833333333vw + 1.666666667px, 60px));
+    margin: 0 clamp(25px, 5.833333333vw + 1.666666667px, 60px);
     object-fit: contain;
 }
 
@@ -26,7 +27,7 @@
     transform: translateY(-50%);
     display: flex;
     cursor: pointer;
-    width: clamp(25px, 2.5vw + 15px, 40px);
+    width: clamp(25px, 5.833333333vw + 1.666666667px, 60px);
 
     fill: var(--main-500);
 
@@ -642,107 +643,6 @@ select option {
 .site-link:hover {
     color: var(--main-900);
     transition: color 250ms ease-in;
-}
-
-.prestations-button {
-    display: flex;
-    font-family: 'Rubik';
-    font-size: var(--fs-400);
-    font-weight: 700;
-    color: var(--main-900);
-}
-
-.prestations-button__handler {
-    font-family: sans-serif;
-    font-weight: bold;
-    font-size: var(--fs-200);
-    margin-left: 5px;
-    color: var(--main-900);
-    cursor: pointer;
-    width: 2ch;
-    height: 2ch;
-    display: inline-flex;
-    /* you can also use 'grid' or just 'flex'*/
-    justify-content: center;
-    align-items: center;
-    border: 2px solid var(--main-900);
-    padding: calc(1ch - 2px);
-    border-radius: 100vw;
-    transition: all 100ms ease-in;
-}
-
-.prestations-button__handler:hover {
-    border: 2px solid var(--main-300);
-    color: var(--main-300);
-    transition: all 250ms ease-in;
-}
-
-.prestations-content {
-    margin-left: 2.5%;
-}
-
-.category {
-    color: var(--main-800);
-    text-transform: uppercase;
-    font-family: var(--ff-title);
-    font-size: calc(var(--fs-400) + 2.5px);
-    font-weight: 700;
-    margin-top: 1rem;
-}
-
-.category:first-child {
-    margin-top: 4rem;
-}
-
-.prestations {
-    margin-left: 2.75%;
-}
-
-.prestation {
-    padding: 0;
-    margin: 0;
-    margin-bottom: 0.4rem;
-    font-family: var(--ff-general);
-    font-size: var(--fs-400);
-    display: flex;
-    flex-wrap: wrap;
-    transition: transform 100ms linear;
-}
-
-.prestation:first-child {
-    margin-top: 0.5rem;
-}
-
-
-.prestation:hover,
-.prestation:focus {
-    transform: scale(1.1) translateX(5vw);
-    transition: transform 200ms ease-in-out;
-}
-
-.prestation-name {
-    color: var(--main-950);
-}
-
-.prestation-name::after {
-    content: " :";
-    font-weight: bold;
-    margin-right: 0.6rem;
-    color: var(--main-800);
-}
-
-.prestation-value {
-    display: flex;
-    text-transform: uppercase;
-    color: var(--main-500);
-}
-
-.prestation-value p {
-    margin: 0;
-}
-
-.prestation-value p:not(:first-child) {
-    margin-left: 0.6rem;
 }
 
 .map__container {

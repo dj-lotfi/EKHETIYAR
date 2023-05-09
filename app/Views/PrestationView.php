@@ -58,11 +58,10 @@ class PrestationView extends View
     {
         ?>
         <div class="prestation-layout">
-            <input class="category-input" type="radio" name="label-accordion" id="CAT-1<?php echo $id ?>" checked>
-            
-            <input class="category-input" type="radio" name="label-accordion" id="CAT-3<?php echo $id ?>">
-            <input class="category-input" type="radio" name="label-accordion" id="CAT-4<?php echo $id ?>">
-            <input class="category-input" type="radio" name="label-accordion" id="CAT-2<?php echo $id ?>">
+            <input class="category-input" type="radio" name="label-accordion<?php echo $id ?>" id="CAT-1<?php echo $id ?>" checked>
+            <input class="category-input" type="radio" name="label-accordion<?php echo $id ?>" id="CAT-3<?php echo $id ?>">
+            <input class="category-input" type="radio" name="label-accordion<?php echo $id ?>" id="CAT-4<?php echo $id ?>">
+            <input class="category-input" type="radio" name="label-accordion<?php echo $id ?>" id="CAT-2<?php echo $id ?>">
 
             <div class="prestations-accordion">
                 
@@ -97,7 +96,7 @@ class PrestationView extends View
                                                     echo $p[$i]->getPrix(); ?>
                                             </p>
                                             <?php if (($p[$i]->getPrix() != null) && ($p[$i]->getPrix() != '?') && ($p[$i]->getPrix() != '')) { ?>
-                                                <p>
+                                                <p style="font-size:var(--fs-200);">
                                                     <?php echo $p[$i]->getDateValeur(); ?>
                                                 </p>
                                             <?php } ?>
