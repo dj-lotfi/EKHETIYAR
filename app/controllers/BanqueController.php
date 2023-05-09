@@ -88,7 +88,7 @@ class BanqueController extends Controller
         if (count($p)>0) {
             $f = $this->model->getFilter($p[0],$min[0],$max[0]);
 
-            for ($i=1; $i < count($p); $i++) { 
+            for ($i=1; $i < count($p)-1; $i++) { 
                 $f = array_intersect( $f , $this->model->getFilter($p[$i],$min[$i],$max[$i]) );
             }
 

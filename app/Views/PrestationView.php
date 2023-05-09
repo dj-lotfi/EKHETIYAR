@@ -121,7 +121,7 @@ class PrestationView extends View
 
             </div>
             <div class="label-accordion">
-                <div class="vertically-centered">
+                <div class="vertically-centered__icon">
                     <label for="CAT-1<?php echo $id ?>" class="category-label">
                         <svg viewBox="0 0 384 512">
                             <path
@@ -130,7 +130,7 @@ class PrestationView extends View
                     </label>
                 </div>
                 
-                <div class="vertically-centered">
+                <div class="vertically-centered__icon">
                     <label for="CAT-3<?php echo $id ?>" class="category-label">
                         <svg viewBox="0 0 640 512">
                             <path
@@ -138,7 +138,7 @@ class PrestationView extends View
                         </svg>
                     </label>
                 </div>
-                <div class="vertically-centered">
+                <div class="vertically-centered__icon">
                     <label for="CAT-4<?php echo $id ?>" class="category-label">
                         <svg viewBox="0 0 496 512">
                             <path
@@ -146,7 +146,7 @@ class PrestationView extends View
                         </svg>
                     </label>
                 </div>
-                <div class="vertically-centered">
+                <div class="vertically-centered__icon">
                     <label for="CAT-2<?php echo $id ?>" class="category-label">
                         <svg viewBox="0 0 512 512">
                             <path
