@@ -86,7 +86,7 @@
     border: 1px solid var(--accent-500);
 }
 
-/* Filter Section */
+
 /* Filter Section */
 .filters {
     height: min-content;
@@ -498,6 +498,15 @@ select option {
     animation: bg-animation 750ms;
 }
 
+@media screen and (orientation: portrait) {
+    .filters {
+            margin-inline: auto;
+        }
+        .scrollable-checkboxes {
+            padding-left: 0;
+        }
+}
+
 @media screen and (min-width: 900px) and (orientation: landscape) {
     .title {
         display: block;
@@ -615,7 +624,7 @@ select option {
     transition: visibility 1s ease-in-out;
 }
 
-.more-info>div>* {
+.more-info>div>*:not(:last-child) {
     margin-top: var(--fs-200);
 }
 

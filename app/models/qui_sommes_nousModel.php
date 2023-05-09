@@ -8,7 +8,6 @@ class qui_sommes_nousModel extends Model {
     public function getQSN(){
         $contact = $this->_db->query("select * from {$this->table};");
         return $contact->getFirstResult();
-
     }
 
     public function getVision()
@@ -34,6 +33,51 @@ class qui_sommes_nousModel extends Model {
     public function getTelephone()
     {
         return $this->telephone;
+    }
+
+    public function getContact()
+    {
+        $contact = $this->_db->query("select * from contacts_info;");
+        return $contact->getResult();
+    }
+
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    public function getSecondPrenom()
+    {
+        return $this->{'2eme_premon'};
+    }
+
+    public function getCtry_code()
+    {
+        return $this->ctry_code;
+    }
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    public function getBackground()
+    {
+        return $this->background;
+    }
+
+    public function getThemeColor()
+    {
+        return $this->theme_color;
     }
 }
 ?>

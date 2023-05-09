@@ -9,7 +9,6 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel='stylesheet' type='text/css' media='screen' href='<?=PROOT?>/css/custom.css?v=<?php echo time(); ?>'>
-    <script defer src='<?=PROOT?>/js/custom.js?v=<?php echo time(); ?>'></script>
 
     <?= $this->content('head'); ?>
 
