@@ -53,7 +53,7 @@ banksPrestations.forEach(bankPrestations => {
     }
   });
 });
-
+/*
 document.addEventListener('DOMContentLoaded', function () {
   const filterSubcategories = document.querySelectorAll('.filters-subcategory');
 
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-
+*/
 // Get all the scrollable-checkboxes UL elements
 const scrollableCheckboxes = document.querySelectorAll('.scrollable-checkboxes');
 

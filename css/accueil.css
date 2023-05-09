@@ -165,7 +165,7 @@
 }
 
 .criteres {
-    display: none;
+    /*display: none;*/
     color: var(--neutral-300);
     background: #474747;
     border-top: 1px solid var(--neutral-300);
@@ -199,8 +199,6 @@
 
 input[type=checkbox]:checked~.tarifs-interval {
     display: flex;
-
-
 }
 
 input[type=text] {
