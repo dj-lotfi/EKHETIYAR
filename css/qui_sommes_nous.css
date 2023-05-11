@@ -59,12 +59,12 @@ section:hover {
 }
 
 .section-body {
-    max-width: 45ch;
-    margin-inline: auto;
+    text-align: center;
 
     font-family: var(--ff-general);
     font-size: calc(var(--fs-400) + 1.5px);
     color: var(--neutral-500);
+    line-height: 1.5;
 }
 
 .contacts__container {

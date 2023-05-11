@@ -69,7 +69,7 @@ function changelogo() {
     var selectedValue2 = document.getElementById('bank2').options[document.getElementById('bank2').selectedIndex].id;
 
     img1.src = "/ProjectFileV5/app/logos/"  + selectedValue1 ;
-    img2.src = "/ProjectFileV5/app/logos/"  +selectedValue2 ;
+    img2.src = "/ProjectFileV5/app/logos/"  + selectedValue2 ;
 
 }
 

@@ -35,9 +35,9 @@ class qui_sommes_nousModel extends Model {
         return $this->telephone;
     }
 
-    public function getContact()
+    public function getContacts()
     {
-        $contact = $this->_db->query("select * from contacts_info;");
+        $contact = $this->_db->query("select * from contacts_info ORDER BY nom ASC;");
         return $contact->getResult();
     }
 
@@ -53,7 +53,7 @@ class qui_sommes_nousModel extends Model {
 
     public function getSecondPrenom()
     {
-        return $this->{'2eme_premon'};
+        return $this->{'2eme_prenom'};
     }
 
     public function getCtry_code()

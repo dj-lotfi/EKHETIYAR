@@ -54,10 +54,10 @@ class AccueilView extends view
                 $this->imageGenerator($_SESSION['img']);
                 ?>
             </div>
-            <div class="slider-control" id="prev" tableinde>
+            <div class="slider-control" id="prev" tabindex="0">
             <svg viewBox="0 0 8 8"><path d="M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z"/></svg>
             </div>
-            <div class="slider-control" id="next">
+            <div class="slider-control" id="next" tabindex="0">
             <svg viewBox="0 0 8 8"><path d="M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z"/></svg>
             </div>
             <div class="slider-dots" id="dots"></div>

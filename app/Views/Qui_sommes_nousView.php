@@ -1,7 +1,6 @@
 <?php
 class qui_sommes_nousView extends View
 {
-
     public function render()
     {
         $this->setSiteTitle('Qui Sommes-Nous');
@@ -20,14 +19,7 @@ class qui_sommes_nousView extends View
         <body class="qsn-layout">
             <?php $this->generateHeader(); ?>
             <main class="prop">
-                <section>
-                    <h1 class="section-title">Notre Vision</h1>
-                    <p class="section-body">
-                        Nous croyons que le choix d'une banque devrait être facile et transparent pour tout le monde. Nous
-                        voulons aider les gens à trouver la banque qui répond le mieux à leurs besoins et à leurs objectifs
-                        financiers.
-                    </p>
-                </section>
+                <?php $this->generateVision(); ?>
 
                 <section>
                     <h1 class="section-title">Comment Nous Fonctionnons</h1>
@@ -47,8 +39,6 @@ class qui_sommes_nousView extends View
                         Nous avons fondé ce site web dans le cadre de notre projet 2CP en 2023. Notre mission est de
                         faciliter le choix d'une banque pour tout le monde en fonction de ce qu'ils recherchent.
                     </p>
-                </section>
-                <section>
                     <h1 class="section-title">Notre équipe</h1>
                     <div class="contacts__container">
                         <div class="contact" style="color:#2cb502;">
@@ -70,8 +60,8 @@ class qui_sommes_nousView extends View
                         <div class="contact" style="color:#2b4c6d;">
                             <div class="person">
                                 <div class="person__container">
-                                    <img class="circle" src="./img/contact_avatars/a-bg_claudeMonet.jpg" alt="">
-                                    <img class="avatar__circle" src="./img/contact_avatars/" alt="memeber avatar">
+                                    <img class="circle" src="./img/contact_avatars/a-bg_dj.jpg" alt="">
+                                    <img class="avatar__circle" src="./img/contact_avatars/a_dj.png" alt="memeber avatar">
                                 </div>
                             </div>
                             <div class="full-name" style="border-top: 2px solid #2b4c6d;">
@@ -88,7 +78,8 @@ class qui_sommes_nousView extends View
                             <div class="person">
                                 <div class="person__container">
                                     <img class="circle" src="./img/contact_avatars/a-bg_placeholder.webp" alt="">
-                                    <img class="avatar__circle" src="./img/contact_avatars/a_placeholder.png" alt="memeber avatar">
+                                    <img class="avatar__circle" src="./img/contact_avatars/a_placeholder.png"
+                                        alt="memeber avatar">
                                 </div>
                             </div>
                             <div class="full-name" style="border-top: 2px solid #e38452;">
@@ -165,6 +156,70 @@ class qui_sommes_nousView extends View
         require_once(ROOT . DS . 'app' . DS . 'Views' . DS . 'layouts' . DS . $this->_layout . '.php'); //affiche la page layouts/default.php
 
 
+    }
+
+    private function generateVision()
+    { ?>
+        <section>
+            <h1 class="section-title">Notre Vision</h1>
+            <p class="section-body">
+                <?php $this->controller->getVision(); ?>
+            </p>
+        </section>
+
+        <?php
+    }
+
+    private function generateFonctionnement()
+    { ?>
+        <section>
+            <h1 class="section-title">Comment Nous Fonctionnons</h1>
+            <p class="section-body">
+                <?php $this->controller->getFonctionnement(); ?>
+            </p>
+        </section>
+
+        <?php
+    }
+
+    private function generateProp()
+    { ?>
+        <section>
+            <h1 class="section-title">À Propos de Nous</h1>
+            <p class="section-body">
+                <?php $this->controller->getProp(); ?>
+            </p>
+        </section>
+
+        <?php
+    }
+
+    private function generateContact($contact)
+    { ?>
+        <div class="contact" style="color:<?php echo $contact->theme_color; ?>;">
+            <div class="person">
+                <div class="person__container">
+                    <img class="circle" src="<?php echo $contact->background; ?>" alt="">
+                    <img class="avatar__circle" src="<?php echo $contact->avatar; ?>" alt="memeber avatar">
+                </div>
+            </div>
+            <div class="full-name" style="border-top: 2px solid <?php echo $contact->theme_color; ?>;">
+                <?php echo $contact->nom; ?>
+                <?php echo $contact->prenom; ?>
+                <?php if ($contact->{'2eme_prenom'} != null)
+                    echo $contact->{'2eme_prenom'}; ?>
+            </div>
+            <div class="email">
+                <?php echo $contact->email; ?>
+            </div>
+            <div class="tel">
+                <?php if ($contact->tel != null) {
+                    echo "( <span>", $contact->ctry_code, "</span>) <span>", $contact->tel, "</span>";
+                } ?>
+            </div>
+        </div>
+
+        <?php
     }
 }
 ?>

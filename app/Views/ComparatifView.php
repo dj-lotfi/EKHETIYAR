@@ -43,7 +43,7 @@ class ComparatifView extends View
                     <form id="choix" method="post">
                         <div class="select-container">
                             <div class="vertically-centered">
-                                <div class="bank-logo__cmp"><img  src="" alt="" id="b1"></div>
+                                <img class="bank-logo__cmp" src="" id="b1">
                                 <select id="bank1" name="bank1" onchange="changelogo()">
                                     <option value="disabled1" disabled selected="selected" >--Selectioner une banque</option>
                                     <?php for ($i = 0; $i < count($b); $i++) { ?>
@@ -52,7 +52,7 @@ class ComparatifView extends View
                                 </select>
                             </div>
                             <div class="vertically-centered">
-                                <div class="bank-logo__cmp"><img  src="" alt="" id="b2"></div>
+                                <img class="bank-logo__cmp" src="" id="b2">
                                 <select id="bank2" name="bank2" onchange="changelogo()">
                                     <option value="disabled2" disabled selected="selected" >--Selectioner une banque</option>
                                     <?php for ($i = 0; $i < count($b); $i++) { ?>
@@ -73,7 +73,7 @@ class ComparatifView extends View
                 <div id="comparaison" class="comparison-slider__container"></div>
 
                 <div id="error" class="modal">
-                    <div class="modal-content2">
+                    <div class="modal-content">
                         <span class="close" onclick="closePopup()">&times;</span>
                         <h3>Selectionnez deux banques differents !!</h3>
                     </div>
