@@ -7,12 +7,7 @@ class Model_admin
 
     public function __construct($table)
     {
-        if ($table == 'adminLogs'){
-            $this->_db = DB_admin::getInstance(0);
-        }
-        else {
-            $this->_db = DB_admin::getInstance(1);
-        }
+        $this->_db = DB_admin::getInstance();
         $this->_table = $table;
         $this->_modelName = str_replace(' ', '', ucwords(str_replace('_',' ', $this->_table)));
     }
@@ -99,7 +94,7 @@ class Model_admin
         {
             return false;
         }
-        return $this->_db->update($this->_table, $id,$indexid, $fields);
+        return $this->_db->update($this->_table, $id, $indexid,$fields);
     }
 
     public function delete($indexid,$id ='')

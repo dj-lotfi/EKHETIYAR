@@ -62,44 +62,13 @@ class PrestationModel extends Model
         $contact = $this->_db->query("SELECT * FROM `prestations` p INNER JOIN `banque_prestation` bp ON p.id_prestation = bp.id_prestation INNER JOIN `devise` d ON d.id_devise=p.id_devise WHERE (id_banque=?) ORDER BY nom",array($id),get_class($this));
         return $contact->getResult();
     }
-    public function getAllCategories()
-    {
-        $contact = $this->_db->query("SELECT DISTINCT categorie FROM prestations");
-        return $contact->getResult();       
-    }
-    public function prestations()
-    {
-        $contact = $this->_db->query("SELECT DISTINCT nom FROM prestations");
-        return $contact->getResult();       
-    }
 
-    public function generateid()
-    {
-        $i = 10 ; 
-        $continue = true ; //DB_USER_ADMIN
-        $conn = mysqli_connect(DB_HOST_ADMIN, DB_USER_ADMIN, DB_PASSWORD_ADMIN, DB_NAME_ADMIN);
-        while($continue)
-        {
-            $sql = "SELECT COUNT(*) AS count FROM prestations WHERE id_prestation = {$i}";
-            $result = mysqli_query($conn, $sql);
-            $count = mysqli_fetch_assoc($result)['count'];
-            if($count==0)$continue = false  ;
-            else $i++ ;
-        }
-        mysqli_close($conn);
-        return $i ;
-    }
-
-    public function getId()
-    {
-        return $this->id_prestation;
-    }
     public function getNom()
     {
         return $this->nom ;
     }
 
-  public function getCategorie()
+    public function getCategorie()
     {
         return $this->categorie ;
     }
@@ -118,8 +87,5 @@ class PrestationModel extends Model
     {
         return $this->iso ;
     }
-    public function getDescription()
-    {
-        return $this->description ;
-    }
+
 }
