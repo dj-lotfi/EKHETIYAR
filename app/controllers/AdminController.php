@@ -22,7 +22,7 @@ class AdminController extends Controller
                 $newbanque = array(
                     "id_banque" => $bn->generateid(),
                     "nom" => $_POST['nomj'],
-                    "abb" => $_POST['abbreviationj'],
+                    "abbreviation" => $_POST['abbreviationj'],
                     "logo" => $_FILES['newbanklogo']['name'],
                     "adresse_siege_social" => $_POST['siege_socialj'],
                     "telephone" => $_POST['telephonej'],
@@ -101,7 +101,7 @@ class AdminController extends Controller
                 $newinfo = array(
                     "id_banque" => $_POST['id'],
                     "nom" => $_POST['nom'],
-                    "abb" => $_POST['abbreviation'],
+                    "abbreviation" => $_POST['abbreviation'],
                     "logo" => $_FILES['file']['name'],
                     "adresse_siege_social" => $_POST['siege_social'],
                     "telephone" => $_POST['telephone'],
@@ -115,7 +115,7 @@ class AdminController extends Controller
                 $newinfo = array(
                     "id_banque" => $_POST['id'],
                     "nom" => $_POST['nom'],
-                    "abb" => $_POST['abbreviation'],
+                    "abbreviation" => $_POST['abbreviation'],
                     "logo" => $_POST['logo'],
                     "adresse_siege_social" => $_POST['siege_social'],
                     "telephone" => $_POST['telephone'],
@@ -244,8 +244,23 @@ class AdminController extends Controller
         }
     }
 
+    public function Logout()
+    {
+        $_SESSION["loggedin"] = false;
+        exit;
+    }
+
+    public function Modifadmins(){
+        $this->view->Modifadmins();
+    }
+
     public function indexAction()
     {
+        if ($_SESSION['loggedin'] == false) {
+            Router::redirect(Login);
+            exit;
+        }
+        $_SESSION["loggedin"] = true;
         $this->view->render();
     }
 }
