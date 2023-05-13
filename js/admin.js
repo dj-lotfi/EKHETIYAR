@@ -1,33 +1,32 @@
+window.onload = function () {
+    console.log('Load ' + localStorage.getItem("lastvisitedelement"));
+    var lastelem = localStorage.getItem("lastvisitedelement");
+    if (lastelem == null) localStorage.setItem("lastvisitedelement" , "bank1");
+    document.getElementById(lastelem).click();
+}
+
 var navItems = document.querySelectorAll('.nav-item');
 
 navItems.forEach(navItem => {
-  var expnaderButton = navItem.querySelector('p');
-  var expander = navItem.querySelector('.item-list__container');
+    var expnaderButton = navItem.querySelector('p');
+    var expander = navItem.querySelector('.item-list__container');
 
-  expnaderButton.onclick = () => {
-    // Remove the "expanded" class from all "item-list__container" elements
-    navItems.forEach(item => {
-      var container = item.querySelector('.item-list__container');
-      if (container && container !== expander) {
-        container.classList.remove('expanded');
-      }
-    });
+    expnaderButton.onclick = () => {
+        // Remove the "expanded" class from all "item-list__container" elements
+        navItems.forEach(item => {
+            var container = item.querySelector('.item-list__container');
+            if (container && container !== expander) {
+                container.classList.remove('expanded');
+            }
+        });
 
-    // Toggle the "expanded" class only on the clicked "item-list__container" element
-    if (expander) {
-      expander.classList.toggle('expanded');
-    }
-  };
+        // Toggle the "expanded" class only on the clicked "item-list__container" element
+        if (expander) {
+            expander.classList.toggle('expanded');
+        }
+    };
 });
 
-
-var modif_sec_loaded = 0;
-//sessionStorage.setItem("lastvisitedelement", 4);
-window.onload = function () {
-    if (sessionStorage.getItem("lastvisitedelement") == null || document.getElementById(sessionStorage.getItem("lastvisitedelement")) == null) sessionStorage.setItem("lastvisitedelement", 4);
-    console.log('Load bank ' + sessionStorage.getItem("lastvisitedelement"));
-    document.getElementById(sessionStorage.getItem("lastvisitedelement")).click();
-}
 function Upload() {
     var fd = new FormData();
     var path = 'app/logos/';
@@ -70,7 +69,6 @@ function Upload() {
     }
 }
 function ModifBanque(bankId) {
-    sessionStorage.setItem("lastvisitedelement", bankId);
     console.log('Modifier banque ' + bankId);
     var loadingScreen = document.getElementById('loader');
     var content = document.getElementById('modification');
@@ -93,8 +91,7 @@ function ModifBanque(bankId) {
     xhttp.send();
 };
 
-function ModifApropos(id){
-    sessionStorage.setItem("lastvisitedelement", id);
+function ModifApropos() {
     var loadingScreen = document.getElementById('loader');
     var content = document.getElementById('modification');
     var modifSpace = document.querySelector('.modifying-window');
@@ -116,8 +113,7 @@ function ModifApropos(id){
     xhttp.send();
 }
 
-function AjoutBanque(id) {
-    sessionStorage.setItem("lastvisitedelement", id);
+function AjoutBanque() {
     var loadingScreen = document.getElementById('loader');
     var content = document.getElementById('modification');
     var modifSpace = document.querySelector('.modifying-window');
@@ -137,13 +133,12 @@ function AjoutBanque(id) {
         }
     };
     xhttp.send();
-    
+
 }
 
 function SupprimBanque(bankId) {
     const confirmed = confirm("Are you sure you want to delete this bank?");
     if (confirmed) {
-        sessionStorage.setItem("lastvisitedelement", idbank);
         var xhttp = new XMLHttpRequest();
         var url = "j2sJDpUgQQmLF5EF/DeleteBank/" + bankId;
         console.log(url);
@@ -200,7 +195,6 @@ function uploadDisplay() {
 //===============================================================================================================================
 
 function MAJBanque() {
-    sessionStorage.setItem("lastvisitedelement", idbank);
     Upload();
     sendData_bank();
     updatebanque(); // show the pop-up
@@ -243,18 +237,19 @@ function affichage() {
     body.style.overflowY = 'hidden';
 }
 
-function deletepres(id, idbank) {
-    sessionStorage.setItem("lastvisitedelement", idbank);
+function deletepres(id) {
+    const confirmed = confirm("Vous etes sur de supprimer cette prestation?");
+    if (confirmed) {
     var xhttp = new XMLHttpRequest();
     // Construct the URL for the PHP function with the form values as parameters
     var url = "j2sJDpUgQQmLF5EF/Deleteprestation/" + id;
     xhttp.open("GET", url, true);
     xhttp.send();
     location.reload();
+    }
 
 }
-function updateprestation(data, idbank) {
-    sessionStorage.setItem("lastvisitedelement", idbank);
+function updateprestation(data) {
     console.log('did it get to this point?');
     console.log(data);
     var xhttp = new XMLHttpRequest();
@@ -279,8 +274,7 @@ function closePopup() {
 function NewInfoPres() {
     document.getElementById('ajprestation').style.display = 'block';
 }
-function addpres(idbank) {
-    sessionStorage.setItem("lastvisitedelement", idbank);
+function addpres() {
     var xhttp = new XMLHttpRequest();
     // Construct the URL for the PHP function with the form values as parameters
     var url = "j2sJDpUgQQmLF5EF/addprestation/" + encodeURIComponent(document.getElementById("idbank").value) + "/" + encodeURIComponent(document.getElementById("nompres").value) + "/" + encodeURIComponent(document.getElementById("categoriepres").value) + "/" + encodeURIComponent(document.getElementById("prixpres").value) + "/" + encodeURIComponent(document.getElementById("datevaleur").value) + "/" + encodeURIComponent(document.getElementById("description").value); xhttp.open("GET", url, true);
@@ -292,8 +286,7 @@ function closeAjPres() {
     document.getElementById('ajprestation').style.display = 'none';
 }
 
-function ModifPub(id) {
-    sessionStorage.setItem("lastvisitedelement", id);
+function ModifPub() {
     var loadingScreen = document.getElementById('loader');
     var content = document.getElementById('modification');
     var modifSpace = document.querySelector('.modifying-window');
@@ -315,7 +308,7 @@ function ModifPub(id) {
     xhttp.send();
 }
 
-function AjouterSiteLogo(){
+function AjouterSiteLogo() {
     var fd = new FormData();
     var path = 'img/';
 
@@ -346,7 +339,7 @@ function AjouterSiteLogo(){
 
 }
 
-function UploadnewbqLogo(){
+function UploadnewbqLogo() {
     var fd = new FormData();
     var path = 'app/logos/';
 
@@ -429,20 +422,53 @@ function SendApropos() {
     return false;
 }
 
-function send_info()
-{
-  var xhr = new XMLHttpRequest();
-  var url = "j2sJDpUgQQmLF5EF/updateApropos";
-  var formData = new FormData(document.getElementById("updateProposhh"));
-  xhr.open("POST", url, true);
-  xhr.send(formData); 
+function send_info() {
+    var xhr = new XMLHttpRequest();
+    var url = "j2sJDpUgQQmLF5EF/updateApropos";
+    var formData = new FormData(document.getElementById("updateProposhh"));
+    xhr.open("POST", url, true);
+    xhr.send(formData);
 }
-function updateApropo()
-{
-  var xhttp = new XMLHttpRequest();
-  // Construct the URL for the PHP function with the form values as parameters
-  var url = "j2sJDpUgQQmLF5EF/updateApropos";
-  xhttp.open("GET", url, true);
-  xhttp.send(); 
+function updateApropo() {
+    var xhttp = new XMLHttpRequest();
+    // Construct the URL for the PHP function with the form values as parameters
+    var url = "j2sJDpUgQQmLF5EF/updateApropos";
+    xhttp.open("GET", url, true);
+    xhttp.send();
+}
+
+function Logout() {
+    var xhttp = new XMLHttpRequest();
+    // Construct the URL for the PHP function with the form values as parameters
+    var url = "j2sJDpUgQQmLF5EF/Logout";
+    xhttp.open("GET", url, true);
+    xhttp.onload = function () {
+        if (this.status == 200) {
+            window.location.href = "Accueil";
+        }
+    }
+    xhttp.send();
+}
+
+function Modifadmins(){
+    var loadingScreen = document.getElementById('loader');
+    var content = document.getElementById('modification');
+    var modifSpace = document.querySelector('.modifying-window');
+
+    modifSpace.style.display = "grid";
+    content.style.display = "none";
+    loadingScreen.style.display = "block";
+    var xhttp = new XMLHttpRequest();
+    var url = "j2sJDpUgQQmLF5EF/Modifadmins";
+    xhttp.open("GET", url, true);
+    xhttp.onload = function () {
+        if (this.status == 200) {
+            loadingScreen.style.display = "none";
+            content.style.display = "block";
+            modifSpace.style.display = "grid";
+            content.innerHTML = this.responseText;
+        }
+    };
+    xhttp.send();
 }
 

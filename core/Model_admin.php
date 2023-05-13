@@ -7,7 +7,12 @@ class Model_admin
 
     public function __construct($table)
     {
-        $this->_db = DB_admin::getInstance();
+        if ($table == 'adminLogs'){
+            $this->_db = DB_admin::getInstance(0);
+        }
+        else {
+            $this->_db = DB_admin::getInstance(1);
+        }
         $this->_table = $table;
         $this->_modelName = str_replace(' ', '', ucwords(str_replace('_',' ', $this->_table)));
     }

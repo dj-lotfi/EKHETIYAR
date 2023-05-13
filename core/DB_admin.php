@@ -1,37 +1,52 @@
 <?php
 
-class DB_admin {
-    
-    private static $_instance = null ;//la référance vers la bdd (static car instance de dbb unique pour chaque utilisateur)
+class DB_admin
+{
+
+    private static $_instance = null; //la référance vers la bdd (static car instance de dbb unique pour chaque utilisateur)
     private $_pdo; //la connexion à la bdd
     private $_query, $_error = false, $_result, $_count = 0, $_lastInsertID = null;
+    static private $lastbdd;
 
 
-    public function __construct()
+    public function __construct($id)
     {
-        try {
-            $this->_pdo = new PDO('mysql:host='.DB_HOST_ADMIN.';dbname='.DB_NAME_ADMIN, DB_USER_ADMIN, DB_PASSWORD_ADMIN);
-            //$this->_pdo = new PDO("sqlsrv:server = " . DB_HOST . "; Database = "  . DB_NAME , DB_USER, DB_PASSWORD);
-        } catch (PDOException $e) {
-            die($e->getMessage());
+        DB_admin::$lastbdd = $id;
+        if ($id == 0) {
+            try {
+                //$this->_pdo = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+                $this->_pdo = new PDO('mysql:host=' . DB_HOST_ADMIN . ';dbname=' . DB_NAME_ADMIN, DB_USER_ADMIN, DB_PASSWORD_ADMIN);
+                //$this->_pdo = new PDO("sqlsrv:server = " . DB_HOST . "; Database = "  . DB_NAME , DB_USER, DB_PASSWORD);
+            } catch (PDOException $e) {
+                die($e->getMessage());
+            }
+        } else {
+            try {
+                $this->_pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
+                //$this->_pdo = new PDO('mysql:host='.DB_HOST_ADMIN.';dbname='.DB_NAME_ADMIN, DB_USER_ADMIN, DB_PASSWORD_ADMIN);
+                //$this->_pdo = new PDO("sqlsrv:server = " . DB_HOST . "; Database = "  . DB_NAME , DB_USER, DB_PASSWORD);
+            } catch (PDOException $e) {
+                die($e->getMessage());
+            }
         }
     }
 
-    public static function getInstance()
+    public static function getInstance($id)
     {
-        if (!isset(self::$_instance)) {//assurer l'unicité de la bdd
-            self::$_instance = new DB_admin();
-        } 
+        if ( DB_admin::$lastbdd != $id){
+        //if (!isset(self::$_instance)) { //assurer l'unicité de la bdd
+            self::$_instance = new DB_admin($id);
+        }
         return self::$_instance;
-        
+
     }
 
-    public function query($sql, $params = [],$class = false)
+    public function query($sql, $params = [], $class = false)
     //fonction pour accérir des données cd depuis la bdd
     {
         $this->_error = false;
-        if ($this->_query = $this->_pdo->prepare($sql)) {//optimisation des requêtes (preparer) //$sql existe et prerare reussite
-            $x =1;
+        if ($this->_query = $this->_pdo->prepare($sql)) { //optimisation des requêtes (preparer) //$sql existe et prerare reussite
+            $x = 1;
             if (count($params)) {
                 foreach ($params as $param) {
                     $this->_query->bindValue($x, $param);
@@ -39,28 +54,29 @@ class DB_admin {
                 }
             }
 
-            if(($this->_query)->execute()) {
+            if (($this->_query)->execute()) {
                 if ($class) {
-                    $this->_result = $this->_query->fetchAll(PDO::FETCH_CLASS,$class);
+                    $this->_result = $this->_query->fetchAll(PDO::FETCH_CLASS, $class);
                 } else {
                     $this->_result = ($this->_query)->fetchAll(PDO::FETCH_OBJ);
                 }
-                
-                $this->_count =  $this->_query->rowCount();
+
+                $this->_count = $this->_query->rowCount();
                 $this->_lastInsertID = $this->_pdo->lastInsertId();
-            }else {
+            } else {
                 $this->_error = true;
-            }     
+            }
         }
-        return $this; 
-        
+        return $this;
+
     }
 
-    public function error(){
+    public function error()
+    {
         return $this->_error;
     }
 
-    protected function _read($table , $class , $params=[])
+    protected function _read($table, $class, $params = [])
     //fonction qui créer une instruction "SELECT * FROM {$table}{$conditionString}{$order}{$limit}"
     //renvoie tous les éléments du tableau $table qui vérifie les conditions {$conditionString} dans l'ordre {$order} et pas plus de {$limit} éléments
     /* $table
@@ -75,13 +91,13 @@ class DB_admin {
     {
         $conditionString = '';
         $bind = [];
-        $order = '';//la colonne d'aprés laquel les resultats sont ordonnés
-        $limit = '';//nombre max d'element a renvoier
+        $order = ''; //la colonne d'aprés laquel les resultats sont ordonnés
+        $limit = ''; //nombre max d'element a renvoier
 
         //conditions
         if (isset($params['conditions'])) {
             if (is_array($params['conditions'])) {
-                foreach ($params['conditions'] as $condition ) {
+                foreach ($params['conditions'] as $condition) {
                     $conditionString .= ' ' . $condition . ' AND';
                 }
                 $conditionString = trim($conditionString);
@@ -89,7 +105,7 @@ class DB_admin {
             } else {
                 $conditionString = $params['conditions'];
             }
-            if($conditionString != '') {
+            if ($conditionString != '') {
                 $conditionString = ' WHERE ' . $conditionString;
             }
         }
@@ -98,7 +114,7 @@ class DB_admin {
         if (array_key_exists('bind', $params)) {
             $bind = $params['bind'];
         }
-        
+
         //order
         if (array_key_exists('order', $params)) {
             $order = ' ORDER BY ' . $params['order'];
@@ -111,7 +127,7 @@ class DB_admin {
 
 
         $sql = "SELECT * FROM {$table}{$conditionString}{$order}{$limit}";
-        if($this->query($sql, $bind,$class)) {
+        if ($this->query($sql, $bind, $class)) {
             if (!count($this->_result)) {
                 return false;
             }
@@ -120,17 +136,17 @@ class DB_admin {
         return false;
     }
 
-    public function find($table, $params=[],$class=false)
+    public function find($table, $params = [], $class = false)
     {
-        if ($this->_read($table ,$class, $params)) {
+        if ($this->_read($table, $class, $params)) {
             return $this->getResult();
         }
         return false;
     }
 
-    public function findFirst($table, $params=[],$class=false)
+    public function findFirst($table, $params = [], $class = false)
     {
-        if ($this->_read($table ,$class, $params)) {
+        if ($this->_read($table, $class, $params)) {
             return $this->getFirstResult();
         }
         return false;
@@ -155,7 +171,7 @@ class DB_admin {
 
     public function getFirstResult()
     {
-        return (!empty($this->_result))? $this->_result[0] : [];
+        return (!empty($this->_result)) ? $this->_result[0] : [];
     }
 
 
@@ -171,18 +187,18 @@ class DB_admin {
         foreach ($fields as $field => $value) {
             $fieldString .= '`' . $field . '`,';
             $valueString .= '?,';
-            $values[] = $value;//inserer à la fin du tableau
+            $values[] = $value; //inserer à la fin du tableau
         }
         $fieldString = rtrim($fieldString, ',');
         $valueString = rtrim($valueString, ',');
         $sql = "INSERT INTO {$table} ({$fieldString}) VALUES ({$valueString})";
-        if (!$this->query($sql, $values)->error()) {//insertion réussite
+        if (!$this->query($sql, $values)->error()) { //insertion réussite
             return true;
         }
         return false;
     }
 
-    public function update($table, $id,$indexid , $fields =[])
+    public function update($table, $id, $indexid, $fields = [])
     //modifier certains données $fields une ligne avec l'identifiant $id
     //fields tableau associative des noms des colonnes et les valeurs
     //resiste les attaques injections
@@ -190,23 +206,23 @@ class DB_admin {
         $fieldString = '';
         $values = [];
         foreach ($fields as $field => $value) {
-            $fieldString .= ' ' .$field . ' = ?,';
+            $fieldString .= ' ' . $field . ' = ?,';
             $values[] = $value;
         }
         $fieldString = trim($fieldString);
-        $fieldString = rtrim($fieldString,',');
+        $fieldString = rtrim($fieldString, ',');
         $sql = "UPDATE {$table} SET {$fieldString} WHERE {$indexid} = {$id}";
-        if (!$this->query($sql, $values)->error()) {//modification réussite
+        if (!$this->query($sql, $values)->error()) { //modification réussite
             return true;
         }
         return false;
     }
 
-    public function delete($table, $id ,$indexid)
+    public function delete($table, $id, $indexid)
     //fonction pour supprimer la ligne avec l'identifiant $id 
     {
         $sql = "DELETE FROM {$table} WHERE {$indexid} = {$id}";
-        if (!$this->query($sql)->error()) {//suppression réussite
+        if (!$this->query($sql)->error()) { //suppression réussite
             return true;
         }
         return false;

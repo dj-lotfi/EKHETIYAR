@@ -13,12 +13,14 @@ class AdminView extends View
     <link rel="stylesheet" href="css/admin.css?v=<?php echo time(); ?>">
     <script defer src="js/admin.js?v=<?php echo time(); ?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <?php $this->end(); ?>
 
     <?php $this->start('body');
     /*if ($_SESSION['loggedin'] == false) {
+    /*
+    if ($_SESSION['loggedin'] == false) {
     Router::redirect(Login);
     exit;
     }
@@ -31,7 +33,8 @@ class AdminView extends View
       <div class="nav">
         <div class="nav-item">
           <p tabindex="0">Banques</p>
-          <button class="addButton" type="button" id="add_bnq" onclick="AjoutBanque(this.id)"></button>
+          <button class="addButton" type="button" id="add_bnq"
+            onclick="localStorage.setItem('lastvisitedelement', this);AjoutBanque();"></button>
           <label class="addBank" for="add_bnq" tabindex="0">
             <svg>
               <use href="#add" />
@@ -51,25 +54,24 @@ class AdminView extends View
           <p tabindex="0">Autres</p>
           <div class="item-list__container">
             <ul class="item-list">
-              <li id="modifaprop" onclick="ModifBanque(this.id);">
+              <li id="modifaprop" onclick="localStorage.setItem('lastvisitedelement', this.id);ModifApropos();">
                 <p tabindex="0">A propos</p>
               </li>
-              <li id="modifpub" onclick="ModifBanque(this.id);">
+              <li id="modifpub" onclick="localStorage.setItem('lastvisitedelement', this.id);ModifPub();">
                 <p tabindex="0">Publicites</p>
               </li>
             </ul>
           </div>
         </div>
+        <div class="nav-item" onclick="Modifadmins();">
+          <p tabindex="0">Admins</p>
+        </div>
+        <div class="nav-item" onclick="Logout();">
+          <p tabindex="0">Logout</p>
+        </div>
+
       </div>
       <div class="modifying-window">
-        <div id="warning" class="modal">
-          <div class="modal-content2">
-            <span class="close" onclick="closeWarning()">&times;</span>
-            <h3 class="supp-warning">Vous etes sur de supprimer cette banque ?</h3>
-            <button class="confirm" id="confirm">Confirmer</button>
-            <button class="annul" id="annul" onclick="closeWarning()">Annuler</button>
-          </div>
-        </div>
         <div id="loader" class="loader">
           <div class="justify-content-center jimu-primary-loading"></div>
         </div>
@@ -94,10 +96,51 @@ class AdminView extends View
 
   }
 
+  public function Modifadmins()
+  {
+    ?>
+    <div id="mdfadm" class="modifying-window">
+      <table>
+        <thead>
+          <tr>
+            <th colspan="3">Admins</th>
+            <th class="material-icons bouton">add</th>
+          </tr>
+          <tr>
+            <th>Username</th>
+            <th colspan="2">Password</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          $temp = new LoginModel();
+          $res = $temp->getLogs();
+          for ($i = 0; $i < sizeof($res); $i++) {
+            ?>
+            <tr>
+              <td>
+                <?php echo $res[$i]->username ?>
+              </td>
+              <td>
+                <?php echo $res[$i]->password ?>
+              </td>
+              <td>
+                <i class="material-icons bouton edit">edit</i>
+                <i class="material-icons bouton delete">delete</i>
+              </td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+    </div>
+    <?php
+
+  }
+
   public function ModifApropos()
   {
     ?>
-    <div id="updatePropos">
+    <div id="updatePropos" class="modifying-window">
       <?php $adm = new AdminModel();
       $prop = $adm->getApropos(); ?>
       <form id="updateProposhh" method="post" onsubmit="event.preventDefault();AjouterSiteLogo();SendApropos();">
@@ -134,7 +177,8 @@ class AdminView extends View
   {
     ?>
     <div id="addbanquePop" class="modifying-window">
-      <form class="bank-info" id="addbanque" method="post" enctype='multipart/form-data' onsubmit="event.preventDefault();ajoutSubmitted();">
+      <form class="bank-info" id="addbanque" method="post" enctype='multipart/form-data'
+        onsubmit="event.preventDefault();ajoutSubmitted();">
         <div class="general">
           <input class="bank-name" type="text" name="nomj" placeholder="Nom">
           <input class="abbreviation" type="text" name="abbreviationj" placeholder="Abbreviation">
@@ -146,12 +190,12 @@ class AdminView extends View
           <input type="text" name="sitej" placeholder="Site officiel">
         </div>
         <label for="newbanklogo" class="upload-label">
-            <span class="upload-label-text">Upload Bank Logo</span>
-            <span class="upload-label-button">Choose File</span>
-          </label>
-          <input type="file" id="newbanklogo" name="newbanklogo" style="display:none;" />
+          <span class="upload-label-text">Upload Bank Logo</span>
+          <span class="upload-label-button">Choose File</span>
+        </label>
+        <input type="file" id="newbanklogo" name="newbanklogo" style="display:none;" />
         <input class="map-link" type="text" name="mapj" placeholder="Map Agences">
-        <div class="submit-bank-info"><input id="ajnewbank" name="submit" type="submit" value="Ajouter"/></div>
+        <div class="submit-bank-info"><input id="ajnewbank" name="submit" type="submit" value="Ajouter" /></div>
       </form>
     </div>
     <?php
@@ -168,12 +212,13 @@ class AdminView extends View
     for ($i = 0; $i < count($res); $i++) {
       ?>
       <li id="<?= $res[$i]->id_banque ?>">
-        <p tabindex="0" onclick="ModifBanque(this.parentElement.id);">
-          <?php echo $res[$i]->abb; ?>
+        <p id="bank<?= $res[$i]->id_banque ?>" tabindex="0"
+          onclick="localStorage.setItem('lastvisitedelement', this.id);ModifBanque(this.parentElement.id);">
+          <?php echo $res[$i]->abbreviation; ?>
         </p>
-        <button class="delButton" type="button" id="<?= $i . $res[$i]->abb ?>"
+        <button class="delButton" type="button" id="<?= $i . $res[$i]->abbreviation ?>"
           onclick="SupprimBanque(this.parentElement.id)"></button>
-        <label for="<?= $i . $res[$i]->abb ?>" tabindex="0">
+        <label for="<?= $i . $res[$i]->abbreviation ?>" tabindex="0">
           <svg>
             <use href="#delete" />
           </svg>
@@ -194,7 +239,7 @@ class AdminView extends View
       enctype='multipart/form-data'>
       <div class="general">
         <input class="bank-name" type="text" name="nom" value="<?php echo $var->nom; ?>" placeholder="Nom">
-        <input class="abbreviation" type="text" name="abbreviation" value="<?php echo $var->abb; ?>"
+        <input class="abbreviation" type="text" name="abbreviation" value="<?php echo $var->abbreviation; ?>"
           placeholder="Abbreviation">
         <input class="seige-social" type="text" name="siege_social" value="<?php echo $var->adresse_siege_social; ?>"
           placeholder="Adresse siege social">
@@ -241,7 +286,6 @@ class AdminView extends View
               <th>Prix (DAZ)</th>
               <th>Date_valeur</th>
               <th>Description</th>
-              <th>Update</th>
               <th onclick="NewInfoPres()" class="update">ADD</button></th>
             </tr>
           </thead>
@@ -273,7 +317,7 @@ class AdminView extends View
                   <h3 onclick="affichage()"> <b> update </b> </h3>
                 </td>
                 <td>
-                  <button class="prestation-delete-button" type="button" onclick="deletepres(<?= $pre[$i]->getId() ?>,<?= $id ?>)">
+                  <button class="prestation-delete-button" type="button" onclick="deletepres(<?= $pre[$i]->getId() ?>)">
                     <svg>
                       <use href="#delete" />
                     </svg>
@@ -295,7 +339,7 @@ class AdminView extends View
                     <h4>Description : </h4><input class="bank-name" type="text" id="updescription" value=""
                       placeholder="Description"><br><br>
                     <input type="submit" name="submit" value="UpdatePrestation"
-                      onclick="updateprestation(<?= $pre[$i]->getId() ?>,<?= $id ?>);" />
+                      onclick="updateprestation(<?= $pre[$i]->getId() ?>);" />
                   </form>
                 </div>
                 <div id="error">
@@ -315,7 +359,7 @@ class AdminView extends View
     <div id="ajprestation" class="modal">
       <div class="modal-content2">
         <span class="close" onclick="closeAjPres()">&times;</span>
-        <form id="addpres" method="post" onsubmit="addpres(<?= $id ?>);event.preventDefault();">
+        <form id="addpres" method="post" onsubmit="addpres();event.preventDefault();">
           <h4>Nom : </h4><input class="bank-name" type="text" id="nompres" placeholder="Nom" value="" required><br><br>
           <h4>Prix : </h4><input class="bank-name" type="text" id="prixpres" value="" placeholder="Prix"><br><br>
           <h4>date de valeur : </h4><input class="bank-name" type="text" id="datevaleur" value=""
@@ -340,21 +384,19 @@ class AdminView extends View
   {
     ?>
     <div class="container">
-      <h2>Ajouter une publicite au carousel</h2>
+      <h2 style="text-align=center;">Images Publicitaires</h2>
       <div>
         <div>
           <form id="uploadpub" method="post" onsubmit="AjouterPub();event.preventDefault();" enctype='multipart/form-data'>
             <label for="image" class="upload-label">
-              <span class="upload-label-text">Upload a carousel image:</span>
-              <span class="upload-label-button">Choose File</span>
+              <span class="upload-label-text">Ajouter image publicitaire:</span>
+              <span class="upload-label-button">Choisir image</span>
             </label>
             <input type="file" id="image" name="image" style="display:none;" />
-            <input type="submit" name="submitPub" class="button" value="Ajouter Pub">
+            <div class="submit-bank-info"><input type="submit" name="submitPub" value="Ajouter"></div>
           </form>
         </div>
       </div>
-
-      <h2>Select Images to Delete</h2>
       <form id="suppub" method="post" onsubmit="SupprimerPub();event.preventDefault();">
         <?php
         // Define the path to the image folder
@@ -362,14 +404,26 @@ class AdminView extends View
 
         // Get all image files in the folder
         $images = glob($imagePath . "*.{jpg,png,gif,svg}", GLOB_BRACE);
+        $usles = 0;
 
         // Loop through each image and display it
-        foreach ($images as $image) {
-          echo '<div><label><input type="checkbox" name="imagesToDelete[]" value="' . $image . '">';
-          echo '<img src="' . $image . '" width="100" height="100"></label></div>';
-        }
         ?>
-        <input type="submit" name="deleteImages" value="Delete Selected Images">
+        <div class="wrapper">
+          <?php
+          foreach ($images as $image) { ?>
+            <div class="selectimg">
+              <label for="<?= $image . $usles ?>">
+                <input class="checkimg" id="<?= $image . $usles ?>" type="checkbox" name="imagesToDelete[]"
+                  value="<?= $image ?>" hidden>
+                <img src="<?= $image ?>" width="auto" height="100">
+              </label>
+            </div>
+            <?php
+            $usles++;
+          }
+          ?>
+        </div>
+        <div class="submit-bank-info"><input type="submit" name="deleteImages" value="Supprimer"></div>
       </form>
     </div>
     <div id="pubfeedback"></div>
