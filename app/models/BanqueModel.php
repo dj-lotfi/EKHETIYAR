@@ -25,7 +25,7 @@ class BanqueModel extends Model
         $contact = $this->_db->query("select * from banques where id_banque=" . $bank);
         $res = $contact->getFirstResult();
         return $res;
-    } 
+    }
 
     public function getNom()
     {

@@ -4,7 +4,7 @@ class AdminModel extends Model_admin
     public $NombreBanque = 20;
     function __construct()
     {
-        $this->_db = DB_admin::getInstance();
+        $this->_db = DB_admin::getInstance(1);
     }
     public function get($id, $table) // $table : le nom du tableau du dbb  
     {
