@@ -87,5 +87,15 @@ class Qui_sommes_nousController extends Controller
         return $this->model->getThemeColor();
     }
 
+    public function getContacts()
+    {
+        return $this->model->getContacts();
+    }
+
+    public function getApropos()
+    {
+        return $this->model->getQSN();
+    }
+
 }
 ?>

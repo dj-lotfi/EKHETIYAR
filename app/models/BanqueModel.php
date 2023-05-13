@@ -97,7 +97,14 @@ class BanqueModel extends Model
             $o = $this->_db->query('SELECT id_banque FROM `banque_prestation` bp INNER JOIN `prestations` p ON bp.id_prestation = p.id_prestation WHERE p.nom = ? AND (p.prix * p.iteration <= ?) AND p.prix IS NOT NULL', array($p, $max),get_class($this)  );
         }
 
-        return $o->getResult();
+        $o = $o->getResult();
+        $res = array();
+
+        foreach ($o as $key => $value) {
+            array_push($res,$value->id_banque);
+        }
+
+        return $res;
     }
 
     public function getOtherOrder($order, $asc_desc)

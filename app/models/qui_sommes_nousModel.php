@@ -6,7 +6,7 @@ class qui_sommes_nousModel extends Model {
     }
 
     public function getQSN(){
-        $contact = $this->_db->query("select * from {$this->table};");
+        $contact = $this->_db->query("select * from {$this->table};",[],get_class($this));
         return $contact->getFirstResult();
     }
 
@@ -37,7 +37,7 @@ class qui_sommes_nousModel extends Model {
 
     public function getContacts()
     {
-        $contact = $this->_db->query("select * from contacts_info ORDER BY nom ASC;");
+        $contact = $this->_db->query("select * from contacts_info;",[],get_class($this));
         return $contact->getResult();
     }
 

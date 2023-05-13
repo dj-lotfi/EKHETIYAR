@@ -93,6 +93,7 @@ class BanqueView extends View
     
     $o = $this->controller->getOrder($order,$acs_desc);
     $t = $this->controller->filtercollecter();
+    
     $p = $t[0];
     $min = $t[1];
     $max = $t[2];
@@ -104,7 +105,6 @@ class BanqueView extends View
 
     $res = $this->controller->getAllBanques();
 
-    //var_dump($o);
         for ($i=0; $i < count($o); $i++) { 
             
             if(in_array($o[$i],$f))

@@ -42,14 +42,6 @@ class BanqueController extends Controller
 
         }
         
-/*
-        echo '<p>'.$order.'</p>';
-        echo '<p>'.$acs_desc.'</p>';
-
-        echo '<pre>';
-        print_r($_POST);
-        echo '</pre>';
-*/
 
         $this->view->displayAllBanques($order,$acs_desc);
     }
@@ -88,13 +80,11 @@ class BanqueController extends Controller
         if (count($p)>0) {
             $f = $this->model->getFilter($p[0],$min[0],$max[0]);
 
-            for ($i=1; $i < count($p)-1; $i++) { 
+            for ($i=1; $i < count($p); $i++) { 
                 $f = array_intersect( $f , $this->model->getFilter($p[$i],$min[$i],$max[$i]) );
             }
-
-            foreach ($f as $key => $value) {
-                array_push($res,$value->getId_banque());
-            }
+            
+            $res = $f;
 
         } else {
             $f = $this->getAllBanques();
@@ -134,67 +124,48 @@ class BanqueController extends Controller
         $prestations = array(array(),array());
         $prestations = $pController->getPrestationsNomCategorie();
 
-        $categories = array();
 
-        foreach ($_POST as $key => $value) {
-            if (substr($key, 0, 9) == 'categorie') {
-                $categories[$key] = $value;
-            } 
-        }
-
-        
-
-        foreach ($categories as $key => $value) {
-
-                $min_max = array(array(),array());
-            
-                $cid = ltrim($key,'categorie_');
-    
-                foreach ($_POST as $k => $v) {
-        
-                    if ($k != 'Sortasc_desc' && $k != 'Sort') {
-                        $parts = explode('_', $k);
-    
-                        if ($parts[0] . '_' . $parts[1] . '_' == 'high-price_' . $cid . '_') {
-                            $min_max[1][$parts[2]] = $v;
-                        }
-                        
-                        if ($parts[0] . '_' . $parts[1] . '_' == 'low-price_' . $cid . '_') {
-                            $min_max[0][$parts[2]] = $v;
-                        }
-                    }
-
-    
-                }
-    
-                foreach ($min_max[0] as $k => $v) {
-                    if ($min_max[0][$k] != '' ||  $min_max[1][$k] != '') {
-                        array_push($t[0],$prestations[0][$k]);
-                        array_push($t[1],$min_max[0][$k]);
-                        array_push($t[2],$min_max[1][$k]);
-                    }
-                }
-        }
         foreach ($_POST as $key => $value) {
             if ($key != 'Sortasc_desc' && $key != 'Sort') {
-                $parts = explode('_', $key);
-            
-                if ($parts[0] == 'filter') {
-    
-                    if(isset($_POST['low-price'.'_'.$parts[1].'_'.$parts[2]]) || isset($_POST['high-price'.'_'.$parts[1].'_'.$parts[2]])){
-                        array_push($t[0],$value);
-                        array_push($t[1],$_POST['low-price'.'_'.$parts[1].'_'.$parts[2]]);
-                        array_push($t[2],$_POST['high-price'.'_'.$parts[1].'_'.$parts[2]]);
-                    }
+                $keyEx = explode('_', $key);
+                
+                if ( $keyEx[0] == 'filter' && ( $_POST['low-price_'.$keyEx[1].'_'.$keyEx[2]] != '' || $_POST['high-price_'.$keyEx[1].'_'.$keyEx[2]] != '' )) {
+
+                    array_push($t[0],$_POST[$key]);
+                    array_push($t[1],$_POST['low-price_'.$keyEx[1].'_'.$keyEx[2]]);
+                    array_push($t[2],$_POST['high-price_'.$keyEx[1].'_'.$keyEx[2]]);
+
+                    unset($_POST[$key]);
+                    unset($_POST['low-price_'.$keyEx[1].'_'.$keyEx[2]]);
+                    unset($_POST['high-price_'.$keyEx[1].'_'.$keyEx[2]]);
+
                 } 
+                
+
             }
+        }
 
-        }/*
-        echo '<pre>';
-        print_r($t);
-        echo '</pre>';
-        */
+        foreach ($_POST as $key => $value) {
+            if ($key != 'Sortasc_desc' && $key != 'Sort') {
+                $keyEx = explode('_', $key);
+                if ( $keyEx[0] == 'categorie' ) {
 
+                    foreach ($_POST as $k => $v) {
+                        if ($k != 'Sortasc_desc' && $k != 'Sort') {
+                            $kEx = explode('_', $k);
+                            if ( $kEx[0] != 'categorie' && $keyEx[1] == $kEx[1] && ($_POST['low-price_'.$kEx[1].'_'.$kEx[2]] != '' || $_POST['high-price_'.$kEx[1].'_'.$kEx[2]]  != '' )) {
+                                array_push($t[0],$prestations[0][$kEx[2]]);
+                                array_push($t[1],$_POST['low-price_'.$kEx[1].'_'.$kEx[2]]);
+                                array_push($t[2],$_POST['high-price_'.$kEx[1].'_'.$kEx[2]]);
+                            }
+                            
+                        }
+                    }
+
+                }
+            }
+            
+        }
         return $t;
     }
         

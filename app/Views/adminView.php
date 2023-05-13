@@ -22,7 +22,7 @@ class AdminView extends View
     Router::redirect(Login);
     exit;
     }
-    $_SESSION["loggedin"] = false;
+    $_SESSION["loggedin"] = true;
     ?>
 
     <body class="admin-layout">
