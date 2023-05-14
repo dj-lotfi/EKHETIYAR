@@ -81,9 +81,9 @@ class view {
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
             <nav class="navbar">
                 <ul>
-                    <li><a href="<?= PROOT ?>/accueil">Accueil</a></li>
-                    <li><a href="<?= PROOT ?>/comparatif">Comparatif</a></li>
-                    <li><a href="<?= PROOT ?>/qui_sommes_nous">Qui Sommes-Nous</a></li>
+                    <button><span></span><a href="<?= PROOT ?>/accueil">Accueil</a><span></span></button>
+                    <button><span></span><a href="<?= PROOT ?>/comparatif">Comparatif</a><span></span></button>
+                    <button><span></span><a href="<?= PROOT ?>/qui_sommes_nous">Qui Sommes-Nous</a><span></span></button>
                 </ul>
             </nav>
             <label for="nav-toggle" class="nav-toggle-label">

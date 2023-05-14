@@ -66,12 +66,13 @@ body{
     align-items: center;
 }
 
-.password-input img{
+.password-input svg{
     height: 65%;
     margin:  7.53px auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    fill: var(--neutral-700);
 }
 
 input[type="text"],
@@ -86,8 +87,8 @@ input[type="password"] {
     padding: 12px 20px;
     border: 2px solid var(--main-600);
     border-radius: 4px;
-    color: var(--neutral-800);
-    background-color: var(--slate-200);
+    color: var(--neutral-800) !important;
+    background-color: var(--slate-200) !important;
     transition: all 250ms ease-in;
 }
 
@@ -138,5 +139,3 @@ input[type="submit"]:hover {
     margin-bottom: 50px;
     margin-top: 20px;
 }
-
-/*====================================================================================*/

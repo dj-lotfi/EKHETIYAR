@@ -57,11 +57,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
 
-.bank-logo__cmp img {
     width: 100%;
-    max-height: 60px;
     object-fit: contain;
 }
 

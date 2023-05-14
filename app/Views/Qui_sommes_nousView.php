@@ -19,11 +19,11 @@ class qui_sommes_nousView extends View
         <body class="qsn-layout">
             <?php $this->generateHeader(); ?>
             <main class="prop">
-                
+
 
                 <?php
                 $m = new qui_sommes_nousModel();
-                    $m = $this->controller->getApropos();
+                $m = $this->controller->getApropos();
                 ?>
                 <section>
                     <h1 class="section-title">Notre Vision</h1>
@@ -45,21 +45,21 @@ class qui_sommes_nousView extends View
                     <h1 class="section-title">Notre équipe</h1>
                     <?php
                     $m = array();
-                    $m =$this->controller->getContacts(); ?>
-                    
-                    
+                    $m = $this->controller->getContacts(); ?>
+
+
                     <div class="contacts__container">
-                        <?php 
-                            $this->generateContact($m[5]);
-                            $this->generateContact($m[0]);
-                            $this->generateContact($m[1]);
+                        <?php
+                        $this->generateContact($m[5]);
+                        $this->generateContact($m[0]);
+                        $this->generateContact($m[1]);
                         ?>
                     </div>
                     <div class="contacts__container">
-                        <?php 
-                            $this->generateContact($m[2]);
-                            $this->generateContact($m[3]);
-                            $this->generateContact($m[4]);
+                        <?php
+                        $this->generateContact($m[2]);
+                        $this->generateContact($m[3]);
+                        $this->generateContact($m[4]);
                         ?>
 
                     </div>
@@ -117,7 +117,8 @@ class qui_sommes_nousView extends View
             <div class="person">
                 <div class="person__container">
                     <img class="circle" src="./img/contact_avatars/<?php echo $contact->background; ?>" alt="">
-                    <img class="avatar__circle" src="./img/contact_avatars/<?php echo $contact->avatar; ?>" alt="memeber avatar">
+                    <img class="avatar__circle" src="./img/contact_avatars/<?php echo $contact->avatar; ?>"
+                        alt="memeber avatar">
                 </div>
             </div>
             <div class="full-name" style="border-top: 2px solid <?php echo $contact->theme_color; ?>;">
@@ -129,11 +130,12 @@ class qui_sommes_nousView extends View
             <div class="email">
                 <?php echo $contact->email; ?>
             </div>
-            <div class="tel">
-                <?php if ($contact->getTel() != null) {
-                    echo "( <span>". $contact->getCtry_code(). "</span>) <span>". $contact->getTel(). "</span>";
-                } ?>
-            </div>
+            <?php if ($contact->getTel() != null) { ?>
+                <div class="tel">
+                    ( <span><?php $contact->getCtry_code() ?></span>) <span><?php $contact->getTel() ?></span>
+                </div>
+            <?php } ?>
+        </div>
         </div>
 
         <?php
