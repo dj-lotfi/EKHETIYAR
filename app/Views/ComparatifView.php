@@ -44,7 +44,7 @@ class ComparatifView extends View
                         <div class="select-container">
                             <div class="vertically-centered">
                                 <img class="bank-logo__cmp" src="/ProjectFileV5/app/logos/blank.svg" id="b1">
-                                <select id="bank1" name="bank1" onchange="changelogo()">
+                                <select id="bank1" name="bank1" onchange="changelogo(this)">
                                     <option value="disabled1" disabled selected="selected" >--Selectioner une banque</option>
                                     <?php for ($i = 0; $i < count($b); $i++) { ?>
                                         <option value="<?php echo $b[$i]->id_banque; ?>" id="<?php echo $b[$i]->logo ?>"><?php echo $b[$i]->nom; ?></option>
@@ -53,7 +53,7 @@ class ComparatifView extends View
                             </div>
                             <div class="vertically-centered">
                                 <img class="bank-logo__cmp" src="/ProjectFileV5/app/logos/blank.svg" id="b2">
-                                <select id="bank2" name="bank2" onchange="changelogo()">
+                                <select id="bank2" name="bank2" onchange="changelogo(this)">
                                     <option value="disabled2" disabled selected="selected" >--Selectioner une banque</option>
                                     <?php for ($i = 0; $i < count($b); $i++) { ?>
                                         <option value="<?php echo $b[$i]->id_banque; ?>" id="<?php echo $b[$i]->logo ?>"><?php echo $b[$i]->nom; ?></option>

@@ -59,18 +59,14 @@ function closePopup() {
     err.style.display = "none";
 };
 
-function changelogo() {
+function changelogo(select) {
     
-    var img1 = document.getElementById("b1");
-    var img2 = document.getElementById("b2");
+    var img = select.previousElementSibling;
     
 
-    var selectedValue1 = document.getElementById('bank1').options[document.getElementById('bank1').selectedIndex].id;
-    var selectedValue2 = document.getElementById('bank2').options[document.getElementById('bank2').selectedIndex].id;
+    var selectedValue = select.options[select.selectedIndex].id;
 
-    img1.src = "/ProjectFileV5/app/logos/"  + selectedValue1 ;
-    img2.src = "/ProjectFileV5/app/logos/"  + selectedValue2 ;
-
+    img.src = "/ProjectFileV5/app/logos/"  + selectedValue;
 }
 
 
