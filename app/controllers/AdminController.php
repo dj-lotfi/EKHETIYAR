@@ -7,7 +7,7 @@ class AdminController extends Controller
         parent::__construct($controller, $action);
         //$this->load_model('AdminModel');
         $this->view = new AdminView($this);
-        $this->model = new AdminModel();
+        $this->model = new AdminModel(1);
         $this->view->setLayout('default');
     }
 
@@ -16,7 +16,7 @@ class AdminController extends Controller
         if (isset($_POST['nomj'])) {
 
             $response['isset'] = 'it is set';
-            $adm = new AdminModel();
+            
             $bn = new BanqueModel();
             if ($_FILES['newbanklogo']['name'] != "") {
                 $newbanque = array(
@@ -32,7 +32,7 @@ class AdminController extends Controller
                     "site_banque" => $_POST['sitej'],
                 );
             }
-            $adm->AddBanque($newbanque);
+            $this->model->AddBanque($newbanque);
 
         }
         echo json_encode($response);
@@ -51,7 +51,7 @@ class AdminController extends Controller
 
     public function updateprestation($id, $nom, $categorie, $prix, $date, $description)
     {
-        $adm = new AdminModel();
+        
         $newinfo = array(
             "id_prestation" => $id,
             "nom" => urldecode($nom),
@@ -60,12 +60,12 @@ class AdminController extends Controller
             "date_valeur" => urldecode($date),
             "description" => urldecode($description),
         );
-        $adm->UpdatePrestation($newinfo);
+        $this->model->UpdatePrestation($newinfo);
     }
 
     public function addprestation($idbank, $nom, $categorie, $prix, $date, $description)
     {
-        $adm = new AdminModel();
+        
         $bn = new PrestationModel();
         $newbanque = array(
             "id_prestation" => $bn->generateid(),
@@ -75,13 +75,13 @@ class AdminController extends Controller
             "date_valeur" => urldecode($date),
             "description" => urldecode($description),
         );
-        $adm->AddPrestation($newbanque, $idbank);
+        $this->model->AddPrestation($newbanque, $idbank);
     }
 
     public function Deleteprestation($id)
     {
-        $adm = new AdminModel();
-        $adm->DeletePrestationId($id);
+        
+        $this->model->DeletePrestationId($id);
     }
 
     public function ModifPub()
@@ -96,7 +96,7 @@ class AdminController extends Controller
     public function update()
     {
         if (isset($_POST['site'])) {
-            $adm = new AdminModel();
+            
             if ($_FILES['file']['name'] != "") {
                 $newinfo = array(
                     "id_banque" => $_POST['id'],
@@ -126,7 +126,7 @@ class AdminController extends Controller
                 );
                 $response['choix2'] = '2';
             }
-            $adm->UpdateBank($newinfo);
+            $this->model->UpdateBank($newinfo);
             $response['data'] = 'Data sent successufully';
         }
         echo json_encode($response);
@@ -252,6 +252,17 @@ class AdminController extends Controller
 
     public function Modifadmins(){
         $this->view->Modifadmins();
+    }
+
+    public function ModifAdm($id,$username , $password){
+        $tab = array(
+            "id" => $id,
+            "username" => $username,
+            "passsword" => $password,
+        );
+        $adm = new AdminModel(0);
+        $modif = $adm->_db->query("UPDATE adminLogs SET username = {$username}, password = {$password} WHERE id = {$id};");
+        $res = $modif->getResult();
     }
 
     public function indexAction()

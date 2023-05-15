@@ -18,13 +18,6 @@ class AdminView extends View
     <?php $this->end(); ?>
 
     <?php $this->start('body');
-    /*if ($_SESSION['loggedin'] == false) {
-    /*
-    if ($_SESSION['loggedin'] == false) {
-    Router::redirect(Login);
-    exit;
-    }
-    $_SESSION["loggedin"] = false;*/
     ?>
 
     <body class="admin-layout">
@@ -45,9 +38,6 @@ class AdminView extends View
               <?php $this->displayBankButtons(); ?>
             </ul>
           </div>
-        </div>
-        <div class="nav-item">
-          <p tabindex="0">Prestations Globales</p>
         </div>
 
         <div class="nav-item">
@@ -125,10 +115,28 @@ class AdminView extends View
                 <?php echo $res[$i]->password ?>
               </td>
               <td>
-                <i class="material-icons bouton edit">edit</i>
-                <i class="material-icons bouton delete">delete</i>
+                <i class="material-icons bouton edit" onclick="AffEditAdm();">edit</i>
+                <i class="material-icons bouton delete" onclick="DelAdm(<?= $res[$i]->id ?>);">delete</i>
               </td>
             </tr>
+
+            <div id="MdfAdm" class="modal">
+              <div class="modal-content3">
+                <span class="close" onclick="closeMdfAdm()">&times;</span>
+                <form id="modifadmform" method="post" onsubmit="EditAdm(<?= $res[$i]->id ?>);event.preventDefault();">
+                  <h4>Username : </h4><input class="bank-name" type="text" id="username" placeholder="Username" value=""
+                    required /><br><br>
+                  <h4>Mot de passe : </h4><input class="password-input" type="password" id="password" value=""
+                    placeholder="Password" /><br><br>
+                  <h4>Confirmer Mot de passe : </h4><input class="password-input" type="password" id="confirmpassword" value=""
+                    placeholder="Confirm Password" /><br><br>
+                  <input id="submitmodifadm" type="submit" name="submitadm" value="Modifier"/>
+                </form>
+              </div>
+              <div id="errorModifAdm">
+
+              </div>
+            </div>
           <?php } ?>
         </tbody>
       </table>
@@ -141,7 +149,7 @@ class AdminView extends View
   {
     ?>
     <div id="updatePropos" class="modifying-window">
-      <?php $adm = new AdminModel();
+      <?php $adm = new AdminModel(1);
       $prop = $adm->getApropos(); ?>
       <form id="updateProposhh" method="post" onsubmit="event.preventDefault();AjouterSiteLogo();SendApropos();">
         <h4>Logo du site : <!--</h4><input class="bank-name" type="text" name="Logo_site" placeholder="Nom"
@@ -167,7 +175,7 @@ class AdminView extends View
           <h4>Telephone : </h4><input class="bank-name" type="text" name="tele" value="<?php echo $prop->telephone; ?>"
             placeholder="Description"><br><br>
           <input type="text" id="idbank" value="<?php echo $prop->id ?>" hidden>
-          <input type="submit" name="submitprop" class="button" value="Update">
+          <div class="submit-bank-info"><input type="submit" name="submitprop" class="button" value="Update"></div>
       </form>
     </div>
     </div>
@@ -203,7 +211,7 @@ class AdminView extends View
 
   public function displayBankButtons()
   {
-    $bdd = new AdminModel();
+    $bdd = new AdminModel(1);
     $res = $bdd->get("*", 'banques');
     //var_dump($res); ?>
 
@@ -232,7 +240,7 @@ class AdminView extends View
 
   public function Affichagebanque($id)
   {
-    $mod = new AdminModel();
+    $mod = new AdminModel(1);
     $var = $mod->get($id, 'banques');
     ?>
     <form class="bank-info" id="update" method="post" onsubmit="MAJBanque();event.preventDefault();"
@@ -329,17 +337,17 @@ class AdminView extends View
                 <div class="modal-content2">
                   <span class="close" onclick="closePopup()">&times;</span>
                   <form id="updatepres" method="post">
-                    <h4>Nom : </h4><input class="bank-name" type="text" id="upnompres" placeholder="Nom" value=""
+                    <h4 style="color: black;">Nom : </h4><input class="bank-name" type="text" id="upnompres" placeholder="Nom" value=""
                       required><br><br>
-                    <h4>Prix : </h4><input class="bank-name" type="text" id="upprixpres" value="" placeholder="Prix"><br><br>
-                    <h4>date de valeur : </h4><input class="bank-name" type="text" id="updatevaleur" value=""
+                    <h4 style="color: black;">Prix : </h4><input class="bank-name" type="text" id="upprixpres" value="" placeholder="Prix"><br><br>
+                    <h4 style="color: black;">date de valeur : </h4><input class="bank-name" type="text" id="updatevaleur" value=""
                       placeholder="Prix"><br><br>
-                    <h4>Categorie : </h4><input class="seige-social" type="text" id="upcategoriepres" value=""
+                    <h4 style="color: black;">Categorie : </h4><input class="seige-social" type="text" id="upcategoriepres" value=""
                       placeholder="Categorie"><br><br>
-                    <h4>Description : </h4><input class="bank-name" type="text" id="updescription" value=""
+                    <h4 style="color: black;">Description : </h4><input class="bank-name" type="text" id="updescription" value=""
                       placeholder="Description"><br><br>
-                    <input type="submit" name="submit" value="UpdatePrestation"
-                      onclick="updateprestation(<?= $pre[$i]->getId() ?>);" />
+                    <div class="submit-bank-info"><input type="submit" name="submit" value="UpdatePrestation"
+                        onclick="updateprestation(<?= $pre[$i]->getId() ?>);" /></div>
                   </form>
                 </div>
                 <div id="error">
@@ -369,7 +377,7 @@ class AdminView extends View
           <h4>Description : </h4><input class="bank-name" type="text" id="description" value=""
             placeholder="Description"><br><br>
           <input type="text" id="idbank" value="<?php echo $id ?>" hidden>
-          <input type="submit" name="submitnew" class="button" value="Update">
+          <div class="submit-bank-info"><input type="submit" name="submitnew" class="button" value="Update"></div>
         </form>
       </div>
       <div id="error">

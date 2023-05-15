@@ -488,7 +488,16 @@ body {
     }
 
     .modal-content2 {
-        display: flex;
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        width: 80%;
+        max-width: 1000px;
+        height: fit-content;
+    }
+    .modal-content3 {
         background-color: #fff;
         margin: 10% auto;
         padding: 20px;
@@ -861,6 +870,19 @@ body {
 
     #mdfadm .delete:hover {
         color: #dc2a2a;
+    }
+
+    .password-input {
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .password-input:focus {
+        outline: none;
+        border-color: #80bdff;
+        box-shadow: 0 0 5px #80bdff;
     }
 
 

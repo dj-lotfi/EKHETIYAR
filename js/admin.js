@@ -1,7 +1,7 @@
 window.onload = function () {
     console.log('Load ' + localStorage.getItem("lastvisitedelement"));
     var lastelem = localStorage.getItem("lastvisitedelement");
-    if (lastelem == null) localStorage.setItem("lastvisitedelement" , "bank1");
+    if (lastelem == null) localStorage.setItem("lastvisitedelement", "bank1");
     document.getElementById(lastelem).click();
 }
 
@@ -198,7 +198,6 @@ function MAJBanque() {
     Upload();
     sendData_bank();
     updatebanque(); // show the pop-up
-    location.reload();
     return false;
 };
 function updatebanque() {
@@ -218,6 +217,7 @@ function updatebanque() {
             }
         };
         xhttp.send();
+        location.reload();
     }
 }
 function sendData_bank() {
@@ -240,18 +240,16 @@ function affichage() {
 function deletepres(id) {
     const confirmed = confirm("Vous etes sur de supprimer cette prestation?");
     if (confirmed) {
-    var xhttp = new XMLHttpRequest();
-    // Construct the URL for the PHP function with the form values as parameters
-    var url = "j2sJDpUgQQmLF5EF/Deleteprestation/" + id;
-    xhttp.open("GET", url, true);
-    xhttp.send();
-    location.reload();
+        var xhttp = new XMLHttpRequest();
+        // Construct the URL for the PHP function with the form values as parameters
+        var url = "j2sJDpUgQQmLF5EF/Deleteprestation/" + id;
+        xhttp.open("GET", url, true);
+        xhttp.send();
+        location.reload();
     }
 
 }
 function updateprestation(data) {
-    console.log('did it get to this point?');
-    console.log(data);
     var xhttp = new XMLHttpRequest();
     //  ($id,$nom,$categorie,$prix,$date,$description)
     var url = "j2sJDpUgQQmLF5EF/updateprestation/" + data + "/" + encodeURIComponent(document.getElementById("upnompres").value) + "/" + encodeURIComponent(document.getElementById("upcategoriepres").value) + "/" + encodeURIComponent(document.getElementById("upprixpres").value) + "/" + encodeURIComponent(document.getElementById("updatevaleur").value) + "/" + encodeURIComponent(document.getElementById("updescription").value);
@@ -450,7 +448,7 @@ function Logout() {
     xhttp.send();
 }
 
-function Modifadmins(){
+function Modifadmins() {
     var loadingScreen = document.getElementById('loader');
     var content = document.getElementById('modification');
     var modifSpace = document.querySelector('.modifying-window');
@@ -472,3 +470,61 @@ function Modifadmins(){
     xhttp.send();
 }
 
+function AffEditAdm() {
+    var popup = document.getElementById("MdfAdm");
+    popup.style.display = "block";
+}
+function closeMdfAdm() {
+    var popup = document.getElementById("MdfAdm");
+    popup.style.display = "none";
+}
+
+function EditAdm(id) {
+    console.log('here');
+    var password1 = document.getElementById("password").value;
+    var password2 = document.getElementById("confirmPassword").value;
+    var username = document.getElementById("username").value;
+
+    var usernameval = /^[a-zA-Z0-9]+$/;
+    var minNumberofChars = 6;
+    var maxNumberofChars = 16;
+    var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    if (!usernameval.test(username)){
+        alert("Username should not contain any special charecters");
+        return false;
+    }
+    if (username.length < minNumberofChars || username.length > maxNumberofChars) {
+        if (username.length < minNumberofChars) alert("username too short");
+        else alert("username too long");
+        return false;
+    }
+
+    if (password1 !== password2) {
+        alert("Passwords do not match. Please re-enter.");
+        return false;
+    }
+
+
+    
+    if (password1.length < minNumberofChars || password1.length > maxNumberofChars) {
+        if (password1.length < minNumberofChars) alert("password too short ");
+        else alert("password too long");
+        return false;
+    }
+    if (!regularExpression.test(password1)) {
+        alert("password should contain atleast one number and one special character");
+        return false;
+    }
+
+    var xhttp = new XMLHttpRequest();
+    // Construct the URL for the PHP function with the form values as parameters
+    var url = "j2sJDpUgQQmLF5EF/ModifAdm/"+ id + "/"+ username + "/" + password1;
+    var content = document.getElementById('errorModifAdm');
+    xhttp.open("GET", url, true);
+    xhttp.onload = function () {
+        if (this.status == 200) {
+            content.innerHTML = this.responseText;
+        }
+    };
+    xhttp.send();
+}

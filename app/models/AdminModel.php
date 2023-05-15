@@ -2,9 +2,9 @@
 class AdminModel extends Model_admin
 {
     public $NombreBanque = 20;
-    function __construct()
+    function __construct($i)
     {
-        $this->_db = DB_admin::getInstance(1);
+        $this->_db = DB_admin::getInstance($i);
     }
     public function get($id, $table) // $table : le nom du tableau du dbb  
     {
@@ -203,54 +203,5 @@ class AdminModel extends Model_admin
         $this->_modelName = str_replace(' ', '', ucwords(str_replace('_', ' ', $this->_table)));
         $InfoAdmin = $this->findById(1, "id");
         return $InfoAdmin["username"];
-    }
-    public function copy_database()
-    {
-        // Connect to source database
-        $source_conn = new mysqli(DB_HOST_ADMIN, DB_USER_ADMIN, DB_PASSWORD_ADMIN, DB_NAME_ADMIN);
-        //DB_NAME_ADMIN  DB_USER_ADMIN DB_PASSWORD_ADMIN DB_HOST_ADMIN
-        if ($source_conn->connect_error) {
-            die("Connection failed: " . $source_conn->connect_error);
-        }
-
-        // Get list of tables in source database
-        $tables = array();
-        $result = mysqli_query($source_conn, "SHOW TABLES FROM " . DB_NAME_ADMIN);
-        $tables = array();
-        while ($row = mysqli_fetch_row($result)) {
-            $tables[] = $row[0];
-        }
-
-        // Connect to destination database
-        $dest_conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-        if ($dest_conn->connect_error) {
-            die("Connection failed: " . $dest_conn->connect_error);
-        }
-        // Copy each table to destination database
-        foreach ($tables as $table) {
-            if ($table == "adminLogs") {
-                continue; // Skip this table
-            }
-            $result = mysqli_query($source_conn, "SELECT * FROM " . $table);
-            $columns = array();
-            $rows = array();
-            while ($row = mysqli_fetch_assoc($result)) {
-                $escaped_row = array();
-                foreach ($row as $key => $value) {
-                    $escaped_row[$key] = mysqli_real_escape_string($dest_conn, $value);
-                    if (!in_array($key, $columns)) {
-                        $columns[] = $key;
-                    }
-                }
-                $rows[] = "('" . implode("','", $escaped_row) . "')";
-            }
-            if (empty($rows)) {
-                continue; // Skip empty table
-            }
-            $query = "REPLACE INTO " . $table . " (" . implode(",", $columns) . ") VALUES " . implode(",", $rows);
-            mysqli_query($dest_conn, $query);
-            echo "Table " . $table . " copied successfully.<br>";
-        }
-        echo "Database copy completed.";
     }
 }
