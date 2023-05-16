@@ -130,12 +130,12 @@ class qui_sommes_nousView extends View
             <div class="email">
                 <?php echo $contact->email; ?>
             </div>
-            <?php if ($contact->getTel() != null) { ?>
-                <div class="tel">
-                    ( <span><?php $contact->getCtry_code() ?></span>) <span><?php $contact->getTel() ?></span>
-                </div>
-            <?php } ?>
-        </div>
+            <div class="tel">
+                <?php if ($contact->getTel() != null) {
+                    echo "( <span>" . $contact->getCtry_code() . "</span> ) <span>" . $contact->getTel() . "</span>";
+                } ?>
+            </div>
+
         </div>
 
         <?php
