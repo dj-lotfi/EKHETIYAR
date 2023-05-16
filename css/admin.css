@@ -32,6 +32,7 @@ body {
     }
 
     .nav-item {
+        cursor: pointer;
         border-bottom: 2px solid var(--neutral-800);
         transition: border 550ms ease-in;
     }
@@ -779,6 +780,7 @@ body {
     }
 
     .prestation-delete-button {
+        cursor: pointer;
         background-color: transparent;
         fill: var(--red-600);
         display: flex;
