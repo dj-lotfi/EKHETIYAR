@@ -145,27 +145,6 @@ class BanqueController extends Controller
             }
         }
 
-        foreach ($_POST as $key => $value) {
-            if ($key != 'Sortasc_desc' && $key != 'Sort') {
-                $keyEx = explode('_', $key);
-                if ( $keyEx[0] == 'categorie' ) {
-
-                    foreach ($_POST as $k => $v) {
-                        if ($k != 'Sortasc_desc' && $k != 'Sort') {
-                            $kEx = explode('_', $k);
-                            if ( $kEx[0] != 'categorie' && $keyEx[1] == $kEx[1] && ($_POST['low-price_'.$kEx[1].'_'.$kEx[2]] != '' || $_POST['high-price_'.$kEx[1].'_'.$kEx[2]]  != '' )) {
-                                array_push($t[0],$prestations[0][$kEx[2]]);
-                                array_push($t[1],$_POST['low-price_'.$kEx[1].'_'.$kEx[2]]);
-                                array_push($t[2],$_POST['high-price_'.$kEx[1].'_'.$kEx[2]]);
-                            }
-                            
-                        }
-                    }
-
-                }
-            }
-            
-        }
         return $t;
     }
         
