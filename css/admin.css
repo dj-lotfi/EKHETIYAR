@@ -278,7 +278,8 @@ body {
         vertical-align: middle;
     }
 
-    input[type=text] {
+    input[type=text],
+    input[type=password] {
         background-color: var(--slate-200);
         height: 31px;
         padding: 3px 7px;
@@ -497,6 +498,7 @@ body {
         max-width: 1000px;
         height: fit-content;
     }
+
     .modal-content3 {
         background-color: #fff;
         margin: 10% auto;
@@ -884,6 +886,27 @@ body {
         border-color: #80bdff;
         box-shadow: 0 0 5px #80bdff;
     }
+
+    .aprop-textbox-label,
+    .aprop-textbox {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+
+    .aprop-textbox-label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .aprop-textbox {
+        padding: 10px;
+        max-width: 100%;
+        line-height: 1.5;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-shadow: 1px 1px 1px #999;
+    }
+
 
 
 }

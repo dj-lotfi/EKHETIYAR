@@ -40,6 +40,11 @@ class AdminView extends View
           </div>
         </div>
 
+        <div class="nav-item" id="AdminsSection"
+          onclick="localStorage.setItem('lastvisitedelement', this.id);Modifadmins();">
+          <p tabindex="0">Admins</p>
+        </div>
+
         <div class="nav-item">
           <p tabindex="0">Autres</p>
           <div class="item-list__container">
@@ -53,9 +58,7 @@ class AdminView extends View
             </ul>
           </div>
         </div>
-        <div class="nav-item" onclick="Modifadmins();">
-          <p tabindex="0">Admins</p>
-        </div>
+
         <div class="nav-item" onclick="Logout();">
           <p tabindex="0">Logout</p>
         </div>
@@ -94,7 +97,7 @@ class AdminView extends View
         <thead>
           <tr>
             <th colspan="3">Admins</th>
-            <th class="material-icons bouton">add</th>
+            <th class="material-icons bouton" onclick="AffAddAdmin();">add</th>
           </tr>
           <tr>
             <th>Username</th>
@@ -120,29 +123,42 @@ class AdminView extends View
               </td>
             </tr>
 
-            <div id="MdfAdm" class="modal">
-              <div class="modal-content3">
-                <span class="close" onclick="closeMdfAdm()">&times;</span>
-                <form id="modifadmform" method="post" onsubmit="EditAdm(<?= $res[$i]->id ?>);event.preventDefault();">
-                  <h4>Username : </h4><input class="bank-name" type="text" id="username" placeholder="Username" value=""
-                    required /><br><br>
-                  <h4>Mot de passe : </h4><input class="password-input" type="password" id="password" value=""
-                    placeholder="Password" /><br><br>
-                  <h4>Confirmer Mot de passe : </h4><input class="password-input" type="password" id="confirmpassword" value=""
-                    placeholder="Confirm Password" /><br><br>
-                  <input id="submitmodifadm" type="submit" name="submitadm" value="Modifier"/>
-                </form>
-              </div>
-              <div id="errorModifAdm">
 
-              </div>
-            </div>
-          <?php } ?>
-        </tbody>
-      </table>
-    </div>
-    <?php
+      </div>
+    <?php } ?>
+    </tbody>
+    </table>
+    <?php for ($i = 0; $i < sizeof($res); $i++) {
+      ?>
+      <div id="modifieradminpopup" class="modal">
+        <div id="modif-admin-content" class="modal-content3">
+          <span class="close" onclick="closeMdfAdm()">&times;</span>
+          <form id="modifadminform<?php echo $res[$i]->id ?>" method="POST"
+            onsubmit="event.preventDefault();EditAdm(<?php echo $res[$i]->id ?>);">
+            <input type="text" id="username" placeholder="Username" value="" required /><br><br>
+            <input type="password" id="password" value="" placeholder="Password" /><br><br>
+            <input type="password" id="confirmpassword" value="" placeholder="Confirm Password" /><br>
+            <div class="submit-bank-info"><input id="submitmodifadm" type="submit" name="submitadm" value="Modifier" /></div>
+          </form>
+        </div>
+        <div id="errorModifAdm<?= $res[$i]->id ?>"></div>
 
+      </div>
+      <div id="ajouteradminpopup" class="modal">
+        <div id="ajout-admin-content" class="modal-content3">
+          <span class="close" onclick="closeAddAdm()">&times;</span>
+          <form id="addadminform" method="POST" onsubmit="event.preventDefault();AddAdm();">
+            <input type="text" id="adusername" placeholder="Username" value="" required /><br><br>
+            <input type="password" id="adpassword" value="" placeholder="Password" /><br><br>
+            <input type="password" id="adconfirmpassword" value="" placeholder="Confirm Password" /><br>
+            <div class="submit-bank-info"><input id="submitaddadm" type="submit" name="submitadm" value="Ajouter" /></div>
+          </form>
+        </div>
+        <div id="errorAjoutAdm"></div>
+
+      </div>
+      <?php
+    }
   }
 
   public function ModifApropos()
@@ -152,30 +168,40 @@ class AdminView extends View
       <?php $adm = new AdminModel(1);
       $prop = $adm->getApropos(); ?>
       <form id="updateProposhh" method="post" onsubmit="event.preventDefault();AjouterSiteLogo();SendApropos();">
-        <h4>Logo du site : <!--</h4><input class="bank-name" type="text" name="Logo_site" placeholder="Nom"
-            value="<?php /*echo $prop->site_logo;*/?>" required><br><br>-->
-          <div class="image-preview">
-            <img src="img/<?php echo $prop->site_logo ?>" alt="<?php echo $prop->site_logo ?>" class="img">
-          </div>
-          <!-- Site logo Upload -->
-          <label for="sitelogo" class="upload-label">
-            <span class="upload-label-text">Upload a Logo for the site:</span>
-            <span class="upload-label-button">Choose File</span>
-          </label>
-          <input type="file" id="sitelogo" name="sitelogo" style="display:none;" />
+        <h4>Logo du site :</h4>
+        <div class="image-preview">
+          <img src="img/<?php echo $prop->site_logo ?>" alt="<?php echo $prop->site_logo ?>" class="img">
+        </div>
+        <!-- Site logo Upload -->
+        <label for="sitelogo" class="upload-label">
+          <span class="upload-label-text">Upload a Logo for the site:</span>
+          <span class="upload-label-button">Choose File</span>
+        </label>
+        <input type="file" id="sitelogo" name="sitelogo" style="display:none;" />
 
-          <h4>Prop : </h4><input class="bank-name" type="text" name="prop" value="<?php echo $prop->prop; ?>"
-            placeholder="Prix"><br><br>
-          <h4>Vision : </h4><input class="bank-name" type="text" name="vision" value="<?php echo $prop->vision; ?>"
-            placeholder="Prix"><br><br>
-          <h4>Fonctionnement : </h4><input class="seige-social" type="text" name="fonctionnement"
-            value="<?php echo $prop->fonctionnement; ?>" placeholder="Categorie"><br><br>
-          <h4>Email : </h4><input class="bank-name" type="text" name="email" value="<?php echo $prop->email; ?>"
-            placeholder="Description"><br><br>
-          <h4>Telephone : </h4><input class="bank-name" type="text" name="tele" value="<?php echo $prop->telephone; ?>"
-            placeholder="Description"><br><br>
-          <input type="text" id="idbank" value="<?php echo $prop->id ?>" hidden>
-          <div class="submit-bank-info"><input type="submit" name="submitprop" class="button" value="Update"></div>
+        <h4> A propos de nous : </h4>
+        <textarea class="aprop-textbox" type="text" name="prop" rows="5" cols="70">
+            <?php echo $prop->prop; ?>
+            </textarea>
+        <br>
+        <h4>Vision : </h4>
+        <textarea class="aprop-textbox" type="text" name="vision" rows="5" cols="70">
+            <?php echo $prop->vision; ?>
+            </textarea>
+
+        <br>
+        <h4>Fonctionnement : </h4>
+        <textarea class="aprop-textbox" type="text" name="fonctionnement" rows="5" cols="70">
+            <?php echo $prop->fonctionnement; ?>
+            </textarea>
+
+        <br>
+        <h4>Email : </h4><input class="bank-name" type="text" name="email" value="<?php echo $prop->email; ?>"
+          placeholder="Description"><br>
+        <h4>Telephone : </h4><input class="bank-name" type="text" name="tele" value="<?php echo $prop->telephone; ?>"
+          placeholder="Description"><br>
+        <input type="text" id="idbank" value="<?php echo $prop->id ?>" hidden>
+        <div class="submit-bank-info"><input type="submit" name="submitprop" value="Update"></div>
       </form>
     </div>
     </div>
@@ -246,16 +272,17 @@ class AdminView extends View
     <form class="bank-info" id="update" method="post" onsubmit="MAJBanque();event.preventDefault();"
       enctype='multipart/form-data'>
       <div class="general">
-        <input class="bank-name" type="text" name="nom" value="<?php echo $var->nom; ?>" placeholder="Nom">
+        <input class="bank-name" type="text" name="nom" value="<?php echo $var->nom; ?>" placeholder="Nom" required>
         <input class="abbreviation" type="text" name="abbreviation" value="<?php echo $var->abbreviation; ?>"
-          placeholder="Abbreviation">
+          placeholder="Abbreviation" required>
         <input class="seige-social" type="text" name="siege_social" value="<?php echo $var->adresse_siege_social; ?>"
-          placeholder="Adresse siege social">
+          placeholder="Adresse siege social" required>
       </div>
       <div class="contacts">
-        <input class="tel" type="text" name="telephone" value="<?php echo $var->telephone; ?>" placeholder="Phone number">
-        <input class="fax" type="text" name="fax" value="<?php echo $var->fax; ?>" placeholder="Fax">
-        <input type="text" name="site" value="<?php echo $var->site_banque; ?>" placeholder="Site officiel">
+        <input class="tel" type="text" name="telephone" value="<?php echo $var->telephone; ?>" placeholder="Phone number"
+          required>
+        <input class="fax" type="text" name="fax" value="<?php echo $var->fax; ?>" placeholder="Fax" required>
+        <input type="text" name="site" value="<?php echo $var->site_banque; ?>" placeholder="Site officiel" required>
         <input class="logo" type="text" name="logo" value="<?php echo $var->logo; ?>" placeholder="Logo" hidden>
         <div>
           <label for="file" class="upload-label">
@@ -272,7 +299,7 @@ class AdminView extends View
         </div>
       </div>
       <div class="map">
-        <input class="map-link" type="text" name="map" value="<?php echo $var->lienmap; ?>">
+        <input class="map-link" type="text" name="map" value="<?php echo $var->lienmap; ?>" required>
         <div class="map__container">
           <iframe class="hide-map-bar" src="<?php echo $var->lienmap ?>" frameborder="0">
           </iframe>
@@ -336,17 +363,18 @@ class AdminView extends View
               <div id="popup" class="modal">
                 <div class="modal-content2">
                   <span class="close" onclick="closePopup()">&times;</span>
-                  <form id="updatepres" method="post">
-                    <h4 style="color: black;">Nom : </h4><input class="bank-name" type="text" id="upnompres" placeholder="Nom" value=""
-                      required><br><br>
-                    <h4 style="color: black;">Prix : </h4><input class="bank-name" type="text" id="upprixpres" value="" placeholder="Prix"><br><br>
-                    <h4 style="color: black;">date de valeur : </h4><input class="bank-name" type="text" id="updatevaleur" value=""
-                      placeholder="Prix"><br><br>
-                    <h4 style="color: black;">Categorie : </h4><input class="seige-social" type="text" id="upcategoriepres" value=""
-                      placeholder="Categorie"><br><br>
-                    <h4 style="color: black;">Description : </h4><input class="bank-name" type="text" id="updescription" value=""
-                      placeholder="Description"><br><br>
-                    <div class="submit-bank-info"><input type="submit" name="submit" value="UpdatePrestation"
+                  <form id="updatepres<?= $pre[$i]->getId() ?>" method="post">
+                    <h4 style="color: black;">Nom : </h4>
+                    <input class="bank-name" type="text" id="upnompres<?= $pre[$i]->getId() ?>" placeholder="Nom" value="<?php echo $pre[$i]->getNom() ?>" required><br>
+                    <h4 style="color: black;">Prix : </h4>
+                    <input class="bank-name" type="text" id="upprixpres<?= $pre[$i]->getId() ?>" value="<?php echo $pre[$i]->getPrix() ?>" placeholder="Prix"><br>
+                    <h4 style="color: black;">Date de valeur : </h4>
+                    <input class="bank-name" type="text" id="updatevaleur<?= $pre[$i]->getId() ?>" value="<?php echo $pre[$i]->getDateValeur() ?>" placeholder="Date Valeur"><br>
+                    <h4 style="color: black;">Categorie : </h4>
+                    <input class="seige-social" type="text" id="upcategoriepres<?= $pre[$i]->getId() ?>" value="<?php echo $pre[$i]->getCategorie() ?>" placeholder="Categorie"><br>
+                    <h4 style="color: black;">Description : </h4>
+                    <input class="bank-name" type="text" id="updescription<?= $pre[$i]->getId() ?>" value="<?php echo $pre[$i]->getDescription() ?>" placeholder="Description"><br>
+                    <div class="submit-bank-info"><input type="submit" name="submit" value="Update"
                         onclick="updateprestation(<?= $pre[$i]->getId() ?>);" /></div>
                   </form>
                 </div>
@@ -368,16 +396,16 @@ class AdminView extends View
       <div class="modal-content2">
         <span class="close" onclick="closeAjPres()">&times;</span>
         <form id="addpres" method="post" onsubmit="addpres();event.preventDefault();">
-          <h4>Nom : </h4><input class="bank-name" type="text" id="nompres" placeholder="Nom" value="" required><br><br>
-          <h4>Prix : </h4><input class="bank-name" type="text" id="prixpres" value="" placeholder="Prix"><br><br>
-          <h4>date de valeur : </h4><input class="bank-name" type="text" id="datevaleur" value=""
-            placeholder="Prix"><br><br>
-          <h4>Categorie : </h4><input class="seige-social" type="text" id="categoriepres" value=""
-            placeholder="Categorie"><br><br>
-          <h4>Description : </h4><input class="bank-name" type="text" id="description" value=""
-            placeholder="Description"><br><br>
+          <input class="bank-name" type="text" id="nompres" placeholder="Nom" value="" required><br>
+          <input class="bank-name" type="text" id="prixpres" value="" placeholder="Prix"><br>
+          <input class="bank-name" type="text" id="datevaleur" value=""
+            placeholder="Date Valeur"><br>
+          <input class="seige-social" type="text" id="categoriepres" value=""
+            placeholder="Categorie"><br>
+          <input class="bank-name" type="text" id="description" value=""
+            placeholder="Description"><br>
           <input type="text" id="idbank" value="<?php echo $id ?>" hidden>
-          <div class="submit-bank-info"><input type="submit" name="submitnew" class="button" value="Update"></div>
+          <div class="submit-bank-info"><input type="submit" name="submitnew" value="Ajouter"></div>
         </form>
       </div>
       <div id="error">

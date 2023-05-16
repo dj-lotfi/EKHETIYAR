@@ -258,11 +258,26 @@ class AdminController extends Controller
         $tab = array(
             "id" => $id,
             "username" => $username,
-            "passsword" => $password,
+            "password" => $password,
         );
         $adm = new AdminModel(0);
-        $modif = $adm->_db->query("UPDATE adminLogs SET username = {$username}, password = {$password} WHERE id = {$id};");
-        $res = $modif->getResult();
+        $adm->UpdateAdmin($tab);
+    }
+
+    public function SuppAdmin($id){
+        $adm = new AdminModel(0);
+        $adm->DeleteAdmin($id);
+    }
+
+    public function AjouterAdm($username , $password){
+        $adm = new AdminModel(0);
+        $tab = array(
+            "id" => $adm->generateid(),
+            "username" => $username,
+            "password" => $password,
+        );
+        
+        $adm->AddAdmin($tab);
     }
 
     public function indexAction()

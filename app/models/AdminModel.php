@@ -146,6 +146,23 @@ class AdminModel extends Model_admin
         $res = $contact->getFirstResult();
         return $res;
     }
+
+    public function generateid()
+    {
+        $i = 10 ; 
+        $continue = true ; //DB_USER_ADMIN
+        $conn = mysqli_connect(DB_HOST_ADMIN, DB_USER_ADMIN, DB_PASSWORD_ADMIN, DB_NAME_ADMIN);
+        while($continue)
+        {
+            $sql = "SELECT COUNT(*) AS count FROM adminLogs WHERE id = {$i}";
+            $result = mysqli_query($conn, $sql);
+            $count = mysqli_fetch_assoc($result)['count'];
+            if($count==0)$continue = false  ;
+            else $i++ ;
+        }
+        mysqli_close($conn);
+        return $i ;
+    }
     /*public function UpdateAgence($Agence)
     {
         if (isset($bank["id_agence"])) {
@@ -203,5 +220,30 @@ class AdminModel extends Model_admin
         $this->_modelName = str_replace(' ', '', ucwords(str_replace('_', ' ', $this->_table)));
         $InfoAdmin = $this->findById(1, "id");
         return $InfoAdmin["username"];
+    }
+
+    public function UpdateAdmin($admin)
+    {
+        if (isset($admin["id"])) {
+            $this->_table = 'adminLogs';
+            $this->_modelName = str_replace(' ', '', ucwords(str_replace('_', ' ', $this->_table)));
+            $this->update($admin['id'], $admin, 'id');
+        }
+    }
+
+    public function DeleteAdmin($id)
+    {
+        $this->_table = 'adminLogs';
+        $this->_modelName = str_replace(' ', '', ucwords(str_replace('_', ' ', $this->_table)));
+        $this->delete("id", $id);
+    }
+
+    public function AddAdmin($admin)
+    {
+        if (isset($admin["id"])) {
+            $this->_table = 'adminLogs';
+            $this->_modelName = str_replace(' ', '', ucwords(str_replace('', ' ', $this->_table)));
+            $this->insert($admin);
+        }
     }
 }

@@ -252,7 +252,7 @@ function deletepres(id) {
 function updateprestation(data) {
     var xhttp = new XMLHttpRequest();
     //  ($id,$nom,$categorie,$prix,$date,$description)
-    var url = "j2sJDpUgQQmLF5EF/updateprestation/" + data + "/" + encodeURIComponent(document.getElementById("upnompres").value) + "/" + encodeURIComponent(document.getElementById("upcategoriepres").value) + "/" + encodeURIComponent(document.getElementById("upprixpres").value) + "/" + encodeURIComponent(document.getElementById("updatevaleur").value) + "/" + encodeURIComponent(document.getElementById("updescription").value);
+    var url = "j2sJDpUgQQmLF5EF/updateprestation/" + data + "/" + encodeURIComponent(document.getElementById("upnompres" + data).value) + "/" + encodeURIComponent(document.getElementById("upcategoriepres" + data).value) + "/" + encodeURIComponent(document.getElementById("upprixpres" + data).value) + "/" + encodeURIComponent(document.getElementById("updatevaleur" + data).value) + "/" + encodeURIComponent(document.getElementById("updescription" + data).value);
     console.log(url);
     xhttp.open("GET", url, true);
     var error = document.getElementById("error");
@@ -471,25 +471,25 @@ function Modifadmins() {
 }
 
 function AffEditAdm() {
-    var popup = document.getElementById("MdfAdm");
+    var popup = document.getElementById("modifieradminpopup");
     popup.style.display = "block";
 }
 function closeMdfAdm() {
-    var popup = document.getElementById("MdfAdm");
+    var popup = document.getElementById("modifieradminpopup");
     popup.style.display = "none";
 }
 
 function EditAdm(id) {
     console.log('here');
     var password1 = document.getElementById("password").value;
-    var password2 = document.getElementById("confirmPassword").value;
+    var password2 = document.getElementById("confirmpassword").value;
     var username = document.getElementById("username").value;
 
     var usernameval = /^[a-zA-Z0-9]+$/;
     var minNumberofChars = 6;
     var maxNumberofChars = 16;
     var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-    if (!usernameval.test(username)){
+    if (!usernameval.test(username)) {
         alert("Username should not contain any special charecters");
         return false;
     }
@@ -505,7 +505,7 @@ function EditAdm(id) {
     }
 
 
-    
+
     if (password1.length < minNumberofChars || password1.length > maxNumberofChars) {
         if (password1.length < minNumberofChars) alert("password too short ");
         else alert("password too long");
@@ -518,13 +518,86 @@ function EditAdm(id) {
 
     var xhttp = new XMLHttpRequest();
     // Construct the URL for the PHP function with the form values as parameters
-    var url = "j2sJDpUgQQmLF5EF/ModifAdm/"+ id + "/"+ username + "/" + password1;
-    var content = document.getElementById('errorModifAdm');
+    var url = "j2sJDpUgQQmLF5EF/ModifAdm/" + id + "/" + username + "/" + password1;
+    var content = document.getElementById('errorModifAdm' + id);
     xhttp.open("GET", url, true);
     xhttp.onload = function () {
         if (this.status == 200) {
             content.innerHTML = this.responseText;
+            location.reload();
         }
     };
     xhttp.send();
+}
+
+function DelAdm(id) {
+    const confirmed = confirm('Are you sure to delete this admin ?');
+    if (confirmed) {
+        var xhttp = new XMLHttpRequest();
+        // Construct the URL for the PHP function with the form values as parameters
+        var url = "j2sJDpUgQQmLF5EF/SuppAdmin/" + id;
+        xhttp.open("GET", url, true);
+        xhttp.send();
+        location.reload();
+    }
+}
+
+function AffAddAdmin() {
+    var popup = document.getElementById("ajouteradminpopup");
+    popup.style.display = "block";
+}
+function closeAddAdm() {
+    var popup = document.getElementById("ajouteradminpopup");
+    popup.style.display = "none";
+}
+
+function AddAdm() {
+    var password1 = document.getElementById("adpassword").value;
+    var password2 = document.getElementById("adconfirmpassword").value;
+    var username = document.getElementById("adusername").value;
+
+    var usernameval = /^[a-zA-Z0-9]+$/;
+    var minNumberofChars = 6;
+    var maxNumberofChars = 16;
+    var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    if (!usernameval.test(username)) {
+        alert("Username should not contain any special charecters");
+        return false;
+    }
+    if (username.length < minNumberofChars || username.length > maxNumberofChars) {
+        if (username.length < minNumberofChars) alert("username too short");
+        else alert("username too long");
+        return false;
+    }
+
+    if (password1 !== password2) {
+        alert("Passwords do not match. Please re-enter.");
+        return false;
+    }
+
+
+
+    if (password1.length < minNumberofChars || password1.length > maxNumberofChars) {
+        if (password1.length < minNumberofChars) alert("password too short ");
+        else alert("password too long");
+        return false;
+    }
+    if (!regularExpression.test(password1)) {
+        alert("password should contain atleast one number and one special character");
+        return false;
+    }
+
+    var xhttp = new XMLHttpRequest();
+    // Construct the URL for the PHP function with the form values as parameters
+    var url = "j2sJDpUgQQmLF5EF/AjouterAdm/" + username + "/" + password1;
+    var content = document.getElementById('errorAjoutAdm');
+    xhttp.open("GET", url, true);
+    xhttp.onload = function () {
+        if (this.status == 200) {
+            content.innerHTML = this.responseText;
+            location.reload();
+        }
+    };
+    xhttp.send();
+
 }

@@ -88,4 +88,21 @@ class PrestationModel extends Model
         return $this->iso ;
     }
 
+    public function generateid()
+    {
+        $i = 10 ; 
+        $continue = true ; //DB_USER_ADMIN
+        $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+        while($continue)
+        {
+            $sql = "SELECT COUNT(*) AS count FROM prestations WHERE id_prestation = {$i}";
+            $result = mysqli_query($conn, $sql);
+            $count = mysqli_fetch_assoc($result)['count'];
+            if($count==0)$continue = false  ;
+            else $i++ ;
+        }
+        mysqli_close($conn);
+        return $i ;
+    }
+
 }
