@@ -16,7 +16,7 @@ class AdminController extends Controller
         if (isset($_POST['nomj'])) {
 
             $response['isset'] = 'it is set';
-            
+
             $bn = new BanqueModel();
             if ($_FILES['newbanklogo']['name'] != "") {
                 $newbanque = array(
@@ -51,7 +51,7 @@ class AdminController extends Controller
 
     public function updateprestation($id, $nom, $categorie, $prix, $date, $description)
     {
-        
+
         $newinfo = array(
             "id_prestation" => $id,
             "nom" => urldecode($nom),
@@ -65,7 +65,7 @@ class AdminController extends Controller
 
     public function addprestation($idbank, $nom, $categorie, $prix, $date, $description)
     {
-        
+
         $bn = new PrestationModel();
         $newbanque = array(
             "id_prestation" => $bn->generateid(),
@@ -80,7 +80,7 @@ class AdminController extends Controller
 
     public function Deleteprestation($id)
     {
-        
+
         $this->model->DeletePrestationId($id);
     }
 
@@ -96,7 +96,7 @@ class AdminController extends Controller
     public function update()
     {
         if (isset($_POST['site'])) {
-            
+
             if ($_FILES['file']['name'] != "") {
                 $newinfo = array(
                     "id_banque" => $_POST['id'],
@@ -250,11 +250,13 @@ class AdminController extends Controller
         exit;
     }
 
-    public function Modifadmins(){
+    public function Modifadmins()
+    {
         $this->view->Modifadmins();
     }
 
-    public function ModifAdm($id,$username , $password){
+    public function ModifAdm($id, $username, $password)
+    {
         $tab = array(
             "id" => $id,
             "username" => $username,
@@ -264,20 +266,40 @@ class AdminController extends Controller
         $adm->UpdateAdmin($tab);
     }
 
-    public function SuppAdmin($id){
+    public function SuppAdmin($id)
+    {
         $adm = new AdminModel(0);
         $adm->DeleteAdmin($id);
     }
 
-    public function AjouterAdm($username , $password){
+    public function AjouterAdm($username, $password)
+    {
         $adm = new AdminModel(0);
-        $tab = array(
-            "id" => $adm->generateid(),
-            "username" => $username,
-            "password" => $password,
-        );
-        
-        $adm->AddAdmin($tab);
+        $model = new LoginModel();
+        $logs = $model->getLogs();
+        $trouv = 0;
+        for ($i = 0; $i < sizeof($logs); $i++) {
+            if ($logs[$i]->username == $username) //hash
+            {
+                $trouv = 1;
+                $user = $logs[$i];
+            }
+        }
+        if ($trouv == 1) {
+            $tab = array(
+                "id" => $user->id,
+                "username" => $username,
+                "password" => $password,
+            );
+            $adm->UpdateAdmin($tab);
+        } else {
+            $tab = array(
+                "id" => $adm->generateid(),
+                "username" => $username,
+                "password" => $password,
+            );
+            $adm->AddAdmin($tab);
+        }
     }
 
     public function indexAction()
